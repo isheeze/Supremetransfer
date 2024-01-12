@@ -10,7 +10,7 @@ import 'swiper/css/navigation'
 
 const slides = [
   {
-    heading: "60 MIN FREE WAITING",
+    heading: "-60 MIN FREE WAITING",
     desc: "We give a complimetry waiting time, 60 min at airports and 15 min at other locations.",
     img: "/collage10.jpeg"
   },
