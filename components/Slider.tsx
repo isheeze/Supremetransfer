@@ -61,7 +61,7 @@ export default () => {
         >
           {slides.map((slide)=>(
             <SwiperSlide>
-              <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+              <div className="relative min-h-[500px] isolate overflow-hidden bg-gray-900 px-6 pt-16 sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
                 <Image
                   className="w-full h-full object-cover text-transparent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10"
                   src={slide.img}

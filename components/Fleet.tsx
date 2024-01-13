@@ -46,7 +46,7 @@ export default function Fleet() {
                             {FLEETS.map((fleet) => (
                             <div key={fleet.img}>
                                 <div className="ml-[10%] bg-indigo-600 rounded-3xl shadow-[0px_15px_30px_rgba(0,0,0,0.3)] aspect-square w-2/3 flex items-center justify-center z-10 relative">
-                                    <Image className="max-w-[130%]" src={fleet.img} width={500} height={500} alt="name" />
+                                    <Image className="absolute max-w-[130%] w-[130%]" src={fleet.img} width={500} height={500} alt="name" />
                                 </div>
                                 <div className="bg-white rounded-3xl p-5 -mt-12 pt-16 shadow-[0px_15px_30px_rgba(0,0,0,0.2)]">
                                     <h3 className="mb-2 font-bold">{fleet.name}</h3>
