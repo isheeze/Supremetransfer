@@ -123,6 +123,7 @@ const Nav = () => {
                       <Link
                         key={item.name}
                         href={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
                         {item.name}
@@ -132,6 +133,7 @@ const Nav = () => {
                   <div className="py-6">
                     <Link
                       href={ PHONE_LINK }
+                      onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center gap-2 rounded-full  px-3.5 py-1 text-sm font-semibold  shadow-sm hover:bg-[#45d079] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 text-gray-900 bg-[#25D366]"
                     >
                       <PhoneIcon className="h-4 w-4" />{ PHONE }
