@@ -16,8 +16,8 @@ export default function AirportTransfer() {
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Up to 50% Lower Prices than Other Airport Transfers</h2>
 
           <dl className="mt-10 grid grid-cols-1">
-            {features.map((feature) => (
-              <div key={feature.description} className="border-t border-gray-200 py-4">
+            {features.map((feature,i) => (
+              <div key={i} className="border-t border-gray-200 py-4">
                 <dd className="text-sm text-gray-500">{feature.description}</dd>
               </div>
             ))}
