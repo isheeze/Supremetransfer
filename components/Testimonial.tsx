@@ -40,6 +40,7 @@ export default function Testimonial(){
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev'
             }}
+            autoplay
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
             className="swiper_container"
           >
@@ -51,9 +52,6 @@ export default function Testimonial(){
                     <p>{item.description}</p>
                     <div>
                       <div className="flex mt-5">
-                        <div className="relative w-14 h-14 rounded-full overflow-hidden mr-2.5">
-                        <Image className="absolute top-0 left-0 w-full h-full object-cover" src={item.image} width={100} height={100} alt="user" />
-                        </div>
                         <h3 className="text-base font-normal tracking-[1px] text-indigo-600">
                           {item.name} <br />
                           <span className="text-xs text-gray-900">{item.profession}</span>

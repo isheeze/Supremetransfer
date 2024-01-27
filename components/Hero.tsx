@@ -24,7 +24,7 @@ const Hero = ()=> {
       setVia2(!via2);
     };
     return (
-        <div className="overflow-hidden relative isolate px-6 pt-14 lg:px-8 lg:pt-24 lg:pb-12 bg-cover bg-center bg-fixed bg-no-repeat bg-[url('https://images.unsplash.com/photo-1519641471654-76ce0107ad1b')]">
+        <div className="overflow-hidden relative isolate px-6 pt-14 lg:px-8 lg:pt-24 lg:pb-12 bg-cover bg-center bg-fixed bg-no-repeat bg-[url('/hero.jpeg')]">
           <div className='flex flex-col-reverse lg:flex-row mx-auto'>
             <div className="flex-1 flex justify-center items-center">
               <form className='max-w-md w-full rounded-3xl backdrop-blur-md bg-slate-50/70 ring-1 ring-inset ring-gray-400/20 p-6 m-6 shadow-2xl'>

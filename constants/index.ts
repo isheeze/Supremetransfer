@@ -3,11 +3,11 @@ export const NAVIGATION = [
     { name: 'Home', href: '/', submenu: [] },
     { name: 'About', href: '/about', submenu: [] },
     { name: 'Services', href: '#', submenu: [
-      { name: 'Airport Transfer', href: '#' },
+      { name: 'Airport Transfer', href: '/airport-transfer' },
       { name: 'Ports Chauffeur', href: '#' }
     ] },
     { name: 'Fleet', href: '/fleet', submenu: [] },
-    { name: 'Contact', href: '#', submenu: [] },
+    { name: 'Contact', href: '/contact', submenu: [] },
     { name: 'Driver', href: '#', submenu: [] },
 ]
 // social Media

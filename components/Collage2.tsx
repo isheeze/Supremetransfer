@@ -32,50 +32,21 @@ export default function Collage2() {
                   aria-hidden="true"
                   className="pointer-events-none lg:absolute lg:inset-y-0 lg:mx-auto lg:w-full lg:max-w-7xl"
                 >
-                  <div className="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
+                  <div className="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/3 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
                     <div className="flex items-center space-x-6 lg:space-x-8">
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                        <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
+                        <div className="h-44 w-64 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
                           <Image
-                            src="/collage1.jpeg"
+                            src="/c1.jpeg"
                             alt=""
                             width={300}
                             height={500}
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <div className="h-44 w-64 overflow-hidden rounded-lg">
                           <Image
-                            src="/collage2.jpeg"
-                            alt=""
-                            width={300}
-                            height={500}
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
-                      </div>
-                      <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <Image
-                            src="/collage3.jpeg"
-                            alt=""
-                            width={300}
-                            height={500}
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <Image
-                            src="/collage4.jpeg"
-                            alt=""
-                            width={300}
-                            height={500}
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <Image
-                            src="/collage5.jpeg"
+                            src="/c2.jpeg"
                             alt=""
                             width={300}
                             height={500}
@@ -84,7 +55,36 @@ export default function Collage2() {
                         </div>
                       </div>
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <div className="h-44 w-64 overflow-hidden rounded-lg">
+                          <Image
+                            src="/c3.jpeg"
+                            alt=""
+                            width={300}
+                            height={500}
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                        <div className="h-44 w-64 overflow-hidden rounded-lg">
+                          <Image
+                            src="/c4.jpeg"
+                            alt=""
+                            width={300}
+                            height={500}
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                        <div className="h-44 w-64 overflow-hidden rounded-lg">
+                          <Image
+                            src="/c5.jpeg"
+                            alt=""
+                            width={300}
+                            height={500}
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                      </div>
+                      <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                        <div className="h-44 w-64 overflow-hidden rounded-lg">
                           <Image
                             src="/collage6.jpeg"
                             alt=""
@@ -93,9 +93,9 @@ export default function Collage2() {
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <div className="h-44 w-64 overflow-hidden rounded-lg">
                           <Image
-                            src="/collage7.jpeg"
+                            src="/c6.jpeg"
                             alt=""
                             width={300}
                             height={500}

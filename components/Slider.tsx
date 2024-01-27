@@ -1,43 +1,44 @@
 'use client'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules'
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
+import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules'
 import Image from 'next/image'
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation'
+import 'swiper/css/autoplay'
+import 'swiper/css/effect-fade'
 
 const slides = [
   {
     heading: "60 MIN FREE WAITING",
     desc: "We give a complimetry waiting time, 60 min at airports and 15 min at other locations.",
-    img: "/collage10.jpeg"
+    img: "/collage1.jpeg"
   },
   {
     heading: "24/7 CUSTOMER SERVICE",
     desc: "Our customer support service works 24/7 to solve queries instantly and book rides.",
-    img: "/collage9.jpeg"
+    img: "/collage2.jpeg"
   },
   {
     heading: "ZERO DELAYS",
     desc: "We arrive on time, with a plan to ensure you have no delays in your journey",
-    img: "/collage8.jpeg"
+    img: "/collage3.jpeg"
   },
   {
     heading: "PRIVACY POLICY",
     desc: "Our chauffeur have signed NDA's to assure our clients their privacy will stay intact.",
-    img: "/collage7.jpeg"
+    img: "/collage4.jpeg"
   },
   {
     heading: "FIXED PRICES",
     desc: "No hidden charges, no extra fees, we charge fixed prices so you can choose us without any confusion.",
-    img: "/collage6.jpeg"
+    img: "/collage5.jpeg"
   },
   {
     heading: "FLIGHT MONITORING",
     desc: "Latest navigation system and flight monitoring technology in our cars keep you updated about flight status while going to airport.",
-    img: "/collage5.jpeg"
+    img: "/collage6.jpeg"
   }
 ]
 
@@ -56,8 +57,10 @@ export default () => {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev'
           }}
-          modules={[Pagination, Navigation]}
+          modules={[Pagination, Navigation, Autoplay, EffectFade]}
+          autoplay
           className="swiper_container"
+          effect="fade"
         >
           {slides.map((slide)=>(
             <SwiperSlide>
