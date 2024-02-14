@@ -25,3 +25,8 @@ body {
 .dark-bg .swiper-pagination-bullet-active{
   background: white !important;
 }
+
+html:has([data-ui="NextStudioLayout"]) .nav,
+html:has([data-ui="NextStudioLayout"]) .footer{
+  display:none;
+}

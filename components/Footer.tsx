@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 export default function Footer() {
     return (
-        <footer className="p-4 sm:p-6 dark:bg-gray-900 overflow-hidden bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')] bg-cover">
+        <footer className="p-4 sm:p-6 dark:bg-gray-900 overflow-hidden bg-[url('https://tailwindcss.com/_next/static/media/hero-dark@90.dba36cdf.jpg')] bg-cover footer">
             <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-16 lg:px-8">
                 <div className="relative isolate">
                     <div className="mx-auto max-w-screen-xl">
