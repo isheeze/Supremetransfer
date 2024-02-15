@@ -59,7 +59,7 @@ export default () => {
           className="swiper_container"
           effect="fade"
         >
-          {sliderSection?.slides?.map((slide)=>(
+          {sliderSection?.slides?.map((slide: any)=>(
             <SwiperSlide>
               <div className="relative min-h-[500px] isolate overflow-hidden bg-gray-900 px-6 pt-16 sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
                 <Image

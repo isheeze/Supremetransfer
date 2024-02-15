@@ -85,7 +85,7 @@ const Nav = () => {
               </button>
             </div>
             <div className="hidden lg:flex lg:gap-x-12">
-              {header.menu?.map((item) => (
+              {header.menu?.map((item: any) => (
                 <div key={item.label}>
                   {item.submenu?.length == undefined && <Link href={item.url} className="text-sm font-semibold leading-6 text-black" style={{color: header.menuColor}}>
                     {item.label}
@@ -107,7 +107,7 @@ const Nav = () => {
                     >
                       <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-sm overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                         <div className="p-4">
-                          {item.submenu?.map((subitem) => (
+                          {item.submenu?.map((subitem: any) => (
                             <div
                               key={subitem.label}
                               className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-gray-50"
@@ -159,7 +159,7 @@ const Nav = () => {
               <div className="mt-6 flow-root">
                 <div className="-my-6 divide-y divide-gray-500/10">
                   <div className="space-y-2 py-6">
-                    {header.menu?.map((item) => (
+                    {header.menu?.map((item: any) => (
                       <Link
                         key={item.label}
                         href={item.url}
@@ -168,7 +168,7 @@ const Nav = () => {
                       >
                         {item.label}
                         {item.submenu?.length != 0 && <div>
-                          {item.submenu?.map((subitem) => (
+                          {item.submenu?.map((subitem: any) => (
                             <Link
                             key={subitem.label}
                             href={subitem.url}

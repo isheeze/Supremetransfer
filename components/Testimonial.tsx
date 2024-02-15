@@ -72,7 +72,7 @@ export default function Testimonial(){
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
             className="swiper_container"
           >
-            {reviewsSection.reviews.map((item) => (
+            {reviewsSection.reviews.map((item: any) => (
               <SwiperSlide key={item.name}>
                 <div className="relative p-10 pt-24 w-full text-gray-800">
                   <Image className="absolute top-5 right-7 opacity-20" src='/quote.png' width={80} height={80} alt="quote"/>

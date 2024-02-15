@@ -15,7 +15,7 @@ export default function Features() {
         </div>
         <div className="mx-auto mt-16 sm:mt-20 lg:mt-24">
           <dl className="grid max-w-xl grid-cols-1 gap-x-10 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-10">
-            {features.points.map((feature) => (
+            {features.points.map((feature: any) => (
               <div key={feature.title} className="relative text-justify">
                 <dt className="text-base font-semibold leading-7 text-gray-900 text-center">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 mx-auto mb-2">

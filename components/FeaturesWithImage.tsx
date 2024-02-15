@@ -15,7 +15,7 @@ export default function FeatureWithImage() {
                 {featureWithImage.description}
               </p>
               <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
-                {featureWithImage.points.map((feature) => (
+                {featureWithImage.points.map((feature: any) => (
                   <div key={feature.title} className="relative pl-9">
                     <dt className="inline font-semibold text-gray-900">
                       <div dangerouslySetInnerHTML={{ __html: feature.icon.svg }} className="absolute left-1 top-1 h-5 w-5 text-indigo-600" aria-hidden="true"/>
