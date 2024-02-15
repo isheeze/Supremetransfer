@@ -189,7 +189,7 @@ function Nav() {
   return (
     <div>
       {/* Utilize the fetched theme data here */}
-      <h1>{theme[0].websiteName}</h1>
+      <h1>{JSON.parse(JSON.stringify(theme))[0].websiteName}</h1>
       {/* ... */}
     </div>
   );
