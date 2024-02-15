@@ -1,5 +1,4 @@
 'use client'
-import { REVIEWS } from "@constants"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 import Image from 'next/image'
 
@@ -13,8 +12,37 @@ import 'swiper/css/autoplay'
 import '@styles/Testimonial.css'
 
 import { EffectCoverflow, Navigation, Pagination, Autoplay } from 'swiper/modules'
+import { useEffect, useState } from "react"
+import { SanityDocument, groq } from "next-sanity"
+import { sanityFetch } from "@sanity/lib/sanityFetch"
 
 export default function Testimonial(){
+  const [reviewsSection, setReviewsSection] = useState<SanityDocument>()
+    
+  useEffect(() => {
+    const fetchThemeData = async () => {
+      try {
+        const getThemeDataQuery = groq`*[_type == "home"]{
+          ReviewsSection
+        }`;
+
+        const themeData = await sanityFetch<SanityDocument>({
+          query: getThemeDataQuery,
+        });
+
+        setReviewsSection(themeData[0].ReviewsSection);
+      } catch (error) {
+        console.error('Error fetching theme data:', error);
+      }
+    };
+
+    fetchThemeData();
+  }, []);
+
+  if (!reviewsSection) {
+    return <div></div>;
+  }
+  
     return (
       <div className="bg-white py-24 sm:py-16">
       <div className="testimonials">
@@ -44,12 +72,12 @@ export default function Testimonial(){
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
             className="swiper_container"
           >
-            {REVIEWS.map((item) => (
+            {reviewsSection.reviews.map((item) => (
               <SwiperSlide key={item.name}>
                 <div className="relative p-10 pt-24 w-full text-gray-800">
                   <Image className="absolute top-5 right-7 opacity-20" src='/quote.png' width={80} height={80} alt="quote"/>
                   <div>
-                    <p>{item.description}</p>
+                    <p>{item.review}</p>
                     <div>
                       <div className="flex mt-5">
                         <h3 className="text-base font-normal tracking-[1px] text-indigo-600">

@@ -30,3 +30,8 @@ html:has([data-ui="NextStudioLayout"]) .nav,
 html:has([data-ui="NextStudioLayout"]) .footer{
   display:none;
 }
+
+.features-icons-containers > svg{
+  width: 100% !important;
+  height: 100% !important;
+}

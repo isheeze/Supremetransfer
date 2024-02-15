@@ -1,5 +1,8 @@
 'use client'
-import React, { useState, useRef } from 'react';
+import { urlForImage } from '@sanity/lib/image';
+import { sanityFetch } from '@sanity/lib/sanityFetch';
+import { SanityDocument, groq } from 'next-sanity';
+import React, { useState, useRef, useEffect } from 'react';
 const Hero = ()=> {
     const [via, setVia] = useState(false);
     const [via2, setVia2] = useState(false);
@@ -23,8 +26,37 @@ const Hero = ()=> {
     const handleVia2 = () => {
       setVia2(!via2);
     };
+
+
+    const [theme, setTheme] = useState<SanityDocument>()
+    
+    useEffect(() => {
+      const fetchThemeData = async () => {
+        try {
+          const getThemeDataQuery = groq`*[_type == "home"]{
+            heroImage
+          }`;
+
+          const themeData = await sanityFetch<SanityDocument>({
+            query: getThemeDataQuery,
+          });
+
+          setTheme(themeData[0]);
+        } catch (error) {
+          console.error('Error fetching theme data:', error);
+        }
+      };
+
+      fetchThemeData();
+    }, []);
+
+    if (!theme) {
+      return <div></div>;
+    }
+
+
     return (
-        <div className="overflow-hidden relative isolate px-6 pt-14 lg:px-8 lg:pt-24 lg:pb-12 bg-cover bg-center bg-fixed bg-no-repeat bg-[url('/hero.jpeg')]">
+        <div className={`overflow-hidden relative isolate px-6 pt-14 lg:px-8 lg:pt-24 lg:pb-12 bg-cover bg-center bg-fixed bg-no-repeat`} style={{backgroundImage: `url(${urlForImage(theme.heroImage)})`}}>
           <div className='flex flex-col-reverse lg:flex-row mx-auto'>
             <div className="flex-1 flex justify-center items-center">
               <form className='max-w-md w-full rounded-3xl backdrop-blur-md bg-slate-50/70 ring-1 ring-inset ring-gray-400/20 p-6 m-6 shadow-2xl'>
