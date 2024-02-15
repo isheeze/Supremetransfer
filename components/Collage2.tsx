@@ -11,7 +11,7 @@ export default function Collage2() {
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{ collage2Section.title }</h2>
     
                 <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
-                {collage2Section.points.map((point) => (
+                {collage2Section.points.map((point:any) => (
                     <div key={point.point} className="border-t border-gray-200 pt-4">
                     <dt className="font-medium text-gray-900">{point.point}</dt>
                     </div>
