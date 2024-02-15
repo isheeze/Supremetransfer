@@ -7,58 +7,28 @@ const theme = {
   type: "document",
   icon: WrenchScrewdriverIcon,
   fields: [
-    defineField({
+    {
       name: "websiteName",
       title: "Website Name",
       type: "string"
-    }),
-    defineField({
-      name: "headline",
-      title: "Headline",
-      type: "string",
-      description: "In one short sentence, what do you do?",
-      validation: (Rule) => Rule.required().min(40).max(50),
-    }),
-    {
-      name: "profileImage",
-      title: "Profile Image",
-      type: "image",
-      description: "Upload a profile picture",
-      options: { hotspot: true },
-      fields: [
-        {
-          name: "alt",
-          title: "Alt",
-          type: "string",
-        },
-      ],
     },
     {
-      name: "shortBio",
-      title: "Short Bio",
+      name: "websiteDescription",
+      title: "Website Description",
       type: "text",
       rows: 4,
     },
     {
-      name: "email",
-      title: "Email Address",
-      type: "string",
+      name: "logo",
+      title: "Logo",
+      type: "image",
+      options: { hotspot: true },
     },
     {
-      name: "location",
-      title: "Location",
-      type: "string",
-    },
-    {
-      name: "fullBio",
-      title: "Full Bio",
-      type: "array",
-      of: [{ type: "block" }],
-    },
-    {
-      name: "resumeURL",
-      title: "Upload Resume",
-      type: "file",
+      name: "favicon",
+      title: "Favicon",
+      type: "image",
+      options: { hotspot: true },
     },
     {
       name: "socialLinks",
@@ -67,10 +37,22 @@ const theme = {
       description: "Add your social media links:",
       fields: [
         {
-          name: "github",
-          title: "Github URL",
+          name: "phone",
+          title: "Phone Number",
+          type: "string",
+          initialValue: "+442080732199",
+        },
+        {
+          name: "whatsapp",
+          title: "Whatsapp Number",
+          type: "string",
+          initialValue: "+442080732199",
+        },
+        {
+          name: "facebook",
+          title: "Facebook URL",
           type: "url",
-          initialValue: "https://github.com/",
+          initialValue: "https://facebook.com/",
         },
         {
           name: "linkedin",
@@ -80,15 +62,21 @@ const theme = {
         },
         {
           name: "twitter",
-          title: "Twitter URL",
+          title: "TwitterX URL",
           type: "url",
           initialValue: "https://twitter.com/",
         },
         {
-          name: "twitch",
-          title: "Twitch URL",
+          name: "instagram",
+          title: "Instagram URL",
           type: "url",
-          initialValue: "https://twitch.com/",
+          initialValue: "https://instagram.com/",
+        },
+        {
+          name: "email",
+          title: "Email",
+          type: "email",
+          initialValue: "info@supremetransfer.co.uk",
         },
       ],
       options: {
@@ -96,15 +84,11 @@ const theme = {
         collapsible: true,
         columns: 2,
       },
-    },
-    {
-      name: "skills",
-      title: "Skills",
-      type: "array",
-      description: "Add a list of skills",
-      of: [{ type: "string" }],
-    },
- ],
+    }
+  ],
+  initialValue: {
+    websiteName: "Supreme Transfer"
+  }
 };
 
 export default theme;

@@ -7,15 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { NAVIGATION, LOGO_SRC, PHONE, PHONE_LINK, WHATSAPP_LINK } from '@constants'
-
-const products = [
-  { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#' },
-  { name: 'Engagement', description: 'Speak directly to your customers', href: '#' },
-  { name: 'Security', description: 'Your customers’ data will be safe and secure', href: '#' },
-  { name: 'Integrations', description: 'Connect with third-party tools', href: '#' },
-  { name: 'Automations', description: 'Build strategic funnels that will convert', href: '#' },
-]
-const Nav = () => {
+/*const Nav = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     return(
@@ -152,6 +144,55 @@ const Nav = () => {
         </a>
       </section>
     )
+}*/
+
+
+import React, { useEffect } from 'react';
+import { sanityFetch } from '@sanity/lib/sanityFetch'
+import { groq } from 'next-sanity'
+import { SanityDocument } from 'sanity'
+// Import sanityFetch if it's a custom function or from a library
+
+function Nav() {
+  const [theme, setTheme] = useState<SanityDocument>();
+
+  useEffect(() => {
+    const fetchThemeData = async () => {
+      try {
+        const getThemeDataQuery = groq`*[_type == "theme"]{
+          websiteName,
+          websiteDescription,
+          logo,
+          favicon,
+          socialLinks,
+        }`;
+
+        const themeData = await sanityFetch<SanityDocument>({
+          query: getThemeDataQuery,
+        });
+
+        setTheme(themeData);
+      } catch (error) {
+        // Handle errors appropriately
+        console.error('Error fetching theme data:', error);
+      }
+    };
+
+    fetchThemeData();
+  }, []); // Empty dependency array: run only once on mount
+
+  // Render conditional content based on theme data availability
+  if (!theme) {
+    return <div>Loading theme data...</div>;
+  }
+
+  return (
+    <div>
+      {/* Utilize the fetched theme data here */}
+      <h1>{theme[0].websiteName}</h1>
+      {/* ... */}
+    </div>
+  );
 }
 
 export default Nav

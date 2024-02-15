@@ -20,3 +20,6 @@ function assertValue<T>(v: T | undefined, errorMessage: string): T {
 
   return v
 }
+
+const token=`${process.env.SANITY_API_READ_TOKEN}`
+export const previewToken= assertValue(token,'Missing environment variable:SANITY_API_READ_TOKEN')
