@@ -1,4 +1,5 @@
 import { QueueListIcon } from '@heroicons/react/24/outline'
+import { defineField } from 'sanity';
 
 const footer = {
   name: "footer",
@@ -6,30 +7,69 @@ const footer = {
   type: "document",
   icon: QueueListIcon,
   fields: [
-    {
-      name: "menuColor",
-      title: "Color Code for menu items",
-      description: "like #000000 for black color.",
-      type: "string"
-    },
-    {
-      name: "phoneBG",
-      title: "Color Code for Background of phone number",
-      description: "like #000000 for black color.",
-      type: "string"
-    },
-    {
-      name: "phoneColor",
-      title: "Color Code for Background of phone number on hover",
-      description: "When mouse goes over phone number it's background color.",
-      type: "string"
-    }
-  ],
-  initialValue: {
-    websiteName: "#000000",
-    phoneBG: "#000000",
-    phoneColor: "#FFFFFF"
-  }
+    defineField({
+      name: "gallery",
+      title: "Gallery",
+      type: "array",
+      of: [
+        {
+          type: "object", // This specifies the type of values in the array
+          fields: [
+            {
+              name: "image",
+              title: "Image",
+              type: "image",
+              options: { hotspot: true },
+            },
+            {
+              name: "alt",
+              type: "string",
+              title: "Alt",
+            },
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: "Menus",
+      title: "Menus",
+      type: "array",
+      of: [
+        {
+          type: "object", // This specifies the type of values in the array
+          fields: [
+            {
+              name: "title",
+              title: "Heading",
+              type: "string"
+            },
+            defineField({
+              name: "menu",
+              title: "Menu",
+              type: "array",
+              of: [
+                {
+                  type: "object", // This specifies the type of values in the array
+                  fields: [
+                    {
+                      name: "label",
+                      title: "Label",
+                      type: "string"
+                    },
+                    {
+                      name: "url",
+                      type: "string",
+                      title: "Url",
+                    },
+                  ],
+                },
+              ],
+            })
+          ],
+        },
+      ],
+    })
+  ]
 };
 
 export default footer;

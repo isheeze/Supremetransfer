@@ -1,6 +1,9 @@
 import theme from './theme'
 import header from './header'
-import home from './home'
 import footer from './footer'
+import home from './home'
+import about from './about'
+import airportTransfer from './airportTransfer'
+import portsChauffeur from './portsChauffeur'
 
-export const schemaTypes = [theme, header, home, footer]
+export const schemaTypes = [theme, header, footer, home, about, airportTransfer, portsChauffeur]

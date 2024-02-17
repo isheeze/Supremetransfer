@@ -31,6 +31,18 @@ const headerData = await sanityFetch<SanityDocument>({
 })
 export const header = headerData[0]
 
+// ======================== Footer ================================
+
+export const getFooterDataQuery = groq`*[_type == "footer"]{
+    gallery,
+    Menus
+}`;
+
+const footerData = await sanityFetch<SanityDocument>({
+    query: getFooterDataQuery,
+})
+export const footer = footerData[0]
+
 // ======================== Home ================================
 export const getImageBannerQuery = groq`*[_type == "home"]{
     imageBanner
@@ -89,3 +101,41 @@ const ReviewsSectionData = await sanityFetch<SanityDocument>({
     query: getReviewsSectionQuery,
 })
 export const reviewsSection = ReviewsSectionData[0].ReviewsSection
+
+// ======================== About ================================
+export const getaboutQuery = groq`*[_type == "about"]{
+    sections
+}`;
+
+const aboutData = await sanityFetch<SanityDocument>({
+    query: getaboutQuery,
+})
+export const about = aboutData[0]
+
+// ======================== airportTransfer ================================
+export const getairportTransferQuery = groq`*[_type == "airportTransfer"]{
+    heading,
+    subheading,
+    images,
+    points,
+    sections
+}`;
+
+const airportTransferaboutData = await sanityFetch<SanityDocument>({
+    query: getairportTransferQuery
+})
+export const airportTransfer = airportTransferaboutData[0]
+
+// ======================== portsChauffeur ================================
+export const getportsChauffeurQuery = groq`*[_type == "portsChauffeur"]{
+    heading,
+    subheading,
+    images,
+    points,
+    sections
+}`;
+
+const portsChauffeurData = await sanityFetch<SanityDocument>({
+    query: getportsChauffeurQuery
+})
+export const portsChauffeur = portsChauffeurData[0]

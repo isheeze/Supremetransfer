@@ -31,7 +31,8 @@ html:has([data-ui="NextStudioLayout"]) .footer{
   display:none;
 }
 
-.features-icons-containers > svg{
+.features-icons-containers > svg,
+.icons-container > svg{
   width: 100% !important;
   height: 100% !important;
 }
