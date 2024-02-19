@@ -2,12 +2,12 @@ import { urlForImage } from "@sanity/lib/image";
 import { portsChauffeur } from "@sanity/lib/queries";
 import Image from "next/image";
 
-export default function PortsChauffeur() {
+export default function PortsChauffeur(props: any) {
   return (
     <div className="bg-white">
       <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 pt-24 sm:px-6 sm:pt-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div>
-          {portsChauffeur.subheading && <h2 className="text-2xl font-semibold leading-7 text-indigo-600">{portsChauffeur.subheading}</h2>}
+          {portsChauffeur.subheading && <h2 className="text-2xl font-semibold leading-7" style={{ color: props.themeColor }}>{portsChauffeur.subheading}</h2>}
           {portsChauffeur.heading && <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{portsChauffeur.heading}</h2>}
 
           <dl className="mt-10 grid grid-cols-1">
@@ -59,7 +59,7 @@ export default function PortsChauffeur() {
               <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
                 <div className="lg:pr-4">
                   <div className="lg:max-w-lg">
-                    <p className="text-base font-semibold leading-7 text-indigo-600">{section.subheading}</p>
+                    <p className="text-base font-semibold leading-7" style={{ color: props.themeColor }}>{section.subheading}</p>
                     <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{section.heading}</h1>
                     {section.descriptions && section.descriptions.map((desc: any, i: any) => ( <p key={i} className="mt-6 text-xl leading-8 text-gray-700">
                       {desc.description}
@@ -90,7 +90,7 @@ export default function PortsChauffeur() {
                     {section.points && <ul role="list" className="mt-8 text-gray-600">
                     {section.points.map((point: any, i: any) => (
                       <li className="flex" key={i}  style={{marginTop: `${section.gap}px`}}>
-                        <div dangerouslySetInnerHTML={{ __html: point.icon.svg }} className="mt-1 h-5 w-5 mr-1 flex-none text-indigo-600 icons-container" aria-hidden="true"/>
+                        <div dangerouslySetInnerHTML={{ __html: point.icon.svg }} className="mt-1 h-5 w-5 mr-1 flex-none icons-container" aria-hidden="true" style={{ color: props.themeColor }}/>
                         <span>
                           <strong className="font-semibold text-gray-900">{point.heading} </strong>
                           {point.descriptions && point.descriptions.map((desc: any, i: any) => (
@@ -110,7 +110,7 @@ export default function PortsChauffeur() {
               <div className="lg:col-span-2 lg:col-start-2 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
                 <div className="lg:pr-4">
                   <div className="lg:max-w-lg">
-                    <p className="text-base font-semibold leading-7 text-indigo-600">{section.subheading}</p>
+                    <p className="text-base font-semibold leading-7" style={{ color: props.themeColor }}>{section.subheading}</p>
                     <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{section.heading}</h1>
                     {section.descriptions && section.descriptions.map((desc: any, i: any) => ( <p key={i} className="mt-6 text-xl leading-8 text-gray-700">
                       {desc.description}
@@ -141,7 +141,7 @@ export default function PortsChauffeur() {
                   {section.points && <ul role="list" className="mt-8 text-gray-600">
                     {section.points.map((point: any, i: any) => (
                       <li className="flex" key={i}  style={{marginTop: `${section.gap}px`}}>
-                        <div dangerouslySetInnerHTML={{ __html: point.icon.svg }} className="mt-1 h-5 w-5 mr-1 flex-none text-indigo-600 icons-container" aria-hidden="true"/>
+                        <div dangerouslySetInnerHTML={{ __html: point.icon.svg }} className="mt-1 h-5 w-5 mr-1 flex-none icons-container" aria-hidden="true" style={{ color: props.themeColor }}/>
                         <span>
                           <strong className="font-semibold text-gray-900">{point.heading} </strong>
                           {point.descriptions && point.descriptions.map((desc: any, i: any) => (

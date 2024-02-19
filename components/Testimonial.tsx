@@ -16,7 +16,7 @@ import { useEffect, useState } from "react"
 import { SanityDocument, groq } from "next-sanity"
 import { sanityFetch } from "@sanity/lib/sanityFetch"
 
-export default function Testimonial(){
+export default function Testimonial(props: any){
   const [reviewsSection, setReviewsSection] = useState<SanityDocument>()
     
   useEffect(() => {
@@ -80,7 +80,7 @@ export default function Testimonial(){
                     <p>{item.review}</p>
                     <div>
                       <div className="flex mt-5">
-                        <h3 className="text-base font-normal tracking-[1px] text-indigo-600">
+                        <h3 className="text-base font-normal tracking-[1px]" style={{ color: props.themeColor }}>
                           {item.name} <br />
                           <span className="text-xs text-gray-900">{item.profession}</span>
                         </h3>
@@ -98,7 +98,7 @@ export default function Testimonial(){
               <div className="swiper-button-next slider-arrow">
                 <ChevronRightIcon className="text-indigo-600" />
               </div>
-              <div className="swiper-pagination"></div>
+              <div className="swiper-pagination" style={{ "--theme-color": props.themeColor } as React.CSSProperties}></div>
             </div>
           </Swiper>
         </div>

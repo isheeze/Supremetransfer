@@ -23,7 +23,7 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 .dark-bg .swiper-pagination-bullet-active{
-  background: white !important;
+  background: var(--theme-color) !important;
 }
 
 html:has([data-ui="NextStudioLayout"]) .nav,
@@ -35,4 +35,14 @@ html:has([data-ui="NextStudioLayout"]) .footer{
 .icons-container > svg{
   width: 100% !important;
   height: 100% !important;
+}
+
+.customFocusRing:focus{
+  --tw-ring-color: var(--theme-color);
+}
+.customBg{
+  background-color: var(--theme-color);
+}
+.customFocusOutline:focus-visible{
+  outline-color: var(--theme-color);
 }

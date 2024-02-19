@@ -12,7 +12,7 @@ import { SanityDocument } from 'next-sanity'
 
 import { urlForImage } from '@sanity/lib/image'
 import Image from 'next/image'
-const Nav = () => {
+const Nav = (props: any) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [theme, setTheme] = useState<SanityDocument>()
     const [header, setHeader] = useState<SanityDocument>()
@@ -35,9 +35,6 @@ const Nav = () => {
           setTheme(themeData[0]);
 
           const getHeaderDataQuery = groq`*[_type == "header"]{
-              menuColor,
-              phoneBG,
-              phoneColor,
               menu
           }`;
           
@@ -77,7 +74,7 @@ const Nav = () => {
             <div className="flex lg:hidden">
               <button
                 type="button"
-                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5" style={{color: props.menuColor}}
                 onClick={() => setMobileMenuOpen(true)}
               >
                 <span className="sr-only">Open main menu</span>
@@ -87,13 +84,13 @@ const Nav = () => {
             <div className="hidden lg:flex lg:gap-x-12">
               {header.menu?.map((item: any) => (
                 <div key={item.label}>
-                  {item.submenu?.length == undefined && <Link href={item.url} className="text-sm font-semibold leading-6 text-black" style={{color: header.menuColor}}>
+                  {item.submenu?.length == undefined && <Link href={item.url} className="text-sm font-semibold leading-6 text-black" style={{color: props.menuColor}}>
                     {item.label}
                   </Link>}
                   {item.submenu?.length && <Popover className="relative">
-                    <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" style={{color: header.menuColor}}>
+                    <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" style={{color: props.menuColor}}>
                       {item.label}
-                      <ChevronDownIcon className="h-5 w-5 flex-none text-gray-900" aria-hidden="true"  style={{color: header.menuColor}}/>
+                      <ChevronDownIcon className="h-5 w-5 flex-none text-gray-900" aria-hidden="true"  style={{color: props.menuColor}}/>
                     </Popover.Button>
 
                     <Transition
@@ -128,7 +125,7 @@ const Nav = () => {
               ))}
             </div>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-2">
-              <Link href={`tel:${theme.socialLinks.phone}`} className="flex items-center gap-2 rounded-full  px-3.5 py-1 text-sm font-semibold  shadow-sm hover:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 text-white bg-gray-900" style={{backgroundColor: header.phoneBG, color: header.phoneColor}}>
+              <Link href={`tel:${theme.socialLinks.phone}`} className="flex items-center gap-2 rounded-full  px-3.5 py-1 text-sm font-semibold  shadow-sm hover:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 text-white bg-gray-900" style={{backgroundColor: props.phoneBG, color: props.phoneColor}}>
                 <PhoneIcon className="h-4 w-4" />{ theme.socialLinks.phone }
               </Link>
             </div>

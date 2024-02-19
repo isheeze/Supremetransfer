@@ -89,5 +89,5 @@
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background: #6a59ff;
+  background: var(--theme-color);
 }

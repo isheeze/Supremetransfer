@@ -4,7 +4,7 @@ import { urlForImage } from '@sanity/lib/image'
 import { about } from '@sanity/lib/queries'
 import Image from 'next/image'
 
-export default function About() {
+export default function About(props: any) {
   return (
     <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
       {about.sections.map((section: any, i: any) => (
@@ -14,7 +14,7 @@ export default function About() {
             <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
               <div className="lg:pr-4">
                 <div className="lg:max-w-lg">
-                  <p className="text-base font-semibold leading-7 text-indigo-600">{section.subheading}</p>
+                  <p className="text-base font-semibold leading-7" style={{ color: props.themeColor }}>{section.subheading}</p>
                   <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{section.heading}</h1>
                   <p className="mt-6 text-xl leading-8 text-gray-700">
                     {section.description}
@@ -45,7 +45,7 @@ export default function About() {
                   {section.points && <ul role="list" className="mt-8 text-gray-600">
                   {section.points.map((point: any, i: any) => (
                     <li className="flex" key={i}  style={{marginTop: `${section.gap}px`}}>
-                      <div dangerouslySetInnerHTML={{ __html: point.icon.svg }} className="mt-1 h-5 w-5 mr-1 flex-none text-indigo-600 icons-container" aria-hidden="true"/>
+                      <div dangerouslySetInnerHTML={{ __html: point.icon.svg }} className="mt-1 h-5 w-5 mr-1 flex-none icons-container" aria-hidden="true" style={{ color: props.themeColor }}/>
                       <span>
                         <strong className="font-semibold text-gray-900">{point.heading} </strong> {point.description}
                       </span>
@@ -61,7 +61,7 @@ export default function About() {
             <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
               <div className="lg:pr-4">
                 <div className="lg:max-w-lg">
-                  <p className="text-base font-semibold leading-7 text-indigo-600">{section.subheading}</p>
+                  <p className="text-base font-semibold leading-7" style={{ color: props.themeColor }}>{section.subheading}</p>
                   <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{section.heading}</h1>
                   <p className="mt-6 text-xl leading-8 text-gray-700">
                     {section.description}
@@ -92,7 +92,7 @@ export default function About() {
                   {section.points && <ul role="list" className="mt-8 text-gray-600">
                   {section.points.map((point: any, i: any) => (
                     <li className="flex" key={i}  style={{marginTop: `${section.gap}px`}}>
-                      <div dangerouslySetInnerHTML={{ __html: point.icon.svg }} className="mt-1 h-5 w-5 mr-1 flex-none text-indigo-600 icons-container" aria-hidden="true"/>
+                      <div dangerouslySetInnerHTML={{ __html: point.icon.svg }} className="mt-1 h-5 w-5 mr-1 flex-none icons-container" aria-hidden="true" style={{ color: props.themeColor }}/>
                       <span>
                         <strong className="font-semibold text-gray-900">{point.heading} </strong> {point.description}
                       </span>

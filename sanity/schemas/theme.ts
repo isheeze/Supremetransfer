@@ -31,6 +31,12 @@ const theme = {
       options: { hotspot: true },
     },
     {
+      name: "themeColor",
+      title: "Color Code for theme's main color",
+      description: "like #5d55e7 for indego color.",
+      type: "string",
+    },
+    {
       name: "socialLinks",
       title: "Social Links",
       type: "object",

@@ -13,7 +13,7 @@ import { SanityDocument, groq } from 'next-sanity';
 import { sanityFetch } from '@sanity/lib/sanityFetch';
 import { urlForImage } from '@sanity/lib/image';
 
-export default () => {
+export default (props: any) => {
   const [sliderSection, setSliderSection] = useState<SanityDocument>()
     
   useEffect(() => {
@@ -87,7 +87,7 @@ export default () => {
           <div className="slider-controler">
             <div className="swiper-button-prev slider-arrow after:text-white after:!text-xl"></div>
             <div className="swiper-button-next slider-arrow after:text-white after:!text-xl"></div>
-            <div className="swiper-pagination"></div>
+            <div className="swiper-pagination" style={{ "--theme-color": props.themeColor } as React.CSSProperties}></div>
           </div>
         </Swiper>
       </div>

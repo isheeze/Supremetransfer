@@ -3,7 +3,7 @@ import { urlForImage } from '@sanity/lib/image';
 import { sanityFetch } from '@sanity/lib/sanityFetch';
 import { SanityDocument, groq } from 'next-sanity';
 import React, { useState, useRef, useEffect } from 'react';
-const Hero = ()=> {
+const Hero = (props: any)=> {
     const [via, setVia] = useState(false);
     const [via2, setVia2] = useState(false);
     const DateRef = useRef(null);
@@ -338,7 +338,8 @@ const Hero = ()=> {
                 <div className="mt-3 flex items-center justify-end gap-x-6">
                   <button
                     type="submit"
-                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500 hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    style={{ "--tw-shadow-color": props.themeColor, backgroundColor: props.themeColor } as React.CSSProperties}
                   >
                     Get Quotes
                   </button>

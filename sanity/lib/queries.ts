@@ -10,6 +10,7 @@ export const getThemeDataQuery = groq`*[_type == "theme"]{
     logo,
     favicon,
     socialLinks,
+    themeColor
 }`;
 
 const themeData = await sanityFetch<SanityDocument>({
@@ -23,6 +24,9 @@ export const getHeaderDataQuery = groq`*[_type == "header"]{
     menuColor,
     phoneBG,
     phoneColor,
+    menuColorN,
+    phoneBGN,
+    phoneColorN,
     menu
 }`;
 
@@ -35,7 +39,9 @@ export const header = headerData[0]
 
 export const getFooterDataQuery = groq`*[_type == "footer"]{
     gallery,
-    Menus
+    Menus,
+    titleColorCode,
+    menuColorCode
 }`;
 
 const footerData = await sanityFetch<SanityDocument>({
@@ -139,3 +145,16 @@ const portsChauffeurData = await sanityFetch<SanityDocument>({
     query: getportsChauffeurQuery
 })
 export const portsChauffeur = portsChauffeurData[0]
+
+// ======================== fleet ================================
+export const getfleetQuery = groq`*[_type == "fleet"]{
+    heading,
+    subheading,
+    description,
+    fleets
+}`;
+
+const fleetData = await sanityFetch<SanityDocument>({
+    query: getfleetQuery
+})
+export const fleet = fleetData[0]

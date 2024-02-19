@@ -68,7 +68,17 @@ const footer = {
           ],
         },
       ],
-    })
+    }),
+    {
+      name: "titleColorCode",
+      type: "string",
+      title: "Title Color Code",
+    },
+    {
+      name: "menuColorCode",
+      type: "string",
+      title: "Menu Color Code",
+    }
   ]
 };
 

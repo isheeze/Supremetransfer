@@ -5,17 +5,20 @@ import Features from '@components/Features'
 import ImageBanner from '@components/ImageBanner'
 import Slider from '@components/Slider'
 import Collage2 from '@components/Collage2'
+import Nav from '@components/Nav'
+import { header, theme } from '@sanity/lib/queries'
 
 export default function Home() {
   return (
     <main className="">
-      <Hero />
+      <Nav menuColor={header.menuColor} phoneBG={header.phoneBG} phoneColor={header.phoneColor} />
+      <Hero themeColor={theme.themeColor} />
       <ImageBanner />
-      <FeaturesWithImage />
-      <Features />
+      <FeaturesWithImage themeColor={theme.themeColor} />
+      <Features themeColor={theme.themeColor} />
       <Collage2 />
-      <Slider />
-      <Testimonial />
+      <Slider themeColor={theme.themeColor} />
+      <Testimonial themeColor={theme.themeColor} />
     </main>
   )
 }
