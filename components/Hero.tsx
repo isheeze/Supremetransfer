@@ -3,6 +3,9 @@ import { urlForImage } from '@sanity/lib/image';
 import { sanityFetch } from '@sanity/lib/sanityFetch';
 import { SanityDocument, groq } from 'next-sanity';
 import React, { useState, useRef, useEffect } from 'react';
+
+import Autocomplete from "react-google-autocomplete"
+
 const Hero = (props: any)=> {
     const [via, setVia] = useState(false);
     const [via2, setVia2] = useState(false);
@@ -75,6 +78,13 @@ const Hero = (props: any)=> {
                               autoComplete="pick-up"
                               className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
                               placeholder="Pick-up Location"
+                            />
+                            <Autocomplete
+                              apiKey={"AIzaSyDZLZ7lGMz9xDLBFhp9mpV9R50X44I9T04"}
+                              onPlaceSelected={(place) => {
+                                console.log(place);
+                              }}
+                              className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
                             />
                           </div>
                         </div>
