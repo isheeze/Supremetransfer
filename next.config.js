@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
+  images: {
 		domains: ['cdn.sanity.io'],
-        unoptimized: true,
+    unoptimized: true,
 	}
 }
 

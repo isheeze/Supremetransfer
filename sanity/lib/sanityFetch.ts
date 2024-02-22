@@ -36,7 +36,7 @@ export async function sanityFetch<QueryResponse>({
             //     perspective: "previewDrafts",
             // }),
             
-              next:{revalidate:0}
+            next:{revalidate:1}
               
             // next: {
             //     tags,
