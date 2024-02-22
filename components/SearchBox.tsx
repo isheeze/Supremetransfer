@@ -3,10 +3,11 @@ import { FunctionComponent } from "react";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
-  getZipCode,
+  getZipCode
 } from "use-places-autocomplete";
 import { useGoogleMapsScript, Libraries } from "use-google-maps-script";
 import { Combobox } from '@headlessui/react';
+import axios from "axios";
 
 interface ISearchBoxProps {
   onSelectAddress: (
@@ -61,9 +62,11 @@ function ReadySearchBox({ onSelectAddress, defaultValue, placeholder }: ISearchB
       
 
       const results = await getGeocode({ address });
-      //const { lat, lng } = await getLatLng(results[0]);
+      const { lat, lng } = await getLatLng(results[0]);
       const zipCode = await getZipCode(results[0], false);
-      alert("ZIP Code: "+zipCode);
+
+      distance()
+      
       onSelectAddress(address, 0, 0);
     } catch (error) {
       console.error(`😱 Error:`, error);
@@ -92,3 +95,69 @@ function ReadySearchBox({ onSelectAddress, defaultValue, placeholder }: ISearchB
     </Combobox>
   );
 }
+const distance = () => {
+  const url = 'https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix';
+  const headers = {
+    'X-Goog-Api-Key': 'AIzaSyDZLZ7lGMz9xDLBFhp9mpV9R50X44I9T04',
+    'Content-Type': 'application/json',
+    'X-Goog-FieldMask': 'originIndex,destinationIndex,duration,distanceMeters,status,condition'
+  }
+  const data = {
+    origins: [
+      {
+        waypoint: {
+          location: {
+            latLng: {
+              latitude: 37.420761,
+              longitude: -122.081356,
+            },
+          },
+        },
+        routeModifiers: { avoid_ferries: true },
+      },
+      {
+        waypoint: {
+          location: {
+            latLng: {
+              latitude: 37.403184,
+              longitude: -122.097371,
+            },
+          },
+        },
+        routeModifiers: { avoid_ferries: true },
+      },
+    ],
+    destinations: [
+      {
+        waypoint: {
+          location: {
+            latLng: {
+              latitude: 37.420999,
+              longitude: -122.086894,
+            },
+          },
+        },
+      },
+      {
+        waypoint: {
+          location: {
+            latLng: {
+              latitude: 37.383047,
+              longitude: -122.044651,
+            },
+          },
+        },
+      },
+    ],
+    travelMode: "DRIVE",
+    routingPreference: "TRAFFIC_AWARE",
+  };
+  axios
+  .post(url, data, { headers })
+  .then((response) => {
+    console.log(response.data); // Handle successful response
+  })
+  .catch((error) => {
+    console.error(error); // Handle errors
+  });
+};

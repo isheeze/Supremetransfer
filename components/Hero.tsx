@@ -4,21 +4,23 @@ import { sanityFetch } from '@sanity/lib/sanityFetch';
 import { SanityDocument, groq } from 'next-sanity';
 import React, { useState, useRef, useEffect } from 'react';
 
-import Autocomplete from "react-google-autocomplete"
 import { SearchBox } from './SearchBox';
-
-const options = {
-  // Autocomplete options
-};
-const apiKey = 'AIzaSyDZLZ7lGMz9xDLBFhp9mpV9R50X44I9T04';
 
 const Hero = (props: any)=> {
     const [via, setVia] = useState(false);
     const [via2, setVia2] = useState(false);
-    const DateRef = useRef(null);
-    const handleDateFocus = () => {
-      if (DateRef.current) {
-        //DateRef.current.showPicker(); // Open the picker programmatically
+    const [twoWay, setTwoWay] = useState(false);
+
+    const DepDateRef = useRef<any>(null);
+    const handleDepDateFocus = () => {
+      if (DepDateRef.current) {
+        DepDateRef?.current?.showPicker(); // Open the picker programmatically
+      }
+    };
+    const ArivalDateRef = useRef<any>(null);
+    const handleArivalDateRefFocus = () => {
+      if (ArivalDateRef.current) {
+        ArivalDateRef?.current?.showPicker(); // Open the picker programmatically
       }
     };
     const handleVia = (inc = true) => {
@@ -35,6 +37,9 @@ const Hero = (props: any)=> {
     const handleVia2 = () => {
       setVia2(!via2);
     };
+    const handleTwoWay = (e:any) => {
+      setTwoWay(e.currentTarget.value == 'Two Way')
+    }
 
 
     const [theme, setTheme] = useState<SanityDocument>()
@@ -62,14 +67,7 @@ const Hero = (props: any)=> {
     if (!theme) {
       return <div></div>;
     }
-
-
-
-
-
-
-
-
+    
     return (
         <div className={`overflow-hidden relative isolate px-6 pt-14 lg:px-8 lg:pt-24 lg:pb-12 bg-cover bg-center bg-fixed bg-no-repeat`} style={{ "--theme-color": props.themeColor,backgroundImage: `url(${urlForImage(theme.heroImage)})` } as React.CSSProperties}>
           <div className='flex flex-col-reverse lg:flex-row mx-auto'>
@@ -150,22 +148,6 @@ const Hero = (props: any)=> {
                       </div>
 
                       <div className="col-span-full">
-                        <div className="mt-2">
-                          <div className="flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
-                            <input
-                              type="datetime-local"
-                              name="departure-date"
-                              id="udeparture-date"
-                              className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 pr-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
-                              placeholder="janesmith"
-                              ref={ DateRef }
-                              onFocus={ handleDateFocus }
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="col-span-full">
                         <fieldset>
                           <div className="mt-2 grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-2">
                             <div className="flex items-center gap-x-3 sm:col-span-3">
@@ -174,6 +156,8 @@ const Hero = (props: any)=> {
                                   <input type="radio"
                                     id="one-way"
                                     name="ways"
+                                    onChange={handleTwoWay}
+                                    value="One Way"
                                     className="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded-full border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:border-4 checked:before:bg-gray-900 hover:before:opacity-10"
                                   />
                                   <span
@@ -196,6 +180,8 @@ const Hero = (props: any)=> {
                                   <input type="radio"
                                     id="two-way"
                                     name="ways"
+                                    onChange={handleTwoWay}
+                                    value="Two Way"
                                     className="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded-full border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:border-4 checked:before:bg-gray-900 hover:before:opacity-10"
                                   />
                                   <span
@@ -213,6 +199,44 @@ const Hero = (props: any)=> {
                             </div>
                           </div>
                         </fieldset>
+                      </div>
+
+                      <div className="col-span-full">
+                        <div className='mt-2'>
+                          <label htmlFor="departure-date" className='font-bold'>Departure Time</label>
+                        </div>
+                        <div className="mt-2">
+                          <div className="flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
+                            <input
+                              type="datetime-local"
+                              name="departure-date"
+                              id="departure-date"
+                              className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 pr-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
+                              placeholder="janesmith"
+                              ref={ DepDateRef }
+                              onFocus={ handleDepDateFocus }
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className={`col-span-full${twoWay ? '' : ' hidden'}`}>
+                        <div className='mt-2'>
+                          <label htmlFor="arrival-date" className='font-bold'>Arrival Time</label>
+                        </div>
+                        <div className="mt-2">
+                          <div className="flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
+                            <input
+                              type="datetime-local"
+                              name="arrival-date"
+                              id="arrival-date"
+                              className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 pr-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
+                              placeholder="janesmith"
+                              ref={ ArivalDateRef }
+                              onFocus={ handleArivalDateRefFocus }
+                            />
+                          </div>
+                        </div>
                       </div>
 
                       <div className="sm:col-span-3">
