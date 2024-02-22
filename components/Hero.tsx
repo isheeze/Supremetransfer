@@ -5,6 +5,12 @@ import { SanityDocument, groq } from 'next-sanity';
 import React, { useState, useRef, useEffect } from 'react';
 
 import Autocomplete from "react-google-autocomplete"
+import { SearchBox } from './SearchBox';
+
+const options = {
+  // Autocomplete options
+};
+const apiKey = 'AIzaSyDZLZ7lGMz9xDLBFhp9mpV9R50X44I9T04';
 
 const Hero = (props: any)=> {
     const [via, setVia] = useState(false);
@@ -58,8 +64,14 @@ const Hero = (props: any)=> {
     }
 
 
+
+
+
+
+
+
     return (
-        <div className={`overflow-hidden relative isolate px-6 pt-14 lg:px-8 lg:pt-24 lg:pb-12 bg-cover bg-center bg-fixed bg-no-repeat`} style={{backgroundImage: `url(${urlForImage(theme.heroImage)})`}}>
+        <div className={`overflow-hidden relative isolate px-6 pt-14 lg:px-8 lg:pt-24 lg:pb-12 bg-cover bg-center bg-fixed bg-no-repeat`} style={{ "--theme-color": props.themeColor,backgroundImage: `url(${urlForImage(theme.heroImage)})` } as React.CSSProperties}>
           <div className='flex flex-col-reverse lg:flex-row mx-auto'>
             <div className="flex-1 flex justify-center items-center">
               <form className='max-w-md w-full rounded-3xl backdrop-blur-md bg-slate-50/70 ring-1 ring-inset ring-gray-400/20 p-6 m-6 shadow-2xl'>
@@ -70,37 +82,30 @@ const Hero = (props: any)=> {
                     <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-6">
                       <div className="col-span-full">
                         <div className="mt-2">
-                          <div className="flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                            <input
-                              type="text"
-                              name="pick-up"
-                              id="pick-up"
-                              autoComplete="pick-up"
-                              className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
-                              placeholder="Pick-up Location"
-                            />
-                            <Autocomplete
-                              apiKey={"AIzaSyDZLZ7lGMz9xDLBFhp9mpV9R50X44I9T04"}
-                              onPlaceSelected={(place) => {
-                                console.log(place);
-                              }}
-                              className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
-                            />
+                          <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
+                            <SearchBox 
+                             onSelectAddress={(address, latitude, longitude) => {
+                              console.log("address", address);
+                              console.log("latitude", latitude);
+                              console.log("longitude", longitude);
+                            }}
+                            defaultValue={""}
+                            placeholder='Pick-up Location'/>
                           </div>
                         </div>
                       </div>
 
                       <div className={`col-span-full${via ? '' : ' hidden'}`}>
                         <div className="mt-2">
-                          <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                            <input
-                              type="text"
-                              name="via"
-                              id="via"
-                              autoComplete="via"
-                              className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
-                              placeholder="Via Location"
-                            />
+                          <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
+                            <SearchBox 
+                             onSelectAddress={(address, latitude, longitude) => {
+                              console.log("address", address);
+                              console.log("latitude", latitude);
+                              console.log("longitude", longitude);
+                            }}
+                            defaultValue={""}
+                            placeholder='Via Location'/>
                             <span onClick={() => handleVia(false)} className="absolute cursor-pointer -translate-y-1/2 top-1/2 right-2.5 rounded-full px-1 py-0.5 text-xs bg-gradient-to-r from-purple-500 to-pink-500 text-white">
                               - Via
                             </span>
@@ -110,15 +115,15 @@ const Hero = (props: any)=> {
 
                       <div className={`col-span-full${via2 ? '' : ' hidden'}`}>
                         <div className="mt-2">
-                          <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                            <input
-                              type="text"
-                              name="via2"
-                              id="via2"
-                              autoComplete="via2"
-                              className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
-                              placeholder="Via Location"
-                            />
+                          <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
+                            <SearchBox 
+                             onSelectAddress={(address, latitude, longitude) => {
+                              console.log("address", address);
+                              console.log("latitude", latitude);
+                              console.log("longitude", longitude);
+                            }}
+                            defaultValue={""}
+                            placeholder='Via Location'/>
                             <span onClick={handleVia2} className="absolute cursor-pointer -translate-y-1/2 top-1/2 right-2.5 rounded-full px-1 py-0.5 text-xs bg-gradient-to-r from-purple-500 to-pink-500 text-white">
                               - Via
                             </span>
@@ -128,15 +133,15 @@ const Hero = (props: any)=> {
 
                       <div className="col-span-full">
                         <div className="mt-2">
-                          <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                            <input
-                              type="text"
-                              name="drop-off"
-                              id="drop-off"
-                              autoComplete="drop-off"
-                              className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
-                              placeholder="Drop-off Location"
-                            />
+                          <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
+                            <SearchBox 
+                             onSelectAddress={(address, latitude, longitude) => {
+                              console.log("address", address);
+                              console.log("latitude", latitude);
+                              console.log("longitude", longitude);
+                            }}
+                            defaultValue={""}
+                            placeholder='Drop-off Location'/>
                             <span onClick={() => handleVia()} className={`absolute cursor-pointer	-translate-y-1/2 top-1/2 right-2.5 rounded-full px-1 py-0.5 text-xs bg-gradient-to-r from-sky-500 to-indigo-500 text-white${via && via2 ? ' hidden' : ''}`}>
                               + Via
                             </span>
@@ -146,7 +151,7 @@ const Hero = (props: any)=> {
 
                       <div className="col-span-full">
                         <div className="mt-2">
-                          <div className="flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                          <div className="flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
                             <input
                               type="datetime-local"
                               name="departure-date"

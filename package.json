@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
+    "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.28.0",
@@ -23,7 +23,9 @@
     "sanity": "^3.28.0",
     "sanity-plugin-icon-picker": "^3.3.0",
     "styled-components": "^6.1.8",
-    "swiper": "^11.0.5"
+    "swiper": "^11.0.5",
+    "use-google-maps-script": "^0.1.2",
+    "use-places-autocomplete": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -15,7 +15,25 @@
     --background-end-rgb: 255, 255, 255;
   }
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 *:focus-visible{
   outline: none;
 }
@@ -37,7 +55,8 @@ html:has([data-ui="NextStudioLayout"]) .footer{
   height: 100% !important;
 }
 
-.customFocusRing:focus{
+.customFocusRing:focus,
+.customFocusWithinRing:focus-within{
   --tw-ring-color: var(--theme-color);
 }
 .customBg{
