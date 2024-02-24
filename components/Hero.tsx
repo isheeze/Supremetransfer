@@ -69,10 +69,10 @@ const Hero = (props: any)=> {
     }
     
     return (
-        <div className={`overflow-hidden relative isolate px-6 pt-14 lg:px-8 lg:pt-24 lg:pb-12 bg-cover bg-center bg-fixed bg-no-repeat`} style={{ "--theme-color": props.themeColor,backgroundImage: `url(${urlForImage(theme.heroImage)})` } as React.CSSProperties}>
-          <div className='flex flex-col-reverse lg:flex-row mx-auto'>
-            <div className="flex-1 flex justify-center items-center">
-              <form className='max-w-md w-full rounded-3xl backdrop-blur-md bg-slate-50/70 ring-1 ring-inset ring-gray-400/20 p-6 m-6 shadow-2xl'>
+        <div className={`overflow-hidden relative isolate pt-14 lg:pt-24 lg:pb-12 bg-cover bg-center bg-fixed bg-no-repeat`} style={{ "--theme-color": props.themeColor,backgroundImage: `url(${urlForImage(theme.heroImage)})` } as React.CSSProperties}>
+          <div className='max-w-7xl flex flex-col-reverse lg:flex-row mx-auto'>
+            <div className="flex-1 flex justify-center items-center sm:justify-start">
+              <form className='max-w-md w-full rounded-3xl backdrop-blur-[5px] bg-slate-50/70 ring-1 ring-inset ring-gray-400/20 p-6 lg:mx-8 mx-6 my-6 shadow-2xl'>
                 <div className="space-y-2">
                   <div className="border-b border-gray-900/10 pb-2">
                     <h2 className="text-center text-base font-semibold leading-7 text-black">Book Your Ride</h2>
