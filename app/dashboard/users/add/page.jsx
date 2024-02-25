@@ -14,12 +14,13 @@ const AddUserPage = () => {
           required
         />
         <input type="phone" placeholder="phone" name="phone" />
-        <select name="isAdmin" id="isAdmin">
+        <select name="role" id="role">
           <option value={false}>
-            Is Admin?
+            Role?
           </option>
-          <option value={true}>Yes</option>
-          <option value={false}>No</option>
+          <option value={'admin'}>Admin</option>
+          <option value={'staff'}>Staff</option>
+          <option value={'user'}>User</option>
         </select>
         <select name="isActive" id="isActive">
           <option value={true}>

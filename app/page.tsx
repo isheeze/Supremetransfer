@@ -7,6 +7,7 @@ import Slider from '@components/Slider'
 import Collage2 from '@components/Collage2'
 import Nav from '@components/Nav'
 import { header, theme } from '@sanity/lib/queries'
+import CarsSection from '@components/CarsSection'
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Nav menuColor={header.menuColor} phoneBG={header.phoneBG} phoneColor={header.phoneColor} />
       <Hero themeColor={theme.themeColor} />
       <ImageBanner />
+      <CarsSection />
       <FeaturesWithImage themeColor={theme.themeColor} />
       <Features themeColor={theme.themeColor} />
       <Collage2 />

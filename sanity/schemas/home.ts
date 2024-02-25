@@ -20,6 +20,26 @@ const home = {
       options: { hotspot: true },
     },
     {
+      name: "CarsSection",
+      title: "Cars Section",
+      type: "object",
+      description: "Settings for cars section",
+      fields: [
+        {
+          name: "image1",
+          title: "First Image",
+          type: "image",
+          options: { hotspot: true },
+        },
+        {
+          name: "image2",
+          title: "Second Image",
+          type: "image",
+          options: { hotspot: true },
+        },
+      ]
+    },
+    {
       name: "WelcomeSection",
       title: "Welcome Section",
       type: "object",
@@ -287,6 +307,12 @@ const home = {
             {
               type: "object", // This specifies the type of values in the array
               fields: [
+                {
+                  name: "image",
+                  title: "Image",
+                  type: "image",
+                  options: { hotspot: true },
+                },
                 {
                   name: "name",
                   type: "string",

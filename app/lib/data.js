@@ -1,10 +1,10 @@
-import { Product, User } from "./models";
+import { User, PostCodeToPostCode, ZoneCharges, ChargesPerMile, Drivers } from "./models";
 import { connectToDB } from "./utils";
 
 export const fetchUsers = async (q, page) => {
   const regex = new RegExp(q, "i");
 
-  const ITEM_PER_PAGE = 2;
+  const ITEM_PER_PAGE = 10;
 
   try {
     connectToDB();
@@ -31,7 +31,8 @@ export const fetchUser = async (id) => {
   }
 };
 
-export const fetchProducts = async (q, page) => {
+// postcodetopostcode
+export const fetchPostCodeToPostCodes = async (q, page) => {
   console.log(q);
   const regex = new RegExp(q, "i");
 
@@ -39,25 +40,118 @@ export const fetchProducts = async (q, page) => {
 
   try {
     connectToDB();
-    const count = await Product.find({ title: { $regex: regex } }).count();
-    const products = await Product.find({ title: { $regex: regex } })
+    const count = await PostCodeToPostCode.find({ $or: [ {pickup: { $regex: regex }}, {dropoff: { $regex: regex }}] }).count();
+    const postCodeToPostCode = await PostCodeToPostCode.find({ $or: [ {pickup: { $regex: regex }}, {dropoff: { $regex: regex }}] })
       .limit(ITEM_PER_PAGE)
       .skip(ITEM_PER_PAGE * (page - 1));
-    return { count, products };
+    return { count, postCodeToPostCode };
   } catch (err) {
     console.log(err);
-    throw new Error("Failed to fetch products!");
+    throw new Error("Failed to fetch ptops!");
   }
 };
 
-export const fetchProduct = async (id) => {
+export const fetchPostCodeToPostCode = async (id) => {
   try {
     connectToDB();
-    const product = await Product.findById(id);
-    return product;
+    const ptop = await PostCodeToPostCode.findById(id);
+    return ptop;
   } catch (err) {
     console.log(err);
-    throw new Error("Failed to fetch product!");
+    throw new Error("Failed to fetch ptop!");
+  }
+};
+
+// ZoneCharges
+export const fetchZoneCharges = async (q, page) => {
+  console.log(q);
+  const regex = new RegExp(q, "i");
+
+  const ITEM_PER_PAGE = 2;
+
+  try {
+    connectToDB();
+    const count = await ZoneCharges.find({ $or: [ { pickup: { $regex: regex }}, {dropoff: { $regex: regex }}] }).count();
+    const zoneCharges = await ZoneCharges.find({ $or: [ { pickup: { $regex: regex }}, {dropoff: { $regex: regex }}] })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1));
+    return { count, zoneCharges };
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch ZoneCharges!");
+  }
+};
+
+export const fetchZoneCharge = async (id) => {
+  try {
+    connectToDB();
+    const zoneCharges = await ZoneCharges.findById(id);
+    return zoneCharges;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch zoneCharge!");
+  }
+};
+
+// ChargesPerMile
+export const fetchChargesPerMiles = async (q, page) => {
+  console.log(q);
+  const regex = new RegExp(q, "i");
+
+  const ITEM_PER_PAGE = 2;
+
+  try {
+    connectToDB();
+    const count = await ChargesPerMile.find({ $or: [ {min: { $regex: regex }}, {max: { $regex: regex }}] }).count();
+    const chargesPerMiles = await ChargesPerMile.find({ $or: [ {min: { $regex: regex }}, {max: { $regex: regex }}] })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1));
+    return { count, chargesPerMiles };
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch ChargesPerMiles!");
+  }
+};
+
+export const fetchChargesPerMile = async (id) => {
+  try {
+    connectToDB();
+    const chargesPerMile = await ChargesPerMile.findById(id);
+    return chargesPerMile;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch chargesPerMile!");
+  }
+};
+
+// Drivers
+export const fetchDrivers = async (q, page) => {
+  console.log(q);
+  const regex = new RegExp(q, "i");
+
+  const ITEM_PER_PAGE = 2;
+
+  try {
+    connectToDB();
+    const count = await Drivers.find({ fullName: { $regex: regex } }).count();
+    const drivers = await Drivers.find({ fullName: { $regex: regex } })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1));
+    return { count, drivers };
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch Drivers!");
+  }
+};
+
+export const fetchDriver = async (id) => {
+  try {
+    connectToDB();
+    const driver = await Drivers.findById(id);
+    return driver;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch Driver!");
   }
 };
 

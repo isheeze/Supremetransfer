@@ -111,7 +111,7 @@ const driversSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    Picture: {
+    picture: {
       type: String,
     },
     DVLALicense: {

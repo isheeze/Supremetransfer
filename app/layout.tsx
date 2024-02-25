@@ -44,6 +44,7 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}  
         <Footer />
+        <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=afc9c955-3cd6-4f3c-8e01-c18f85072bb3"> </script>
       </body>
     </html>
   )

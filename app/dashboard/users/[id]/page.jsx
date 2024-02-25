@@ -29,10 +29,11 @@ const SingleUserPage = async ({ params }) => {
           <input type="text" name="phone" placeholder={user.phone} />
           <label>Address</label>
           <textarea type="text" name="address" placeholder={user.address} />
-          <label>Is Admin?</label>
+          <label>Role</label>
           <select name="isAdmin" id="isAdmin">
-            <option value={true} selected={user.isAdmin}>Yes</option>
-            <option value={false} selected={!user.isAdmin}>No</option>
+            <option value={'admin'} selected={user.role == 'admin'}>Admin</option>
+            <option value={'staff'} selected={user.role == 'staff'}>Staff</option>
+            <option value={'user'} selected={user.role == 'user'}>User</option>
           </select>
           <label>Is Active?</label>
           <select name="isActive" id="isActive">

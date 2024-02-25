@@ -15,6 +15,7 @@ import { EffectCoverflow, Navigation, Pagination, Autoplay } from 'swiper/module
 import { useEffect, useState } from "react"
 import { SanityDocument, groq } from "next-sanity"
 import { sanityFetch } from "@sanity/lib/sanityFetch"
+import { urlForImage } from "@sanity/lib/image"
 
 export default function Testimonial(props: any){
   const [reviewsSection, setReviewsSection] = useState<SanityDocument>()
@@ -75,7 +76,7 @@ export default function Testimonial(props: any){
             {reviewsSection.reviews.map((item: any) => (
               <SwiperSlide key={item.name}>
                 <div className="relative p-10 pt-24 w-full text-gray-800">
-                  <Image className="absolute top-5 right-7 opacity-20" src='/quote.png' width={80} height={80} alt="quote"/>
+                  {item.image && <Image className="absolute top-3 right-7 " src={urlForImage(item.image)} width={80} height={80} alt="quote"/>}
                   <div>
                     <p>{item.review}</p>
                     <div>

@@ -58,6 +58,16 @@ const ImageBannerData = await sanityFetch<SanityDocument>({
     query: getImageBannerQuery,
 })
 export const imageBanner = ImageBannerData[0]
+
+export const carsSectionQuery = groq`*[_type == "home"]{
+    CarsSection
+}`;
+
+const CarsSectionData = await sanityFetch<SanityDocument>({
+    query: carsSectionQuery,
+})
+export const carsSection = CarsSectionData[0]
+
 // feature with image section
 export const getFeatureWithImageQuery = groq`*[_type == "home"]{
     WelcomeSection

@@ -203,7 +203,7 @@ const Hero = (props: any)=> {
 
                       <div className="col-span-full">
                         <div className='mt-2'>
-                          <label htmlFor="departure-date" className='font-bold'>Departure Time</label>
+                          <label htmlFor="departure-date" className='font-bold'>Pickup Time</label>
                         </div>
                         <div className="mt-2">
                           <div className="flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
@@ -222,7 +222,7 @@ const Hero = (props: any)=> {
 
                       <div className={`col-span-full${twoWay ? '' : ' hidden'}`}>
                         <div className='mt-2'>
-                          <label htmlFor="arrival-date" className='font-bold'>Arrival Time</label>
+                          <label htmlFor="arrival-date" className='font-bold'>Return Time</label>
                         </div>
                         <div className="mt-2">
                           <div className="flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
