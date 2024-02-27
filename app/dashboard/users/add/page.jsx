@@ -1,7 +1,14 @@
 import { addUser } from "@/app/lib/actions";
 import styles from "@/app/ui/dashboard/users/addUser/addUser.module.css";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
 
-const AddUserPage = () => {
+const AddUserPage = async() => {
+  const {user} = await auth();
+  if(user.role != 'admin'){
+    redirect('/dashboard')
+  }
+
   return (
     <div className={styles.container}>
       <form action={addUser} className={styles.form}>

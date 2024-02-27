@@ -1,7 +1,14 @@
 import { addChargesPerMile } from "@/app/lib/actions";
 import styles from "@/app/ui/dashboard/products/addProduct/addProduct.module.css";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
 
-const AddChargesPerMilesPage = () => {
+const AddChargesPerMilesPage = async() => {
+  const {user} = await auth();
+  if(user.role != 'admin'){
+    redirect('/dashboard')
+  }
+
   return (
     <div className={styles.container}>
       <form action={addChargesPerMile} className={styles.form}>

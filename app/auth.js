@@ -10,7 +10,7 @@ const login = async (credentials) => {
     connectToDB();
     const user = await User.findOne({ username: credentials.username });
 
-    if (!user || !user.isAdmin) throw new Error("Wrong credentials!");
+    if (!user || (user.role !== 'admin' && user.role !== 'staff')) throw new Error("Wrong credentials!");
 
     const isPasswordCorrect = await bcrypt.compare(
       credentials.password,
@@ -33,7 +33,13 @@ export const { signIn, signOut, auth } = NextAuth({
       async authorize(credentials) {
         try {
           const user = await login(credentials);
-          return user;
+          const userData = {
+            username: user.username,
+            role: user.role,
+            id: user._id,
+          };
+      
+          return userData;
         } catch (err) {
           return null;
         }
@@ -45,14 +51,16 @@ export const { signIn, signOut, auth } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.username = user.username;
-        token.img = user.img;
+        token.role = user.role;
+        token.id = user.id;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.user.username = token.username;
-        session.user.img = token.img;
+        session.user.role = token.role;
+        session.user.id = token.id;
       }
       return session;
     },

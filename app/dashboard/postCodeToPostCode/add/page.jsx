@@ -1,7 +1,14 @@
 import { addPostCodeToPostCode } from "@/app/lib/actions";
 import styles from "@/app/ui/dashboard/products/addProduct/addProduct.module.css";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
 
-const AddPostCodeToPostCodePage = () => {
+const AddPostCodeToPostCodePage = async () => {
+  const {user} = await auth();
+  if(user.role != 'admin'){
+    redirect('/dashboard')
+  }
+
   return (
     <div className={styles.container}>
       <form action={addPostCodeToPostCode} className={styles.form}>

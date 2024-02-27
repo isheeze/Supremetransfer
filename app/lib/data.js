@@ -102,8 +102,8 @@ export const fetchChargesPerMiles = async (q, page) => {
 
   try {
     connectToDB();
-    const count = await ChargesPerMile.find({ $or: [ {min: { $regex: regex }}, {max: { $regex: regex }}] }).count();
-    const chargesPerMiles = await ChargesPerMile.find({ $or: [ {min: { $regex: regex }}, {max: { $regex: regex }}] })
+    const count = await ChargesPerMile.find().count();
+    const chargesPerMiles = await ChargesPerMile.find()
       .limit(ITEM_PER_PAGE)
       .skip(ITEM_PER_PAGE * (page - 1));
     return { count, chargesPerMiles };

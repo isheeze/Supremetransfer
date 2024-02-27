@@ -1,8 +1,15 @@
 import { updateZoneCharges } from "@/app/lib/actions";
 import { fetchZoneCharge } from "@/app/lib/data";
 import styles from "@/app/ui/dashboard/products/singleProduct/singleProduct.module.css";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
 
 const SingleZoneChargePage = async ({ params }) => {
+  const {user} = await auth();
+  if(user.role != 'admin'){
+    redirect('/dashboard')
+  }
+
   const { id } = params;
   const zoneCharge = await fetchZoneCharge(id);
 

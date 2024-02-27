@@ -2,10 +2,20 @@ import { updateUser } from "@/app/lib/actions";
 import { fetchUser } from "@/app/lib/data";
 import styles from "@/app/ui/dashboard/users/singleUser/singleUser.module.css";
 import Image from "next/image";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
 
 const SingleUserPage = async ({ params }) => {
-  
+  var userr = await auth();
+  userr = userr.user
   const { id } = params;
+
+
+  if(userr.role == 'admin' || userr.id == id){
+  }else{
+    redirect('/dashboard')
+  }
+  
   const user = await fetchUser(id);
 
   return (
@@ -29,17 +39,20 @@ const SingleUserPage = async ({ params }) => {
           <input type="text" name="phone" placeholder={user.phone} />
           <label>Address</label>
           <textarea type="text" name="address" placeholder={user.address} />
-          <label>Role</label>
-          <select name="isAdmin" id="isAdmin">
-            <option value={'admin'} selected={user.role == 'admin'}>Admin</option>
-            <option value={'staff'} selected={user.role == 'staff'}>Staff</option>
-            <option value={'user'} selected={user.role == 'user'}>User</option>
-          </select>
-          <label>Is Active?</label>
-          <select name="isActive" id="isActive">
-            <option value={true} selected={user.isActive}>Yes</option>
-            <option value={false} selected={!user.isActive}>No</option>
-          </select>
+          {userr.role == 'admin' &&
+          <div>
+            <label>Role</label>
+            <select name="isAdmin" id="isAdmin">
+              <option value={'admin'} selected={user.role == 'admin'}>Admin</option>
+              <option value={'staff'} selected={user.role == 'staff'}>Staff</option>
+              <option value={'user'} selected={user.role == 'user'}>User</option>
+            </select>
+            <label>Is Active?</label>
+            <select name="isActive" id="isActive">
+              <option value={true} selected={user.isActive}>Yes</option>
+              <option value={false} selected={!user.isActive}>No</option>
+            </select>
+          </div>}
           <button>Update</button>
         </form>
       </div>

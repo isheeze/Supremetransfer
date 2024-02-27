@@ -1,8 +1,15 @@
 import { updatePostCodeToPostCode } from "@/app/lib/actions";
 import { fetchPostCodeToPostCode } from "@/app/lib/data";
 import styles from "@/app/ui/dashboard/products/singleProduct/singleProduct.module.css";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
 
 const SinglePostCodeToPostCodePage = async ({ params }) => {
+  const {user} = await auth();
+  if(user.role != 'admin'){
+    redirect('/dashboard')
+  }
+
   const { id } = params;
   const postCodeToPostCode = await fetchPostCodeToPostCode(id);
 

@@ -5,8 +5,16 @@ import Search from "@/app/ui/dashboard/search/search";
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
 import { fetchChargesPerMiles } from "@/app/lib/data";
 import { deleteChargesPerMile } from "@/app/lib/actions";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
 
 const ChargesPerMilePage = async ({ searchParams }) => {
+  const {user} = await auth();
+  if(user.role != 'admin'){
+    redirect('/dashboard')
+  }
+
+
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
   const { count, chargesPerMiles } = await fetchChargesPerMiles(q, page);

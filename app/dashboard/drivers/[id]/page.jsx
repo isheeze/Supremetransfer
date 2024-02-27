@@ -3,7 +3,14 @@ import styles from "@/app/ui/dashboard/users/singleUser/singleUser.module.css";
 import DriverForm from "@components/DriverForm";
 import Image from "next/image";
 
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
+
 const SingleDriverPage = async ({ params }) => {
+  const {user} = await auth();
+  if(user.role != 'admin'){
+    redirect('/dashboard')
+  }
   
   const { id } = params;
   const driver = await fetchDriver(id);

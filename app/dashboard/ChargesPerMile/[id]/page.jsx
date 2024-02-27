@@ -1,8 +1,14 @@
 import { updateChargesPerMile } from "@/app/lib/actions";
 import { fetchChargesPerMile } from "@/app/lib/data";
 import styles from "@/app/ui/dashboard/products/singleProduct/singleProduct.module.css";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
 
 const SingleChargesPerMilePage = async ({ params }) => {
+  const {user} = await auth();
+  if(user.role != 'admin'){
+    redirect('/dashboard')
+  }
   const { id } = params;
   const chargesPerMile = await fetchChargesPerMile(id);
 

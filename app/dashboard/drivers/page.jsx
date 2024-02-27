@@ -4,8 +4,15 @@ import Search from "@/app/ui/dashboard/search/search";
 import styles from "@/app/ui/dashboard/users/users.module.css";
 import { deleteCloudinaryDriver } from "@app/lib/cloudinary";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
 
 const DriversPage = async ({ searchParams }) => {
+  const {user} = await auth();
+  if(user.role != 'admin'){
+    redirect('/dashboard')
+  }
+
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
   const { count, drivers } = await fetchDrivers(q, page);

@@ -5,8 +5,15 @@ import Search from "@/app/ui/dashboard/search/search";
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
 import { fetchZoneCharges } from "@/app/lib/data";
 import { deleteZoneCharges } from "@/app/lib/actions";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
 
 const ZoneCharges = async ({ searchParams }) => {
+  const {user} = await auth();
+  if(user.role != 'admin'){
+    redirect('/dashboard')
+  }
+
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
   const { count, zoneCharges } = await fetchZoneCharges(q, page);
