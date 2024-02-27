@@ -282,7 +282,8 @@ export const deleteChargesPerMile = async (formData) => {
 
 // Drivers
 export const addDrivers = async (formData) => {
-  const { fullName, email, mobile, picture, DVLALicense, DriverPCO, DriversNationalInsurance, VehicleLogBook, MOT, InsuranceCertificate, VehiclePCO, VehicleRentalAgreement } =
+  console.log('add Drivers triggered... ')
+  const { fullName, email, mobile, picture, picture_publickey, DVLALicense, DVLALicense_publickey, DriverPCO, DriverPCO_publickey, DriversNationalInsurance, DriversNationalInsurance_publickey, VehicleLogBook, VehicleLogBook_publickey, MOT, MOT_publickey, InsuranceCertificate, InsuranceCertificate_publickey, VehiclePCO, VehiclePCO_publickey, VehicleRentalAgreement, VehicleRentalAgreement_publickey } =
     Object.fromEntries(formData);
 
   try {
@@ -293,14 +294,23 @@ export const addDrivers = async (formData) => {
       email,
       mobile,
       picture,
+      picture_publickey,
       DVLALicense,
+      DVLALicense_publickey,
       DriverPCO,
+      DriverPCO_publickey,
       DriversNationalInsurance,
+      DriversNationalInsurance_publickey,
       VehicleLogBook,
+      VehicleLogBook_publickey,
       MOT,
+      MOT_publickey,
       InsuranceCertificate,
+      InsuranceCertificate_publickey,
       VehiclePCO,
-      VehicleRentalAgreement
+      VehiclePCO_publickey,
+      VehicleRentalAgreement,
+      VehicleRentalAgreement_publickey
     });
 
     await newDrivers.save();
@@ -314,32 +324,39 @@ export const addDrivers = async (formData) => {
 };
 
 export const updateDrivers = async (formData) => {
-  const { id, fullName, email, mobile, picture, DVLALicense, DriverPCO, DriversNationalInsurance, VehicleLogBook, MOT, InsuranceCertificate, VehiclePCO, VehicleRentalAgreement } =
+  const { id, fullName, email, mobile, picture, picture_publickey, DVLALicense, DVLALicense_publickey, DriverPCO, DriverPCO_publickey, DriversNationalInsurance, DriversNationalInsurance_publickey, VehicleLogBook, VehicleLogBook_publickey, MOT, MOT_publickey, InsuranceCertificate, InsuranceCertificate_publickey, VehiclePCO, VehiclePCO_publickey, VehicleRentalAgreement, VehicleRentalAgreement_publickey } =
     Object.fromEntries(formData);
 
   try {
     connectToDB();
-
     const updateFields = {
       fullName,
       email,
       mobile,
       picture,
+      picture_publickey,
       DVLALicense,
+      DVLALicense_publickey,
       DriverPCO,
+      DriverPCO_publickey,
       DriversNationalInsurance,
+      DriversNationalInsurance_publickey,
       VehicleLogBook,
+      VehicleLogBook_publickey,
       MOT,
+      MOT_publickey,
       InsuranceCertificate,
+      InsuranceCertificate_publickey,
       VehiclePCO,
-      VehicleRentalAgreement
+      VehiclePCO_publickey,
+      VehicleRentalAgreement,
+      VehicleRentalAgreement_publickey
     };
 
     Object.keys(updateFields).forEach(
       (key) =>
         (updateFields[key] === "" || undefined) && delete updateFields[key]
     );
-
     await Drivers.findByIdAndUpdate(id, updateFields);
   } catch (err) {
     console.log(err);

@@ -149,8 +149,7 @@ const distance = () => {
         },
       },
     ],
-    travelMode: "DRIVE",
-    routingPreference: "TRAFFIC_AWARE",
+    travelMode: "DRIVE"
   };
   axios
   .post(url, data, { headers })

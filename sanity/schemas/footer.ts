@@ -70,6 +70,17 @@ const footer = {
       ],
     }),
     {
+      name: "contactTitle",
+      type: "string",
+      title: "Title for contact in Footer",
+    },
+    {
+      name: "contactInfo",
+      type: "text",
+      rows: 4,
+      title: "Contact Details",
+    },
+    {
       name: "titleColorCode",
       type: "string",
       title: "Title Color Code",

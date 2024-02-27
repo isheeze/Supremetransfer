@@ -114,28 +114,55 @@ const driversSchema = new mongoose.Schema(
     picture: {
       type: String,
     },
+    picture_publickey: {
+      type: String,
+    },
     DVLALicense: {
+      type: String,
+    },
+    DVLALicense_publickey: {
       type: String,
     },
     DriverPCO: {
       type: String,
     },
+    DriverPCO_publickey: {
+      type: String,
+    },
     DriversNationalInsurance: {
+      type: String,
+    },
+    DriversNationalInsurance_publickey: {
       type: String,
     },
     VehicleLogBook: {
       type: String,
     },
+    VehicleLogBook_publickey: {
+      type: String,
+    },
     MOT: {
+      type: String,
+    },
+    MOT_publickey: {
       type: String,
     },
     InsuranceCertificate: {
       type: String,
     },
+    InsuranceCertificate_publickey: {
+      type: String,
+    },
     VehiclePCO: {
       type: String,
     },
+    VehiclePCO_publickey: {
+      type: String,
+    },
     VehicleRentalAgreement: {
+      type: String,
+    },
+    VehicleRentalAgreement_publickey: {
       type: String,
     }
   },

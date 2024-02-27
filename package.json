@@ -13,8 +13,10 @@
     "@heroicons/react": "^2.1.1",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.28.0",
+    "@stripe/stripe-js": "^3.0.5",
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
+    "cloudinary": "^2.0.1",
     "distance-matrix-2": "^1.1.0",
     "eslint-config-next": "^14.1.0",
     "mongoose": "^8.2.0",
@@ -27,11 +29,13 @@
     "recharts": "^2.12.1",
     "sanity": "^3.28.0",
     "sanity-plugin-icon-picker": "^3.3.0",
+    "stripe": "^14.18.0",
     "styled-components": "^6.1.8",
     "swiper": "^11.0.5",
     "use-debounce": "^10.0.0",
     "use-google-maps-script": "^0.1.2",
-    "use-places-autocomplete": "^4.0.1"
+    "use-places-autocomplete": "^4.0.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",

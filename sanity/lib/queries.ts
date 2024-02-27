@@ -40,6 +40,8 @@ export const header = headerData[0]
 export const getFooterDataQuery = groq`*[_type == "footer"]{
     gallery,
     Menus,
+    contactTitle,
+    contactInfo,
     titleColorCode,
     menuColorCode
 }`;

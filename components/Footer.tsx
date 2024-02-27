@@ -32,6 +32,7 @@ export default function Footer() {
                                 ))}
                             </div>
                         </div>
+                        <div className='flex flex-col justify-between'>
                         <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                             {footer.Menus.map((item: any) => (
                                 <div key={item.title}>
@@ -48,7 +49,15 @@ export default function Footer() {
                                 </div>
                             ))}
                         </div>
-                        <Image className='sm:absolute relative bottom-0 right-0 rounded-lg' src='/tfl.png' alt='TFL' width={285} height={300} />
+                        <div className='md:flex mt-8 items-start gap-4 '>
+                            <div>
+                                <h2 className="mb-6 text-sm font-semibold uppercase" style={{ color: footer.titleColorCode }}>{footer.contactTitle}</h2>
+                                <div style={{ color: footer.menuColorCode }}>{footer.contactInfo}</div>
+                            </div>
+                            <Image className='rounded-lg' src='/tfl.png' alt='TFL' width={285} height={300} />
+                        </div>
+                        </div>
+                        
                     </div>
                     <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                     <div className="sm:flex sm:items-center sm:justify-between">

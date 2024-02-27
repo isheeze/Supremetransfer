@@ -2,6 +2,56 @@ import { urlForImage } from "@sanity/lib/image"
 import { fleet } from "@sanity/lib/queries"
 import Image from "next/image"
 
+/**************** STRIPE START ******************/
+import { loadStripe } from "@stripe/stripe-js"
+import Stripe from "stripe";
+
+const stripe = new Stripe('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const asyncStripe = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+
+async function handler(amount: number) {
+    try {
+    const date = new Date().toISOString();
+
+    const session = await stripe.checkout.sessions.create({
+        line_items: [
+        {
+            price_data: {
+            currency: "usd",
+            product_data: {
+                name: "Ride-" + date,
+            },
+            unit_amount: amount * 100 || 100,
+            },
+            quantity: 1,
+        },
+        ],
+        mode: "payment",
+        success_url: `http://localhost:3000/?success=true`,
+        cancel_url: `http://localhost:3000/?canceled=true`,
+    });
+
+    return session.id
+    
+    } catch (err) {
+    console.log({ error: "Error checkout session" });
+    }
+}
+
+async function stripeSession(formData: FormData) {
+    'use server'
+    const session_id = await handler(112)
+
+    const stripe = await asyncStripe;
+    if(stripe && session_id){
+        await stripe.redirectToCheckout({
+            sessionId:session_id
+        })
+    }else{
+        console.log('stripe: ',stripe, ' -> session: ',session_id)
+    }
+}
+/**************** STRIPE END ******************/
 export default function Fleet(props: any) {
     return (
         <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
@@ -34,7 +84,7 @@ export default function Fleet(props: any) {
                                         ))}
                                     </div>
                                     {props.price && <div>{fleet.factor ?
-                                        <div className="rounded-3xl shadow-[0px_15px_30px_rgba(0,0,0,0.3)] flex items-center justify-center z-10 absolute text-white p-2 w-10/12 left-1/2 -translate-x-1/2 mt-2 cursor-pointer" style={{backgroundColor: props.themeColor}}>Book Now</div> :
+                                        <button className="rounded-3xl shadow-[0px_15px_30px_rgba(0,0,0,0.3)] flex items-center justify-center z-10 absolute text-white p-2 w-10/12 left-1/2 -translate-x-1/2 mt-2 cursor-pointer" style={{backgroundColor: props.themeColor}}>Book Now</button> :
                                         <div className="rounded-3xl shadow-[0px_15px_30px_rgba(0,0,0,0.3)] flex items-center justify-center z-10 absolute text-white p-2 w-10/12 left-1/2 -translate-x-1/2 mt-2" style={{backgroundColor: props.themeColor}}><a href='/contact'>Get Quote</a></div>
                                     }</div>}
 
