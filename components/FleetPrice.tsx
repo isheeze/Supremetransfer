@@ -1,6 +1,7 @@
 import { urlForImage } from "@sanity/lib/image"
 import { fleet } from "@sanity/lib/queries"
 import Image from "next/image"
+import { payment } from '@app/lib/actions'
 
 export default function Fleet(props: any) {
     return (
@@ -26,12 +27,21 @@ export default function Fleet(props: any) {
                                 <div className="bg-white rounded-3xl p-5 -mt-12 pt-16 shadow-[0px_15px_30px_rgba(0,0,0,0.2)] relative">
                                     <h3 className="mb-2 font-bold flex justify-between gap-x-2">
                                         <span>{fleet.name}</span>
+                                        {props.price && fleet.factor && <span>£{props.price * fleet.factor}</span>}
                                     </h3>
                                     <div className="grid max-w-xl grid-cols-2 gap-x-1 gap-y-2 items-center">
                                         {fleet.properties?.map((feature: any) => (
                                             <div className="flex text-xs gap-1"><div dangerouslySetInnerHTML={{ __html: feature.icon.svg }} className="w-5" aria-hidden="true"/>{feature.property}</div>
                                         ))}
                                     </div>
+                                    {props.price && <div>{fleet.factor ?
+                                        <form action={payment}>
+                                            <input type="hidden" value={props.price * fleet.factor} name="price" />
+                                            <button className="rounded-3xl shadow-[0px_15px_30px_rgba(0,0,0,0.3)] flex items-center justify-center z-10 absolute text-white p-2 w-10/12 left-1/2 -translate-x-1/2 mt-2 cursor-pointer" style={{backgroundColor: props.themeColor}}>Book Now</button>
+                                        </form> :
+                                        <div className="rounded-3xl shadow-[0px_15px_30px_rgba(0,0,0,0.3)] flex items-center justify-center z-10 absolute text-white p-2 w-10/12 left-1/2 -translate-x-1/2 mt-2" style={{backgroundColor: props.themeColor}}><a href='/contact'>Get Quote</a></div>
+                                    }</div>}
+
                                 </div>
                             </div>
                             ))}
@@ -42,4 +52,3 @@ export default function Fleet(props: any) {
         </div>
     )
   }
-  

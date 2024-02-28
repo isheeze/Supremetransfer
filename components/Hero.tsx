@@ -5,8 +5,32 @@ import { SanityDocument, groq } from 'next-sanity';
 import React, { useState, useRef, useEffect } from 'react';
 
 import { SearchBox } from './SearchBox';
+import { useFormState } from 'react-dom';
+import { handleRide } from '@app/lib/actions';
 
 const Hero = (props: any)=> {
+  const [state, formAction] = useFormState(handleRide, null)
+  
+  const [pickupAddress, setPickupAddress] = useState<any>()
+  const [pickupZipcode, setPickupZipcode] = useState<any>()
+  const [pickupLat, setPickupLat] = useState<any>()
+  const [pickupLng, setPickupLng] = useState<any>()
+
+  const [via1Address, setVia1Address] = useState<any>()
+  const [via1Zipcode, setVia1Zipcode] = useState<any>()
+  const [via1Lat, setVia1Lat] = useState<any>()
+  const [via1Lng, setVia1Lng] = useState<any>()
+
+  const [via2Address, setVia2Address] = useState<any>()
+  const [via2Zipcode, setVia2Zipcode] = useState<any>()
+  const [via2Lat, setVia2Lat] = useState<any>()
+  const [via2Lng, setVia2Lng] = useState<any>()
+
+  const [dropoffAddress, setDropoffAddress] = useState<any>()
+  const [dropoffZipcode, setDropoffZipcode] = useState<any>()
+  const [dropoffLat, setDropoffLat] = useState<any>()
+  const [dropoffLng, setDropoffLng] = useState<any>()
+
     const [via, setVia] = useState(false);
     const [via2, setVia2] = useState(false);
     const [twoWay, setTwoWay] = useState(false);
@@ -72,24 +96,30 @@ const Hero = (props: any)=> {
         <div className={`overflow-hidden relative isolate pt-14 lg:pt-24 lg:pb-12 bg-cover bg-center bg-fixed bg-no-repeat`} style={{ "--theme-color": props.themeColor,backgroundImage: `url(${urlForImage(theme.heroImage)})` } as React.CSSProperties}>
           <div className='max-w-7xl flex flex-col-reverse lg:flex-row mx-auto'>
             <div className="flex-1 flex justify-center items-center sm:justify-start">
-              <form className='max-w-md w-full rounded-3xl backdrop-blur-[5px] bg-slate-50/70 ring-1 ring-inset ring-gray-400/20 p-6 lg:mx-8 mx-6 my-6 shadow-2xl'>
+              <form action={formAction} className='max-w-md w-full rounded-3xl backdrop-blur-[5px] bg-slate-50/70 ring-1 ring-inset ring-gray-400/20 p-6 lg:mx-8 mx-6 my-6 shadow-2xl'>
                 <div className="space-y-2">
                   <div className="border-b border-gray-900/10 pb-2">
                     <h2 className="text-center text-base font-semibold leading-7 text-black">Book Your Ride</h2>
 
+                    {state && <div className="my-8">{state.errors.map((item: any) => (<div className="mb-2 rounded-md shadow-md bg-red-800 text-gray-50 p-2">{item.message}</div>))}</div>}
                     <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-6">
                       <div className="col-span-full">
                         <div className="mt-2">
                           <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
                             <SearchBox 
-                             onSelectAddress={(address, latitude, longitude) => {
-                              console.log("address", address);
-                              console.log("latitude", latitude);
-                              console.log("longitude", longitude);
+                             onSelectAddress={(address, zipcode, lat, lng) => {
+                              setPickupAddress(address)
+                              setPickupZipcode(zipcode)
+                              setPickupLat(lat)
+                              setPickupLng(lng)
                             }}
                             defaultValue={""}
                             placeholder='Pick-up Location'/>
                           </div>
+                          <input type='hidden' name="pickupAddress" value={pickupAddress} />
+                          {pickupZipcode && <input type='hidden' name="pickupZipcode" value={pickupZipcode} />}
+                          {pickupLat && <input type='hidden' name="pickupLat" value={pickupLat} />}
+                          {pickupLng && <input type='hidden' name="pickupLng" value={pickupLng} />}
                         </div>
                       </div>
 
@@ -97,16 +127,21 @@ const Hero = (props: any)=> {
                         <div className="mt-2">
                           <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
                             <SearchBox 
-                             onSelectAddress={(address, latitude, longitude) => {
-                              console.log("address", address);
-                              console.log("latitude", latitude);
-                              console.log("longitude", longitude);
+                              onSelectAddress={(address, zipcode, lat, lng) => {
+                                setVia1Address(address)
+                                setVia1Zipcode(zipcode)
+                                setVia1Lat(lat)
+                                setVia1Lng(lng)
                             }}
                             defaultValue={""}
                             placeholder='Via Location'/>
                             <span onClick={() => handleVia(false)} className="absolute cursor-pointer -translate-y-1/2 top-1/2 right-2.5 rounded-full px-1 py-0.5 text-xs bg-gradient-to-r from-purple-500 to-pink-500 text-white">
                               - Via
                             </span>
+                            {via1Address && <input type='hidden' name="via1Address" value={via1Address} />}
+                            {via1Zipcode && <input type='hidden' name="via1Zipcode" value={via1Zipcode} />}
+                            {via1Lat && <input type='hidden' name="via1Lat" value={via1Lat} />}
+                            {via1Lng && <input type='hidden' name="via1Lng" value={via1Lng} />}
                           </div>
                         </div>
                       </div>
@@ -115,16 +150,21 @@ const Hero = (props: any)=> {
                         <div className="mt-2">
                           <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
                             <SearchBox 
-                             onSelectAddress={(address, latitude, longitude) => {
-                              console.log("address", address);
-                              console.log("latitude", latitude);
-                              console.log("longitude", longitude);
+                              onSelectAddress={(address, zipcode, lat, lng) => {
+                                setVia2Address(address)
+                                setVia2Zipcode(zipcode)
+                                setVia2Lat(lat)
+                                setVia2Lng(lng)
                             }}
                             defaultValue={""}
                             placeholder='Via Location'/>
                             <span onClick={handleVia2} className="absolute cursor-pointer -translate-y-1/2 top-1/2 right-2.5 rounded-full px-1 py-0.5 text-xs bg-gradient-to-r from-purple-500 to-pink-500 text-white">
                               - Via
                             </span>
+                            {via2Address && <input type='hidden' name="via2Address" value={via1Address} />}
+                            {via2Zipcode && <input type='hidden' name="via2Zipcode" value={via1Zipcode} />}
+                            {via2Lat && <input type='hidden' name="via2Lat" value={via1Lat} />}
+                            {via2Lng && <input type='hidden' name="via2Lng" value={via1Lng} />}
                           </div>
                         </div>
                       </div>
@@ -133,16 +173,21 @@ const Hero = (props: any)=> {
                         <div className="mt-2">
                           <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
                             <SearchBox 
-                             onSelectAddress={(address, latitude, longitude) => {
-                              console.log("address", address);
-                              console.log("latitude", latitude);
-                              console.log("longitude", longitude);
+                              onSelectAddress={(address, zipcode, lat, lng) => {
+                                setDropoffAddress(address)
+                                setDropoffZipcode(zipcode)
+                                setDropoffLat(lat)
+                                setDropoffLng(lng)
                             }}
                             defaultValue={""}
                             placeholder='Drop-off Location'/>
                             <span onClick={() => handleVia()} className={`absolute cursor-pointer	-translate-y-1/2 top-1/2 right-2.5 rounded-full px-1 py-0.5 text-xs bg-gradient-to-r from-sky-500 to-indigo-500 text-white${via && via2 ? ' hidden' : ''}`}>
                               + Via
                             </span>
+                            <input type='hidden' name="dropoffAddress" value={dropoffAddress} />
+                            {dropoffZipcode && <input type='hidden' name="dropoffZipcode" value={dropoffZipcode} />}
+                            {dropoffLat && <input type='hidden' name="dropoffLat" value={dropoffLat} />}
+                            {dropoffLng && <input type='hidden' name="dropoffLng" value={dropoffLng} />}
                           </div>
                         </div>
                       </div>
@@ -158,6 +203,7 @@ const Hero = (props: any)=> {
                                     name="ways"
                                     onChange={handleTwoWay}
                                     value="One Way"
+                                    checked
                                     className="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded-full border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:border-4 checked:before:bg-gray-900 hover:before:opacity-10"
                                   />
                                   <span
@@ -203,14 +249,14 @@ const Hero = (props: any)=> {
 
                       <div className="col-span-full">
                         <div className='mt-2'>
-                          <label htmlFor="departure-date" className='font-bold'>Pickup Time</label>
+                          <label htmlFor="pickupTime" className='font-bold'>Pickup Time</label>
                         </div>
                         <div className="mt-2">
                           <div className="flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
                             <input
                               type="datetime-local"
-                              name="departure-date"
-                              id="departure-date"
+                              name="pickupTime"
+                              id="pickupTime"
                               className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 pr-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
                               placeholder="janesmith"
                               ref={ DepDateRef }
@@ -222,14 +268,14 @@ const Hero = (props: any)=> {
 
                       <div className={`col-span-full${twoWay ? '' : ' hidden'}`}>
                         <div className='mt-2'>
-                          <label htmlFor="arrival-date" className='font-bold'>Return Time</label>
+                          <label htmlFor="returnTime" className='font-bold'>Return Time</label>
                         </div>
                         <div className="mt-2">
                           <div className="flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
                             <input
                               type="datetime-local"
-                              name="arrival-date"
-                              id="arrival-date"
+                              name="returnTime"
+                              id="returnTime"
                               className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-4 pr-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6"
                               placeholder="janesmith"
                               ref={ ArivalDateRef }

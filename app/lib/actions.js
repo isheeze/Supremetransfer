@@ -6,6 +6,9 @@ import { connectToDB } from "./utils";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
 import { signIn } from "../auth";
+import { z } from 'zod';
+import Stripe from "stripe";
+import axios from "axios";
 
 export const addUser = async (formData) => {
   const { username, email, password, phone, address, role, isActive } =
@@ -393,3 +396,198 @@ export const authenticate = async (prevState, formData) => {
     throw err;
   }
 };
+
+export const payment = async (formData) => {
+  const stripe = new Stripe('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+  var session = ""
+  try {
+    const price = formData.get('price')
+    const date = new Date().toISOString();
+
+    session = await stripe.checkout.sessions.create({
+        line_items: [
+        {
+            price_data: {
+            currency: "gbp",
+            product_data: {
+                name: "Ride-" + date,
+            },
+            unit_amount: price * 100 || 100,
+            },
+            quantity: 1,
+        },
+        ],
+        mode: "payment",
+        success_url: `http://localhost:3000/?success=true`,
+        cancel_url: `http://localhost:3000/?canceled=true`,
+    });
+  } catch (err) {
+    console.log({ error: "Error checkout session" });
+  }
+  if(session.id){
+    redirect(`/api/stripe/${session.id}`)
+  }
+}
+
+const distance = async (originLat, originLng, distinationLat, distinationLng) => {
+  const url = 'https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix';
+  const headers = {
+    'X-Goog-Api-Key': 'AIzaSyDZLZ7lGMz9xDLBFhp9mpV9R50X44I9T04',
+    'Content-Type': 'application/json',
+    'X-Goog-FieldMask': 'originIndex,destinationIndex,duration,distanceMeters,status,condition'
+  }
+  const data = {
+    origins: [
+      {
+        waypoint: {
+          location: {
+            latLng: {
+              latitude: originLat,
+              longitude: originLng,
+            },
+          },
+        },
+        routeModifiers: { avoid_ferries: true },
+      },
+    ],
+    destinations: [
+      {
+        waypoint: {
+          location: {
+            latLng: {
+              latitude: distinationLat,
+              longitude: distinationLng,
+            },
+          },
+        },
+      },
+    ],
+    travelMode: "DRIVE"
+  };
+  const dis = await axios.post(url, data, { headers })
+  return dis
+};
+function toTwoDigits( value, dp ){
+  return +parseFloat(value).toFixed( dp );
+}
+export async function handleRide(prevState, formData) {
+  console.log('1.')
+  const schema = z.object({
+    pickupAddress: z.string().min(1, {message: "Select pick up address"}),
+    dropoffAddress: z.string().min(1, {message: "Select drop off address"}),
+    pickupTime: z.string().min(1, {message: "Select pick up time"}),
+  });
+  console.log('2.')
+  try {
+    const parsedData = schema.parse({
+      pickupAddress: formData.get("pickupAddress"),
+      dropoffAddress: formData.get("dropoffAddress"),
+      pickupTime: formData.get("pickupTime"),
+    });
+
+    var price
+
+    console.log('3.')
+    if(!(formData.get('via1Address') || formData.get('via2Address'))){
+      console.log('4.')
+      if(formData.get('pickupZipcode') && formData.get('dropoffZipcode')){
+        console.log('5.')
+        const p = formData.get('pickupZipcode').split(" ")
+        const d = formData.get('dropoffZipcode').split(" ")
+        console.log('6.')
+        connectToDB();
+        console.log('7.')
+        const postCodeToPostCode = await PostCodeToPostCode.find({pickup: p[0], dropoff: d[0]})
+        console.log('8.')
+        console.log(postCodeToPostCode)
+        if(postCodeToPostCode.length){
+          console.log('9.')
+          price = postCodeToPostCode[0].price
+        }else{
+          console.log('10.')
+          const dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
+          if(dis){
+            const miles = dis.data[0].distanceMeters*0.000621371192;
+            connectToDB();
+            const chargesPerMile = await ChargesPerMile.find({min: {$lte: miles}, max: {$gte: miles}})
+            if(chargesPerMile.length){
+              price = toTwoDigits(chargesPerMile[0].price * miles, 2)
+            }
+          }
+        }
+      }else{
+        console.log('11.')
+        const dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
+        if(dis){
+          const miles = dis.data[0].distanceMeters*0.000621371192;
+          connectToDB();
+          const chargesPerMile = await ChargesPerMile.find({min: {$lte: miles}, max: {$gte: miles}})
+          if(chargesPerMile.length){
+            price = toTwoDigits(chargesPerMile[0].price * miles, 2)
+          }
+        }
+      }
+      console.log('12.')
+    }else{
+      console.log('13.')
+      if(formData.get('via1Address') && formData.get('via2Address')){
+        var dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('via1Lat'),formData.get('via1Lng'))
+        var miles = dis.data[0].distanceMeters*0.000621371192;
+        dis = await distance(formData.get('via1Lat'),formData.get('via1Lng'),formData.get('via2Lat'),formData.get('via2Lng'))
+        miles += dis.data[0].distanceMeters*0.000621371192;
+        dis = await distance(formData.get('via2Lat'),formData.get('via2Lng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
+        miles += dis.data[0].distanceMeters*0.000621371192;
+        
+        const chargesPerMile = await ChargesPerMile.find({min: {$lte: miles}, max: {$gte: miles}})
+
+        if(chargesPerMile.length){
+          price = toTwoDigits(chargesPerMile[0].price * miles, 2)
+        }
+        console.log('14.')
+      }else{
+        console.log('15.')
+        if(formData.get('via1Address')){
+          var dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('via1Lat'),formData.get('via1Lng'))
+          var miles = dis.data[0].distanceMeters*0.000621371192;
+          dis = await distance(formData.get('via1Lat'),formData.get('via1Lng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
+          miles += dis.data[0].distanceMeters*0.000621371192;
+          
+          const chargesPerMile = await ChargesPerMile.find({min: {$lte: miles}, max: {$gte: miles}})
+
+          if(chargesPerMile.length){
+            price = toTwoDigits(chargesPerMile[0].price * miles, 2)
+          }
+          console.log('16.')
+        }else{
+          var dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('via2Lat'),formData.get('via2Lng'))
+          var miles = dis.data[0].distanceMeters*0.000621371192;
+          dis = await distance(formData.get('via2Lat'),formData.get('via2Lng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
+          miles += dis.data[0].distanceMeters*0.000621371192;
+          
+          const chargesPerMile = await ChargesPerMile.find({min: {$lte: miles}, max: {$gte: miles}})
+
+          if(chargesPerMile.length){
+            price = toTwoDigits(chargesPerMile[0].price * miles, 2)
+          }
+          console.log('17.')
+        }
+      }
+    }
+
+  } catch (error) {
+    console.log('errors: ', error)
+    if(error.errors){
+      return { errors: error.errors };
+    }else{
+      return { errors: [error]}
+    }
+  }
+  console.log('18.')
+  if(price){
+    console.log('19.')
+    redirect(`/fleet/${price}`)
+  }
+  console.log('20.')
+  revalidatePath("/");
+}
+

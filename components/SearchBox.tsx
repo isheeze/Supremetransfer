@@ -12,6 +12,7 @@ import axios from "axios";
 interface ISearchBoxProps {
   onSelectAddress: (
     address: string,
+    postcode: any,
     latitude: number | null,
     longitude: number | null
   ) => void;
@@ -51,7 +52,7 @@ function ReadySearchBox({ onSelectAddress, defaultValue, placeholder }: ISearchB
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     if (e.target.value === "") {
-      onSelectAddress("", null, null);
+      onSelectAddress("", "", null, null);
     }
   };
 
@@ -64,10 +65,8 @@ function ReadySearchBox({ onSelectAddress, defaultValue, placeholder }: ISearchB
       const results = await getGeocode({ address });
       const { lat, lng } = await getLatLng(results[0]);
       const zipCode = await getZipCode(results[0], false);
-
-      distance()
       
-      onSelectAddress(address, 0, 0);
+      onSelectAddress(address, zipCode, lat, lng);
     } catch (error) {
       console.error(`😱 Error:`, error);
     }
@@ -84,7 +83,7 @@ function ReadySearchBox({ onSelectAddress, defaultValue, placeholder }: ISearchB
     <Combobox.Options className="absolute bg-white w-full rounded-lg shadow-lg top-11 z-10 p-3 max-h-72 overflow-auto" >
     {status === "OK" &&
                 data.map(({ place_id, description }) => (
-                    <Combobox.Option key={place_id} value={description} className={({ active }) =>
+                    <Combobox.Option key={place_id} value={description} className={({ active }:any) =>
                     `text-gray-900 p-2 cursor-pointer rounded-md ${
                       active ? 'customBg text-white shadow-md' : 'text-gray-900'
                     }`}>
@@ -95,7 +94,7 @@ function ReadySearchBox({ onSelectAddress, defaultValue, placeholder }: ISearchB
     </Combobox>
   );
 }
-const distance = () => {
+export const distance = (originLat:any, originLng:any, distinationLat:any, distinationLng:any) => {
   const url = 'https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix';
   const headers = {
     'X-Goog-Api-Key': 'AIzaSyDZLZ7lGMz9xDLBFhp9mpV9R50X44I9T04',
@@ -108,19 +107,8 @@ const distance = () => {
         waypoint: {
           location: {
             latLng: {
-              latitude: 37.420761,
-              longitude: -122.081356,
-            },
-          },
-        },
-        routeModifiers: { avoid_ferries: true },
-      },
-      {
-        waypoint: {
-          location: {
-            latLng: {
-              latitude: 37.403184,
-              longitude: -122.097371,
+              latitude: originLat,
+              longitude: originLng,
             },
           },
         },
@@ -132,18 +120,8 @@ const distance = () => {
         waypoint: {
           location: {
             latLng: {
-              latitude: 37.420999,
-              longitude: -122.086894,
-            },
-          },
-        },
-      },
-      {
-        waypoint: {
-          location: {
-            latLng: {
-              latitude: 37.383047,
-              longitude: -122.044651,
+              latitude: distinationLat,
+              longitude: distinationLng,
             },
           },
         },
@@ -151,12 +129,23 @@ const distance = () => {
     ],
     travelMode: "DRIVE"
   };
-  axios
-  .post(url, data, { headers })
-  .then((response) => {
-    console.log(response.data); // Handle successful response
+  fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(data)
   })
-  .catch((error) => {
-    console.error(error); // Handle errors
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(response => {
+    // Handle successful response
+    console.log(response);
+  })
+  .catch(error => {
+    // Handle errors
+    console.error(error);
   });
 };
