@@ -5,6 +5,7 @@ import { about } from '@sanity/lib/queries'
 import Image from 'next/image'
 
 export default function About(props: any) {
+  
   return (
     <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
       {about.sections.map((section: any, i: any) => (
