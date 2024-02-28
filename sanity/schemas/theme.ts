@@ -49,6 +49,12 @@ const theme = {
           initialValue: "+442080732199",
         },
         {
+          name: "phone2",
+          title: "2nd Phone Number",
+          type: "string",
+          initialValue: "+442080732199",
+        },
+        {
           name: "whatsapp",
           title: "Whatsapp Number",
           type: "string",
