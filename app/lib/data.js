@@ -155,6 +155,36 @@ export const fetchDriver = async (id) => {
   }
 };
 
+// Rides
+export const fetchRides = async (q, page) => {
+  console.log(q);
+  const regex = new RegExp(q, "i");
+
+  const ITEM_PER_PAGE = 2;
+
+  try {
+    connectToDB();
+    const count = await Rides.find({ clientName: { $regex: regex } }).count();
+    const rides = await Rides.find({ clientName: { $regex: regex } })
+      .limit(ITEM_PER_PAGE)
+      .skip(ITEM_PER_PAGE * (page - 1));
+    return { count, rides };
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch Rides!");
+  }
+};
+
+export const fetchRide = async (id) => {
+  try {
+    connectToDB();
+    const driver = await Rides.findById(id);
+    return driver;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch Driver!");
+  }
+};
 // DUMMY DATA
 
 export const cards = [

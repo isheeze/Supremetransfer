@@ -1,7 +1,8 @@
 import { urlForImage } from "@sanity/lib/image"
 import { fleet } from "@sanity/lib/queries"
 import Image from "next/image"
-import { payment } from '@app/lib/actions'
+import { pricedFleet } from '@app/lib/actions'
+import HiddenInputsFleetPrice from "./HiddenInputsFleetPrice"
 
 export default function Fleet(props: any) {
     return (
@@ -35,13 +36,14 @@ export default function Fleet(props: any) {
                                         ))}
                                     </div>
                                     {props.price && <div>{fleet.factor ?
-                                        <form action={payment}>
+                                        <form action={pricedFleet}>
                                             <input type="hidden" value={props.price * fleet.factor} name="price" />
+                                            <input type="hidden" value={fleet.name} name="vehicle" />
+                                            <HiddenInputsFleetPrice />
                                             <button className="rounded-3xl shadow-[0px_15px_30px_rgba(0,0,0,0.3)] flex items-center justify-center z-10 absolute text-white p-2 w-10/12 left-1/2 -translate-x-1/2 mt-2 cursor-pointer" style={{backgroundColor: props.themeColor}}>Book Now</button>
                                         </form> :
                                         <div className="rounded-3xl shadow-[0px_15px_30px_rgba(0,0,0,0.3)] flex items-center justify-center z-10 absolute text-white p-2 w-10/12 left-1/2 -translate-x-1/2 mt-2" style={{backgroundColor: props.themeColor}}><a href='/contact'>Get Quote</a></div>
                                     }</div>}
-
                                 </div>
                             </div>
                             ))}

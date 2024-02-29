@@ -13,11 +13,6 @@ import { SanityDocument } from 'next-sanity'
 import { urlForImage } from '@sanity/lib/image'
 import Image from 'next/image'
 
-
-import { loadStripe } from "@stripe/stripe-js"
-const asyncStripe = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
-
-
 const Nav = (props: any) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [theme, setTheme] = useState<SanityDocument>()
@@ -62,23 +57,12 @@ const Nav = (props: any) => {
       return <div></div>;
     }
 
-    async function paymentCall(){
-      const stripe = await asyncStripe;
-          if(stripe){
-              await stripe.redirectToCheckout({
-                  sessionId:'cs_test_a1zuV0qxSwYNvCKWLhnbBzdDdo84tNLqIR10g1l0nYZV9QjlL317tzKCbk'
-              })
-          }else{
-              console.log('stripe: ',stripe, ' -> session: cs_test_a1zuV0qxSwYNvCKWLhnbBzdDdo84tNLqIR10g1l0nYZV9QjlL317tzKCbk')
-          }
-    }
-
     return(
       <section className='relative nav'>
         <header className="max-w-7xl mx-auto absolute inset-x-0 top-0 z-50">
           <nav className="flex items-center justify-between gap-4 px-6 py-2 lg:px-8" aria-label="Global">
             <div className="flex">
-              <Link onClick={paymentCall} href="/" className="-m-1.5 p-1.5">
+              <Link href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">{theme.websiteName}</span>
                 <Image
                   className="h-16 w-auto"
@@ -145,6 +129,9 @@ const Nav = (props: any) => {
             <div className="hidden lg:flex lg:justify-end lg:gap-x-2">
               <Link href={`tel:${theme.socialLinks.phone}`} className="flex items-center gap-2 rounded-full  px-3.5 py-1 text-sm font-semibold  shadow-sm hover:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 text-white bg-gray-900" style={{backgroundColor: props.phoneBG, color: props.phoneColor}}>
                 <PhoneIcon className="h-4 w-4" />{ theme.socialLinks.phone }
+              </Link>
+              <Link href={`tel:${theme.socialLinks.phone2}`} className="flex items-center gap-2 rounded-full  px-3.5 py-1 text-sm font-semibold  shadow-sm hover:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 text-white bg-gray-900" style={{backgroundColor: props.phoneBG, color: props.phoneColor}}>
+                <PhoneIcon className="h-4 w-4" />{ theme.socialLinks.phone2 }
               </Link>
             </div>
           </nav>

@@ -169,8 +169,83 @@ const driversSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+const ridesSchema = new mongoose.Schema(
+  {
+    pickup: {
+      type: String,
+      required: true,
+    },
+    via1: {
+      type: String,
+    },
+    via2: {
+      type: String,
+    },
+    dropoff: {
+      type: String,
+      required: true,
+    },
+    direction: {
+      type: String,
+    },
+    pickupTime: {
+      type: String,
+    },
+    returnTime: {
+      type: String,
+    },
+    passengers: {
+      type: String,
+    },
+    luggage: {
+      type: String,
+    },
+    infantSeat: {
+      type: String,
+    },
+    babySeat: {
+      type: String,
+    },
+    boosterSeat: {
+      type: String,
+    },
+    price: {
+      type: String,
+    },
+    vehicle: {
+      type: String,
+    },
+    clientName: {
+      type: String,
+    },
+    clientPhone: {
+      type: String,
+    },
+    clientEmail: {
+      type: String,
+    },
+    note: {
+      type: String,
+    },
+    airline: {
+      type: String,
+    },
+    arrivalFlightNumber: {
+      type: String,
+    },
+    flightArrivalTime: {
+      type: String,
+    },
+    terminal: {
+      type: String,
+    }
+  },
+  { timestamps: true }
+);
+
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
 export const PostCodeToPostCode = mongoose.models.PostCodeToPostCode || mongoose.model("PostCodeToPostCode", postCodeToPostCodeSchema);
 export const ZoneCharges = mongoose.models.ZoneCharges || mongoose.model("ZoneCharges", zoneChargesSchema);
 export const ChargesPerMile = mongoose.models.ChargesPerMile || mongoose.model("ChargesPerMile", chargesPerMileSchema);
 export const Drivers = mongoose.models.Drivers || mongoose.model("Drivers", driversSchema);
+export const Rides = mongoose.models.Rides || mongoose.model("Rides", ridesSchema);

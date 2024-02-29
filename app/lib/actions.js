@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { User, PostCodeToPostCode, ZoneCharges, ChargesPerMile, Drivers } from "./models";
+import { User, PostCodeToPostCode, ZoneCharges, ChargesPerMile, Drivers, Rides } from "./models";
 import { connectToDB } from "./utils";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
@@ -383,6 +383,108 @@ export const deleteDrivers = async (formData) => {
 
   revalidatePath("/dashboard/drivers");
 };
+// rides
+export const addRides = async (formData) => {
+  console.log('add Drivers triggered... ')
+  const { pickup, via1, via2, dropoff, direction, pickupTime, returnTime, passengers, luggage, infantSeat, babySeat, boosterSeat, price, vehicle, clientName, clientPhone, clientEmail, note, airline, arrivalFlightNumber, flightArrivalTime, terminal } =
+    Object.fromEntries(formData);
+
+  try {
+    connectToDB();
+
+    const newRides = new Rides({
+      pickup,
+      via1,
+      via2,
+      dropoff,
+      direction,
+      pickupTime,
+      returnTime,
+      passengers,
+      luggage,
+      infantSeat,
+      babySeat,
+      boosterSeat,
+      price,
+      vehicle,
+      clientName,
+      clientPhone,
+      clientEmail,
+      note,
+      airline,
+      arrivalFlightNumber,
+      flightArrivalTime,
+      terminal
+    });
+
+    await newRides.save();
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to create Rides!");
+  }
+
+  revalidatePath("/dashboard/rides");
+  redirect("/dashboard/rides");
+};
+
+export const updateRides = async (formData) => {
+  const { id, pickup, via1, via2, dropoff, direction, pickupTime, returnTime, passengers, luggage, infantSeat, babySeat, boosterSeat, price, vehicle, clientName, clientPhone, clientEmail, note, airline, arrivalFlightNumber, flightArrivalTime, terminal } =
+    Object.fromEntries(formData);
+
+  try {
+    connectToDB();
+    const updateFields = {
+      pickup,
+      via1,
+      via2,
+      dropoff,
+      direction,
+      pickupTime,
+      returnTime,
+      passengers,
+      luggage,
+      infantSeat,
+      babySeat,
+      boosterSeat,
+      price,
+      vehicle,
+      clientName,
+      clientPhone,
+      clientEmail,
+      note,
+      airline,
+      arrivalFlightNumber,
+      flightArrivalTime,
+      terminal
+    }
+
+    Object.keys(updateFields).forEach(
+      (key) =>
+        (updateFields[key] === "" || undefined) && delete updateFields[key]
+    );
+    await Rides.findByIdAndUpdate(id, updateFields);
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to update Rides!");
+  }
+
+  revalidatePath("/dashboard/rides");
+  redirect("/dashboard/rides");
+};
+
+export const deleteRides = async (formData) => {
+  const { id } = Object.fromEntries(formData);
+
+  try {
+    connectToDB();
+    await Rides.findByIdAndDelete(id);
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to delete Rides!");
+  }
+
+  revalidatePath("/dashboard/rides");
+};
 
 export const authenticate = async (prevState, formData) => {
   const { username, password } = Object.fromEntries(formData);
@@ -397,11 +499,11 @@ export const authenticate = async (prevState, formData) => {
   }
 };
 
-export const payment = async (formData) => {
+export const payment = async (formData, successUrl) => {
   const stripe = new Stripe('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
   var session = ""
   try {
-    const price = formData.get('price')
+    const price = formData.get('totalPrice')
     const date = new Date().toISOString();
 
     session = await stripe.checkout.sessions.create({
@@ -418,7 +520,7 @@ export const payment = async (formData) => {
         },
         ],
         mode: "payment",
-        success_url: `http://localhost:3000/?success=true`,
+        success_url: successUrl,
         cancel_url: `http://localhost:3000/?canceled=true`,
     });
   } catch (err) {
@@ -426,6 +528,44 @@ export const payment = async (formData) => {
   }
   if(session.id){
     redirect(`/api/stripe/${session.id}`)
+  }
+}
+export const fetchZoneChargesByZone = async (p, d) => {
+
+
+  try {
+    connectToDB();
+    const count = await ZoneCharges.find({ $or: [{ pickup: p}, {dropoff: d}] }).count();
+    const zoneCharges = await ZoneCharges.find({ $or: [{ pickup: p}, {dropoff: d}] });
+    return zoneCharges;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch ZoneCharges!");
+  }
+};
+export const pricedFleet = async (formData) => {
+  const zoneCharges = await fetchZoneChargesByZone(formData.get('pickup'),formData.get('pickup'))
+
+  if(zoneCharges){
+    formData.set("zoneCharges", zoneCharges[0].price)
+    console.log(formData)
+  }
+
+  var query = `/order?`
+  for(var pair of formData.entries()){
+    query += `${pair[0]}= ${pair[1]}&`
+  }
+  redirect(query)
+}
+export const orderHandler = async (formData) => {
+  var query = `/confirmation?`
+  for(var pair of formData.entries()){
+    query += `${pair[0]}= ${pair[1]}&`
+  }
+  if(formData.get('payment') == 'Cash Payment'){ 
+    redirect(query)
+  }else{
+    payment(formData, 'localhost:3000'+query)
   }
 }
 
@@ -471,13 +611,11 @@ function toTwoDigits( value, dp ){
   return +parseFloat(value).toFixed( dp );
 }
 export async function handleRide(prevState, formData) {
-  console.log('1.')
   const schema = z.object({
     pickupAddress: z.string().min(1, {message: "Select pick up address"}),
     dropoffAddress: z.string().min(1, {message: "Select drop off address"}),
     pickupTime: z.string().min(1, {message: "Select pick up time"}),
   });
-  console.log('2.')
   try {
     const parsedData = schema.parse({
       pickupAddress: formData.get("pickupAddress"),
@@ -487,24 +625,15 @@ export async function handleRide(prevState, formData) {
 
     var price
 
-    console.log('3.')
     if(!(formData.get('via1Address') || formData.get('via2Address'))){
-      console.log('4.')
       if(formData.get('pickupZipcode') && formData.get('dropoffZipcode')){
-        console.log('5.')
         const p = formData.get('pickupZipcode').split(" ")
         const d = formData.get('dropoffZipcode').split(" ")
-        console.log('6.')
         connectToDB();
-        console.log('7.')
         const postCodeToPostCode = await PostCodeToPostCode.find({pickup: p[0], dropoff: d[0]})
-        console.log('8.')
-        console.log(postCodeToPostCode)
         if(postCodeToPostCode.length){
-          console.log('9.')
           price = postCodeToPostCode[0].price
         }else{
-          console.log('10.')
           const dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
           if(dis){
             const miles = dis.data[0].distanceMeters*0.000621371192;
@@ -516,7 +645,6 @@ export async function handleRide(prevState, formData) {
           }
         }
       }else{
-        console.log('11.')
         const dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
         if(dis){
           const miles = dis.data[0].distanceMeters*0.000621371192;
@@ -527,9 +655,7 @@ export async function handleRide(prevState, formData) {
           }
         }
       }
-      console.log('12.')
     }else{
-      console.log('13.')
       if(formData.get('via1Address') && formData.get('via2Address')){
         var dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('via1Lat'),formData.get('via1Lng'))
         var miles = dis.data[0].distanceMeters*0.000621371192;
@@ -543,9 +669,7 @@ export async function handleRide(prevState, formData) {
         if(chargesPerMile.length){
           price = toTwoDigits(chargesPerMile[0].price * miles, 2)
         }
-        console.log('14.')
       }else{
-        console.log('15.')
         if(formData.get('via1Address')){
           var dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('via1Lat'),formData.get('via1Lng'))
           var miles = dis.data[0].distanceMeters*0.000621371192;
@@ -557,7 +681,6 @@ export async function handleRide(prevState, formData) {
           if(chargesPerMile.length){
             price = toTwoDigits(chargesPerMile[0].price * miles, 2)
           }
-          console.log('16.')
         }else{
           var dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('via2Lat'),formData.get('via2Lng'))
           var miles = dis.data[0].distanceMeters*0.000621371192;
@@ -569,7 +692,6 @@ export async function handleRide(prevState, formData) {
           if(chargesPerMile.length){
             price = toTwoDigits(chargesPerMile[0].price * miles, 2)
           }
-          console.log('17.')
         }
       }
     }
@@ -582,12 +704,13 @@ export async function handleRide(prevState, formData) {
       return { errors: [error]}
     }
   }
-  console.log('18.')
   if(price){
-    console.log('19.')
-    redirect(`/fleet/${price}`)
+    var query = `/fleet/${price}?`
+    for(var pair of formData.entries()){
+      query += `${pair[0]}= ${pair[1]}&`
+    }
+    redirect(query)
   }
-  console.log('20.')
   revalidatePath("/");
 }
 

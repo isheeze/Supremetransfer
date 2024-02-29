@@ -203,7 +203,7 @@ const Hero = (props: any)=> {
                                     name="ways"
                                     onChange={handleTwoWay}
                                     value="One Way"
-                                    checked
+                                    defaultChecked
                                     className="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded-full border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:border-4 checked:before:bg-gray-900 hover:before:opacity-10"
                                   />
                                   <span
@@ -343,7 +343,8 @@ const Hero = (props: any)=> {
                                 <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="infant-seat">
                                   <input type="checkbox"
                                     id="infant-seat"
-                                    name="extra-seats"
+                                    name="infant-seats"
+                                    value="infant-seats"
                                     className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
                                   />
                                   <span
@@ -368,7 +369,8 @@ const Hero = (props: any)=> {
                                 <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="baby-seat">
                                   <input type="checkbox"
                                     id="baby-seat"
-                                    name="extra-seats"
+                                    name="baby-seat"
+                                    value="baby-seat"
                                     className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
                                   />
                                   <span
@@ -393,7 +395,8 @@ const Hero = (props: any)=> {
                                 <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="booster-seat">
                                   <input type="checkbox"
                                     id="booster-seat"
-                                    name="extra-seats"
+                                    name="booster-seat"
+                                    value="booster-seat"
                                     className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
                                   />
                                   <span
