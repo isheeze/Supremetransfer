@@ -8,7 +8,7 @@ const Confirm = (props: any) => {
                     <div className="mx-auto max-w-2xl lg:text-center mb-8">
                         <h2 className="text-base font-semibold leading-7" style={{color: props.themeColor}}><CheckCircleIcon className="m-auto w-20"/></h2>
                         <p className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                            Order Confirmed
+                            Booking Confirmed
                         </p>
                     </div>
                     <ConfirmOrder themeColor={props.themeColor} />

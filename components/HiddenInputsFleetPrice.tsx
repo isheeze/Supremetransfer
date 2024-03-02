@@ -42,6 +42,10 @@ export default function HiddenInputsFleetPrice() {
     const price = searchParams.get("price")
     const zoneCharges = searchParams.get("zoneCharges")
     const vehicle = searchParams.get("vehicle")
+
+    const _id = searchParams.get("_id")
+    const paymentMethod = searchParams.get("paymentMethod")
+    const status = searchParams.get("status")
     return (
         <div>
             {pickupAddress && <input type="hidden" name="pickupAddress" value={pickupAddress} />}
@@ -82,6 +86,10 @@ export default function HiddenInputsFleetPrice() {
             {price && <input type="hidden" name="price" value={price} />}
             {zoneCharges && <input type="hidden" name="zoneCharges" value={zoneCharges} />}
             {vehicle && <input type="hidden" name="vehicle" value={vehicle} />}
+            
+            {_id && <input type="hidden" name="_id" value={_id} />}
+            {paymentMethod && <input type="hidden" name="paymentMethod" value={paymentMethod} />}
+            {status && <input type="hidden" name="status" value={status} />}
         </div>
     )
 }

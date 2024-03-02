@@ -238,6 +238,12 @@ const ridesSchema = new mongoose.Schema(
     },
     terminal: {
       type: String,
+    },
+    paymentMethod:{
+      type: String,
+    },
+    status: {
+      type: String,
     }
   },
   { timestamps: true }

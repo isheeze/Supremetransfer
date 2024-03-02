@@ -4,7 +4,7 @@ import { connectToDB } from "./utils";
 export const fetchUsers = async (q, page) => {
   const regex = new RegExp(q, "i");
 
-  const ITEM_PER_PAGE = 10;
+  const ITEM_PER_PAGE = 30;
 
   try {
     connectToDB();
@@ -36,7 +36,7 @@ export const fetchPostCodeToPostCodes = async (q, page) => {
   console.log(q);
   const regex = new RegExp(q, "i");
 
-  const ITEM_PER_PAGE = 2;
+  const ITEM_PER_PAGE = 30;
 
   try {
     connectToDB();
@@ -67,7 +67,7 @@ export const fetchZoneCharges = async (q, page) => {
   console.log(q);
   const regex = new RegExp(q, "i");
 
-  const ITEM_PER_PAGE = 2;
+  const ITEM_PER_PAGE = 30;
 
   try {
     connectToDB();
@@ -98,7 +98,7 @@ export const fetchChargesPerMiles = async (q, page) => {
   console.log(q);
   const regex = new RegExp(q, "i");
 
-  const ITEM_PER_PAGE = 2;
+  const ITEM_PER_PAGE = 30;
 
   try {
     connectToDB();
@@ -129,7 +129,7 @@ export const fetchDrivers = async (q, page) => {
   console.log(q);
   const regex = new RegExp(q, "i");
 
-  const ITEM_PER_PAGE = 2;
+  const ITEM_PER_PAGE = 30;
 
   try {
     connectToDB();
@@ -160,7 +160,7 @@ export const fetchRides = async (q, page) => {
   console.log(q);
   const regex = new RegExp(q, "i");
 
-  const ITEM_PER_PAGE = 2;
+  const ITEM_PER_PAGE = 30;
 
   try {
     connectToDB();

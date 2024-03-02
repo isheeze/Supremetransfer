@@ -42,12 +42,17 @@ const Sidebar = async () => {
           },
           {
             title: "Charges Per Mile",
-            path: "/dashboard/chargesPerMile",
+            path: "/dashboard/ChargesPerMile",
             icon: <MdOutlineBubbleChart />,
           },
           {
             title: "Drivers",
             path: "/dashboard/drivers",
+            icon: <MdOutlineBubbleChart />,
+          },
+          {
+            title: "Rides",
+            path: "/dashboard/rides",
             icon: <MdOutlineBubbleChart />,
           },
         ],

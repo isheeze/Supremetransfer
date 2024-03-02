@@ -237,8 +237,8 @@ export const addChargesPerMile = async (formData) => {
     throw new Error("Failed to create ChargesPerMile!");
   }
 
-  revalidatePath("/dashboard/chargesPerMile");
-  redirect("/dashboard/chargesPerMile");
+  revalidatePath("/dashboard/ChargesPerMile");
+  redirect("/dashboard/ChargesPerMile");
 };
 
 export const updateChargesPerMile = async (formData) => {
@@ -265,8 +265,8 @@ export const updateChargesPerMile = async (formData) => {
     throw new Error("Failed to update ChargesPerMile!");
   }
 
-  revalidatePath("/dashboard/chargesPerMile");
-  redirect("/dashboard/chargesPerMile");
+  revalidatePath("/dashboard/ChargesPerMile");
+  redirect("/dashboard/ChargesPerMile");
 };
 
 export const deleteChargesPerMile = async (formData) => {
@@ -280,7 +280,7 @@ export const deleteChargesPerMile = async (formData) => {
     throw new Error("Failed to delete ChargesPerMile!");
   }
 
-  revalidatePath("/dashboard/chargesPerMile");
+  revalidatePath("/dashboard/ChargesPerMile");
 };
 
 // Drivers
@@ -386,7 +386,7 @@ export const deleteDrivers = async (formData) => {
 // rides
 export const addRides = async (formData) => {
   console.log('add Drivers triggered... ')
-  const { pickup, via1, via2, dropoff, direction, pickupTime, returnTime, passengers, luggage, infantSeat, babySeat, boosterSeat, price, vehicle, clientName, clientPhone, clientEmail, note, airline, arrivalFlightNumber, flightArrivalTime, terminal } =
+  const { pickup, via1, via2, dropoff, direction, pickupTime, returnTime, passengers, luggage, infantSeat, babySeat, boosterSeat, price, vehicle, clientName, clientPhone, clientEmail, note, airline, arrivalFlightNumber, flightArrivalTime, terminal, paymentMethod, status } =
     Object.fromEntries(formData);
 
   try {
@@ -414,7 +414,54 @@ export const addRides = async (formData) => {
       airline,
       arrivalFlightNumber,
       flightArrivalTime,
-      terminal
+      terminal,
+      paymentMethod,
+      status
+    });
+
+    await newRides.save();
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to create Rides!");
+  }
+
+  revalidatePath("/dashboard/rides");
+  redirect("/dashboard/rides");
+};
+export const addRidesWithId = async (formData) => {
+  console.log('add Drivers triggered... ')
+  const { _id, pickup, via1, via2, dropoff, direction, pickupTime, returnTime, passengers, luggage, infantSeat, babySeat, boosterSeat, price, vehicle, clientName, clientPhone, clientEmail, note, airline, arrivalFlightNumber, flightArrivalTime, terminal, paymentMethod, status } =
+    Object.fromEntries(formData);
+
+  try {
+    connectToDB();
+
+    const newRides = new Rides({
+      _id,
+      pickup,
+      via1,
+      via2,
+      dropoff,
+      direction,
+      pickupTime,
+      returnTime,
+      passengers,
+      luggage,
+      infantSeat,
+      babySeat,
+      boosterSeat,
+      price,
+      vehicle,
+      clientName,
+      clientPhone,
+      clientEmail,
+      note,
+      airline,
+      arrivalFlightNumber,
+      flightArrivalTime,
+      terminal,
+      paymentMethod,
+      status
     });
 
     await newRides.save();
@@ -428,7 +475,7 @@ export const addRides = async (formData) => {
 };
 
 export const updateRides = async (formData) => {
-  const { id, pickup, via1, via2, dropoff, direction, pickupTime, returnTime, passengers, luggage, infantSeat, babySeat, boosterSeat, price, vehicle, clientName, clientPhone, clientEmail, note, airline, arrivalFlightNumber, flightArrivalTime, terminal } =
+  const { id, pickup, via1, via2, dropoff, direction, pickupTime, returnTime, passengers, luggage, infantSeat, babySeat, boosterSeat, price, vehicle, clientName, clientPhone, clientEmail, note, airline, arrivalFlightNumber, flightArrivalTime, terminal, paymentMethod, status } =
     Object.fromEntries(formData);
 
   try {
@@ -455,7 +502,9 @@ export const updateRides = async (formData) => {
       airline,
       arrivalFlightNumber,
       flightArrivalTime,
-      terminal
+      terminal,
+      paymentMethod,
+      status
     }
 
     Object.keys(updateFields).forEach(
@@ -559,6 +608,11 @@ export const pricedFleet = async (formData) => {
 }
 export const orderHandler = async (formData) => {
   var query = `/confirmation?`
+  var id = mongoose.Types.ObjectId()
+  
+  formData.set("status","draft")
+  formData.id("_id",id)
+
   for(var pair of formData.entries()){
     query += `${pair[0]}= ${pair[1]}&`
   }
