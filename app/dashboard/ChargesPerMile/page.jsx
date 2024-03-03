@@ -23,7 +23,7 @@ const ChargesPerMilePage = async ({ searchParams }) => {
     <div className={styles.container}>
       <div className={styles.top}>
         <Search placeholder="Search for a charges..." />
-        <Link href="/dashboard/ChargesPerMiles/add">
+        <Link href="/dashboard/ChargesPerMile/add">
           <button className={styles.addButton}>Add New</button>
         </Link>
       </div>
@@ -45,7 +45,7 @@ const ChargesPerMilePage = async ({ searchParams }) => {
               <td>{p2p.createdAt?.toString().slice(4, 16)}</td>
               <td>
                 <div className={styles.buttons}>
-                  <Link href={`/dashboard/ChargesPerMiles/${p2p.id}`}>
+                  <Link href={`/dashboard/ChargesPerMile/${p2p.id}`}>
                     <button className={`${styles.button} ${styles.view}`}>
                       View
                     </button>

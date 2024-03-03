@@ -16,7 +16,7 @@ const RidesPage = async ({ searchParams }) => {
 
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
-  const { count, Rides } = await fetchRides(q, page);
+  const { count, rides } = await fetchRides(q, page);
 
   return (
     <div className={styles.container}>
@@ -35,12 +35,12 @@ const RidesPage = async ({ searchParams }) => {
           </tr>
         </thead>
         <tbody>
-          {Rides.map((p2p) => (
+          {rides.map((p2p) => (
             <tr key={p2p.id}>
-              <td>{p2p.pickup}</td>
-              <td>{p2p.via1}</td>
-              <td>{p2p.via2}</td>
-              <td>{p2p.dropoff}</td>
+              <td>{p2p.pickupAddress}</td>
+              <td>{p2p.via1Address}</td>
+              <td>{p2p.via2Address}</td>
+              <td>{p2p.dropoffAddress}</td>
               <td>{p2p.price}</td>
               <td>{p2p.createdAt?.toString().slice(4, 16)}</td>
               <td>

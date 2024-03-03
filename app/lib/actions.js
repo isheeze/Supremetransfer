@@ -445,7 +445,7 @@ export const addRidesWithId = async (formData) => {
       direction,
       pickupTime,
       returnTime,
-      passengers,
+      passenger,
       luggage,
       infantSeat,
       babySeat,
@@ -488,7 +488,7 @@ export const updateRides = async (formData) => {
       direction,
       pickupTime,
       returnTime,
-      passengers,
+      passenger,
       luggage,
       infantSeat,
       babySeat,
@@ -519,6 +519,28 @@ export const updateRides = async (formData) => {
 
   revalidatePath("/dashboard/rides");
   redirect("/dashboard/rides");
+};
+
+export const changeStatusRides = async (id, status) => {
+
+  try {
+    connectToDB();
+    const updateFields = {
+      status
+    }
+
+    Object.keys(updateFields).forEach(
+      (key) =>
+        (updateFields[key] === "" || undefined) && delete updateFields[key]
+    );
+    await Rides.findByIdAndUpdate(id, updateFields);
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to update Rides!");
+  }
+
+  revalidatePath("/dashboard");
+  redirect("/dashboard");
 };
 
 export const deleteRides = async (formData) => {
@@ -580,23 +602,21 @@ export const payment = async (formData, successUrl) => {
   }
 }
 export const fetchZoneChargesByZone = async (p, d) => {
-
-
   try {
     connectToDB();
     const count = await ZoneCharges.find({ $or: [{ pickup: p}, {dropoff: d}] }).count();
     const zoneCharges = await ZoneCharges.find({ $or: [{ pickup: p}, {dropoff: d}] });
-    return zoneCharges;
+    return {count , zoneCharges};
   } catch (err) {
     console.log(err);
     throw new Error("Failed to fetch ZoneCharges!");
   }
 };
 export const pricedFleet = async (formData) => {
-  const zoneCharges = await fetchZoneChargesByZone(formData.get('pickup'),formData.get('pickup'))
+  const {count , zoneCharges} = await fetchZoneChargesByZone(formData.get('pickup'),formData.get('dropoff'))
 
-  if(zoneCharges){
-    formData.set("zoneCharges", zoneCharges[0].price)
+  if(count){
+    formData.set("zoneCharges", zoneCharges.price)
     console.log(formData)
   }
 

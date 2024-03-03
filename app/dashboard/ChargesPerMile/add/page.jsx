@@ -14,7 +14,7 @@ const AddChargesPerMilesPage = async() => {
       <form action={addChargesPerMile} className={styles.form}>
         <input type="text" placeholder="min" name="min" required />
         <input type="text" placeholder="max" name="max" required />
-        <input type="number" placeholder="price per mile" name="price" required />
+        <input type="text" placeholder="price per mile" name="price" required />
         <button type="submit">Submit</button>
       </form>
     </div>

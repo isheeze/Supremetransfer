@@ -28,10 +28,10 @@ export default function HiddenInputsFleetPrice() {
     const dropoffLng = searchParams.get("dropoffLng")
 
     
-    const ways = searchParams.get("ways")
+    const direction = searchParams.get("direction")
     const pickupTime = searchParams.get("pickupTime")
     const returnTime = searchParams.get("returnTime")
-    const Passenger = searchParams.get("Passenger")
+    const passenger = searchParams.get("passenger")
     const luggage = searchParams.get("luggage")
 
     
@@ -72,10 +72,10 @@ export default function HiddenInputsFleetPrice() {
             {dropoffLng && <input type="hidden" name="dropoffLng" value={dropoffLng} />}
 
             
-            {ways && <input type="hidden" name="ways" value={ways} />}
+            {direction && <input type="hidden" name="direction" value={direction} />}
             {pickupTime && <input type="hidden" name="pickupTime" value={pickupTime} />}
             {returnTime && <input type="hidden" name="returnTime" value={returnTime} />}
-            {Passenger && <input type="hidden" name="Passenger" value={Passenger} />}
+            {passenger && <input type="hidden" name="Passenger" value={passenger} />}
             {luggage && <input type="hidden" name="luggage" value={luggage} />}
 
             

@@ -171,17 +171,17 @@ const driversSchema = new mongoose.Schema(
 
 const ridesSchema = new mongoose.Schema(
   {
-    pickup: {
+    pickupAddress: {
       type: String,
       required: true,
     },
-    via1: {
+    via1Address: {
       type: String,
     },
-    via2: {
+    via2Address: {
       type: String,
     },
-    dropoff: {
+    dropoffAddress: {
       type: String,
       required: true,
     },
@@ -194,7 +194,7 @@ const ridesSchema = new mongoose.Schema(
     returnTime: {
       type: String,
     },
-    passengers: {
+    passenger: {
       type: String,
     },
     luggage: {

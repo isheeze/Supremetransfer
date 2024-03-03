@@ -1,4 +1,4 @@
-import { User, PostCodeToPostCode, ZoneCharges, ChargesPerMile, Drivers } from "./models";
+import { User, PostCodeToPostCode, ZoneCharges, ChargesPerMile, Drivers, Rides } from "./models";
 import { connectToDB } from "./utils";
 
 export const fetchUsers = async (q, page) => {

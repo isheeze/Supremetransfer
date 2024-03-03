@@ -200,7 +200,7 @@ const Hero = (props: any)=> {
                                 <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="one-way">
                                   <input type="radio"
                                     id="one-way"
-                                    name="ways"
+                                    name="direction"
                                     onChange={handleTwoWay}
                                     value="One Way"
                                     defaultChecked
@@ -225,7 +225,7 @@ const Hero = (props: any)=> {
                                 <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="two-way">
                                   <input type="radio"
                                     id="two-way"
-                                    name="ways"
+                                    name="direction"
                                     onChange={handleTwoWay}
                                     value="Two Way"
                                     className="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded-full border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:border-4 checked:before:bg-gray-900 hover:before:opacity-10"
@@ -289,7 +289,7 @@ const Hero = (props: any)=> {
                         <div className="block w-full rounded-full border-0 py-1 px-3 text-black shadow ring-1 ring-inset ring-slate-900/20 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                             <select
                               id="Passenger"
-                              name="Passenger"
+                              name="passenger"
                               autoComplete="Passenger"
                               className="block w-full rounded-full border-0 py-1 bg-transparent text-black sm:max-w-xs sm:text-sm sm:leading-6"
                             >

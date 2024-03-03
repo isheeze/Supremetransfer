@@ -25,7 +25,7 @@ const SingleChargesPerMilePage = async ({ params }) => {
           <label>Dropoff</label>
           <input type="text" name="max" placeholder={chargesPerMile.max} />
           <label>Price</label>
-          <input type="number" name="price" placeholder={chargesPerMile.price} />
+          <input type="text" name="price" placeholder={chargesPerMile.price} />
           <button>Update</button>
         </form>
       </div>
