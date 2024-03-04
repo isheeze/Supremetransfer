@@ -6,6 +6,7 @@ import { fetchRides } from "@/app/lib/data";
 import { deleteRides } from "@/app/lib/actions";
 import { redirect } from "next/navigation";
 import { auth } from "@/app/auth";
+import ImportCSV from '@components/ImportCSV'
 
 const RidesPage = async ({ searchParams }) => {
   const {user} = await auth();
@@ -20,6 +21,9 @@ const RidesPage = async ({ searchParams }) => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.top}>
+        <ImportCSV />
+      </div>
       <div className={styles.top}>
         <Search placeholder="Search for a charges..." />
       </div>
