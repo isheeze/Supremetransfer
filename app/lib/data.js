@@ -251,8 +251,8 @@ export const fetchDraftRides = async (q, page) => {
       rides = await Rides.findById(q)
       rides = new Array(rides)
     }else{
-      count = await Rides.find({ $and: [ { $or: [ { pickupAddress: { $regex: regex } }, { dropoffAddress: { $regex: regex } }]}, {status: 'Rejected'}] }).count();
-      rides = await Rides.find({ $and: [ { $or: [ { pickupAddress: { $regex: regex } }, { dropoffAddress: { $regex: regex } }]}, {status: 'Rejected'}] })
+      count = await Rides.find({ $and: [ { $or: [ { pickupAddress: { $regex: regex } }, { dropoffAddress: { $regex: regex } }]}, {status: 'draft'}] }).count();
+      rides = await Rides.find({ $and: [ { $or: [ { pickupAddress: { $regex: regex } }, { dropoffAddress: { $regex: regex } }]}, {status: 'draft'}] })
       .sort({createdAt: -1})
       .limit(ITEM_PER_PAGE)
       .skip(ITEM_PER_PAGE * (page - 1));

@@ -45,6 +45,10 @@ export default function HiddenInputsFleetPrice() {
     const dropoffParkingCharges = searchParams.get("dropoffParkingCharges")
     const vehicle = searchParams.get("vehicle")
 
+    const infantSeatPrice = searchParams.get("infantSeatPrice")
+    const babySeatPrice = searchParams.get("babySeatPrice")
+    const boosterSeatPrice = searchParams.get("boosterSeatPrice")
+
     const _id = searchParams.get("_id")
     const paymentMethod = searchParams.get("paymentMethod")
     const status = searchParams.get("status")
@@ -91,6 +95,10 @@ export default function HiddenInputsFleetPrice() {
             {dropoffParkingCharges && <input type="hidden" name="dropoffParkingCharges" value={dropoffParkingCharges.trim()} />}
             {vehicle && <input type="hidden" name="vehicle" value={vehicle.trim()} />}
             
+            {infantSeatPrice && <input type="hidden" name="infantSeatPrice" value={infantSeatPrice.trim()} />}
+            {babySeatPrice && <input type="hidden" name="babySeatPrice" value={babySeatPrice.trim()} />}
+            {boosterSeatPrice && <input type="hidden" name="boosterSeatPrice" value={boosterSeatPrice.trim()} />}
+
             {_id && <input type="hidden" name="_id" value={_id.trim()} />}
             {paymentMethod && <input type="hidden" name="paymentMethod" value={paymentMethod.trim()} />}
             {status && <input type="hidden" name="status" value={status.trim()} />}

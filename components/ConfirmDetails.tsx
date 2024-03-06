@@ -142,7 +142,7 @@ export default async function ConfirmOrder(props: any) {
                         </div>
                         <div className="ml-2.5">
                             <span className="block text-sm font-semibold leading-6 text-gray-900">
-                                £<span className="text-base font-semibold leading-7 text-center" style={{color: props.themeColor}}>{ searchParams.get("zoneCharges")? parseFloat(zoneCharges || "") + parseFloat(price || "") : price }</span> /-
+                                £<span className="text-base font-semibold leading-7 text-center" style={{color: props.themeColor}}>{ searchParams.get("totalPrice") }</span> /-
                             </span>
                         </div>
                     </div>

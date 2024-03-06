@@ -1203,11 +1203,13 @@ export const sendRejectedEmail = async (formData) => {
                                                      passenger && (message += `<span style="font-weight: bold" class="bold">Passengers: </span>`+passenger.trim()+`<br>`)
                                                      var luggage = formData.get('luggage')
                                                      luggage && (message += `<span style="font-weight: bold" class="bold">Luggage: </span>`+luggage.trim()+`<br>`)
-                                                     var infantSeat = formData.get('infantSeat')
-                                                     var babySeat = formData.get('babySeat')
-                                                     var boosterSeat = formData.get('boosterSeat')
-                                                     if(infantSeat || babySeat || boosterSeat) { message += `<span style="font-weight: bold" class="bold">Extra Seats: </span>`+infantSeat.trim()+' '+babySeat.trim()+' '+boosterSeat.trim()+`<br>`}
-                                                     var note = formData.get('note')
+                                                     /*var infantSeat = formData.get('infantSeatPrice')
+                                                     { message += `<span style="font-weight: bold" class="bold">Infant Seats: </span>`+infantSeat.trim()+`<br>`}
+                                                     var babySeat = formData.get('babySeatPrice')
+                                                     { message += `<span style="font-weight: bold" class="bold">Baby Seats: </span>`+babySeat.trim()+`<br>`}
+                                                     var boosterSeat = formData.get('boosterSeatPrice')
+                                                     { message += `<span style="font-weight: bold" class="bold">Booster Seats: </span>`+boosterSeat.trim()+`<br>`}
+                                                     */var note = formData.get('note')
                                                      note && (message += `<span style="font-weight: bold" class="bold">Note: </span>`+note.trim()+`<br>`)
                                                   message += `</td>
                                                </tr>
@@ -1785,11 +1787,13 @@ export const sendAcceptedEmail = async (formData) => {
                                                      passenger && (message += `<span style="font-weight: bold" class="bold">Passengers: </span>`+passenger.trim()+`<br>`)
                                                      var luggage = formData.get('luggage')
                                                      luggage && (message += `<span style="font-weight: bold" class="bold">Luggage: </span>`+luggage.trim()+`<br>`)
-                                                     var infantSeat = formData.get('infantSeat')
-                                                     var babySeat = formData.get('babySeat')
-                                                     var boosterSeat = formData.get('boosterSeat')
-                                                     if(infantSeat || babySeat || boosterSeat) { message += `<span style="font-weight: bold" class="bold">Extra Seats: </span>`+infantSeat.trim()+' '+babySeat.trim()+' '+boosterSeat.trim()+`<br>`}
-                                                     var note = formData.get('note')
+                                                     /*var infantSeat = formData.get('infantSeatPrice')
+                                                     { message += `<span style="font-weight: bold" class="bold">Infant Seats: </span>`+infantSeat.trim()+`<br>`}
+                                                     var babySeat = formData.get('babySeatPrice')
+                                                     { message += `<span style="font-weight: bold" class="bold">Baby Seats: </span>`+babySeat.trim()+`<br>`}
+                                                     var boosterSeat = formData.get('boosterSeatPrice')
+                                                     { message += `<span style="font-weight: bold" class="bold">Booster Seats: </span>`+boosterSeat.trim()+`<br>`}
+                                                     */var note = formData.get('note')
                                                      note && (message += `<span style="font-weight: bold" class="bold">Note: </span>`+note.trim()+`<br>`)
                                                   message += `</td>
                                                </tr>
@@ -2367,11 +2371,13 @@ export const sendVerificationEmail = async (formData) => {
                                                      passenger && (message += `<span style="font-weight: bold" class="bold">Passengers: </span>`+passenger.trim()+`<br>`)
                                                      var luggage = formData.get('luggage')
                                                      luggage && (message += `<span style="font-weight: bold" class="bold">Luggage: </span>`+luggage.trim()+`<br>`)
-                                                     var infantSeat = formData.get('infantSeat')
-                                                     var babySeat = formData.get('babySeat')
-                                                     var boosterSeat = formData.get('boosterSeat')
-                                                     if(infantSeat || babySeat || boosterSeat) { message += `<span style="font-weight: bold" class="bold">Extra Seats: </span>`+infantSeat.trim()+' '+babySeat.trim()+' '+boosterSeat.trim()+`<br>`}
-                                                     var note = formData.get('note')
+                                                     /*var infantSeat = formData.get('infantSeatPrice')
+                                                     { message += `<span style="font-weight: bold" class="bold">Infant Seats: </span>`+infantSeat.trim()+`<br>`}
+                                                     var babySeat = formData.get('babySeatPrice')
+                                                     { message += `<span style="font-weight: bold" class="bold">Baby Seats: </span>`+babySeat.trim()+`<br>`}
+                                                     var boosterSeat = formData.get('boosterSeatPrice')
+                                                     { message += `<span style="font-weight: bold" class="bold">Booster Seats: </span>`+boosterSeat.trim()+`<br>`}
+                                                     */var note = formData.get('note')
                                                      note && (message += `<span style="font-weight: bold" class="bold">Note: </span>`+note.trim()+`<br>`)
                                                   message += `</td>
                                                </tr>
@@ -2845,6 +2851,25 @@ export async function handleRide(prevState, formData) {
       formData.set('dropoffParkingCharges',parkingCharges[0].price)
     }
   }
+  if(formData.get('infantSeat')){
+    let extraPrices = await ExtraPrices.find({ title: "Infant Seat" })
+    if(extraPrices.length){
+      formData.set('infantSeatPrice',extraPrices[0].price)
+    }
+  }
+  if(formData.get('babySeat')){
+    let extraPrices = await ExtraPrices.find({ title: "Baby Seat" })
+    if(extraPrices.length){
+      formData.set('babySeatPrice',extraPrices[0].price)
+    }
+  }
+  if(formData.get('boosterSeat')){
+    let extraPrices = await ExtraPrices.find({ title: "Booster Seat" })
+    if(extraPrices.length){
+      formData.set('boosterSeatPrice',extraPrices[0].price)
+    }
+  }
+
   console.log(formData)
   if(price){
     var query = `/fleet/${price}?`

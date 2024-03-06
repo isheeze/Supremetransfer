@@ -10,6 +10,11 @@ export default async function OrderAndFlightDetails(props: any) {
     const pickupParkingCharges = searchParams.get("pickupParkingCharges")
     const dropoffParkingCharges = searchParams.get("dropoffParkingCharges")
 
+    
+    const infantSeatPrice = searchParams.get("infantSeatPrice")
+    const babySeatPrice = searchParams.get("babySeatPrice")
+    const boosterSeatPrice = searchParams.get("boosterSeatPrice")
+
     const price = searchParams.get("price")
     var totalPrice = 0
     if(price){
@@ -23,6 +28,15 @@ export default async function OrderAndFlightDetails(props: any) {
     }
     if(searchParams.get("dropoffParkingCharges")){
         totalPrice += parseFloat(searchParams.get("dropoffParkingCharges") || '0')
+    }
+    if(infantSeatPrice){
+        totalPrice += parseFloat(infantSeatPrice || '0')
+    }
+    if(babySeatPrice){
+        totalPrice += parseFloat(babySeatPrice || '0')
+    }
+    if(boosterSeatPrice){
+        totalPrice += parseFloat(boosterSeatPrice || '0')
     }
     return (
         <div className="flex flex-col md:flex-row">
@@ -175,6 +189,42 @@ export default async function OrderAndFlightDetails(props: any) {
                                 </div>
                             </div>
                         </div>
+                        {infantSeatPrice && <div className="sm:col-span-2">
+                            <div className="flex items-center sm:col-span-2">
+                                <div className="block font-semibold leading-6 text-gray-900">
+                                Infant Seat:
+                                </div>
+                                <div className="ml-2.5">
+                                    <span className="block text-sm font-semibold leading-6 text-gray-900">
+                                        £{ infantSeatPrice.trim() } /-
+                                    </span>
+                                </div>
+                            </div>
+                        </div>}
+                        {babySeatPrice && <div className="sm:col-span-2">
+                            <div className="flex items-center sm:col-span-2">
+                                <div className="block font-semibold leading-6 text-gray-900">
+                                Baby Seat:
+                                </div>
+                                <div className="ml-2.5">
+                                    <span className="block text-sm font-semibold leading-6 text-gray-900">
+                                        £{ babySeatPrice.trim() } /-
+                                    </span>
+                                </div>
+                            </div>
+                        </div>}
+                        {boosterSeatPrice && <div className="sm:col-span-2">
+                            <div className="flex items-center sm:col-span-2">
+                                <div className="block font-semibold leading-6 text-gray-900">
+                                Booster Seat:
+                                </div>
+                                <div className="ml-2.5">
+                                    <span className="block text-sm font-semibold leading-6 text-gray-900">
+                                        £{ boosterSeatPrice.trim() } /-
+                                    </span>
+                                </div>
+                            </div>
+                        </div>}
                         {zoneCharges && <div className="sm:col-span-2">
                             <div className="flex items-center sm:col-span-2">
                                 <div className="block font-semibold leading-6 text-gray-900">
