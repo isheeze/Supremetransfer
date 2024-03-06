@@ -2650,7 +2650,21 @@ const distance = async (originLat, originLng, distinationLat, distinationLng) =>
 function toTwoDigits( value, dp ){
   return +parseFloat(value).toFixed( dp );
 }
+import { sanityFetch } from '@sanity/lib/sanityFetch';
+import { SanityDocument, groq } from 'next-sanity';
+async function test (){
+  const getThemeDataQuery = groq`*[_type == "home"]{
+    heroImage
+  }`;
+
+  const themeData = await sanityFetch<SanityDocument>({
+    query: getThemeDataQuery,
+  });
+
+  console.log(themeData)
+}
 export async function handleRide(prevState, formData) {
+  await test()
   console.log('1')
   const schema = z.object({
     pickupAddress: z.string().min(1, {message: "Select pick up address"}),
