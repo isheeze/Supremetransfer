@@ -757,8 +757,8 @@ export const payment = async (formData, successUrl) => {
           },
         ],
         mode: "payment",
-        success_url: 'http://localhost:3000'+successUrl,
-        cancel_url: `http://localhost:3000/?canceled=true`,
+        success_url: 'https://supremetransfer.vercel.app'+successUrl,
+        cancel_url: `https://supremetransfer.vercel.app/?canceled=true`,
     });
   } catch (err) {
     console.log({ error: "Error checkout session: ",err });
