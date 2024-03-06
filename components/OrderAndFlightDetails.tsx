@@ -7,18 +7,22 @@ export default async function OrderAndFlightDetails(props: any) {
     const searchParams = useSearchParams();
     
     const zoneCharges = searchParams.get("zoneCharges")
+    const pickupParkingCharges = searchParams.get("pickupParkingCharges")
+    const dropoffParkingCharges = searchParams.get("dropoffParkingCharges")
+
     const price = searchParams.get("price")
+    var totalPrice = 0
     if(price){
-        var totalPrice = parseFloat(price)
+        totalPrice = parseFloat(price)
     }
     if(searchParams.get("zoneCharges")){
-        totalPrice += parseFloat(searchParams.get("zoneCharges"))
+        totalPrice += parseFloat(searchParams.get("zoneCharges") || '0')
     }
     if(searchParams.get("pickupParkingCharges")){
-        totalPrice += parseFloat(searchParams.get("pickupParkingCharges"))
+        totalPrice += parseFloat(searchParams.get("pickupParkingCharges") || '0')
     }
     if(searchParams.get("dropoffParkingCharges")){
-        totalPrice += parseFloat(searchParams.get("dropoffParkingCharges"))
+        totalPrice += parseFloat(searchParams.get("dropoffParkingCharges") || '0')
     }
     return (
         <div className="flex flex-col md:flex-row">
@@ -171,38 +175,38 @@ export default async function OrderAndFlightDetails(props: any) {
                                 </div>
                             </div>
                         </div>
-                        {searchParams.get("zoneCharges") && <div className="sm:col-span-2">
+                        {zoneCharges && <div className="sm:col-span-2">
                             <div className="flex items-center sm:col-span-2">
                                 <div className="block font-semibold leading-6 text-gray-900">
                                 Zone/Area Charges:
                                 </div>
                                 <div className="ml-2.5">
                                     <span className="block text-sm font-semibold leading-6 text-gray-900">
-                                        £{ searchParams.get("zoneCharges").trim() } /-
+                                        £{ zoneCharges.trim() } /-
                                     </span>
                                 </div>
                             </div>
                         </div>}
-                        {searchParams.get("pickupParkingCharges") && <div className="sm:col-span-2">
+                        {pickupParkingCharges && <div className="sm:col-span-2">
                             <div className="flex items-center sm:col-span-2">
                                 <div className="block font-semibold leading-6 text-gray-900">
                                 Pickup Parking Charges:
                                 </div>
                                 <div className="ml-2.5">
                                     <span className="block text-sm font-semibold leading-6 text-gray-900">
-                                        £{ searchParams.get("pickupParkingCharges").trim() } /-
+                                        £{ pickupParkingCharges.trim() } /-
                                     </span>
                                 </div>
                             </div>
                         </div>}
-                        {searchParams.get("dropoffParkingCharges") && <div className="sm:col-span-2">
+                        {dropoffParkingCharges && <div className="sm:col-span-2">
                             <div className="flex items-center sm:col-span-2">
                                 <div className="block font-semibold leading-6 text-gray-900">
                                 Dropoff Parking Charges:
                                 </div>
                                 <div className="ml-2.5">
                                     <span className="block text-sm font-semibold leading-6 text-gray-900">
-                                        £{ searchParams.get("dropoffParkingCharges").trim() } /-
+                                        £{ dropoffParkingCharges.trim() } /-
                                     </span>
                                 </div>
                             </div>
