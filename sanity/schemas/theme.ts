@@ -37,6 +37,13 @@ const theme = {
       type: "string",
     },
     {
+      name: "heroButtonColor",
+      title: "Color Code for Button on Hero Section",
+      description: "like #5d55e7 for indego color.",
+      type: "string",
+      initialValue: "#5d55e7"
+    },
+    {
       name: "socialLinks",
       title: "Social Links",
       type: "object",

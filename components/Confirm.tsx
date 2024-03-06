@@ -1,6 +1,12 @@
 import { CheckCircleIcon } from "@heroicons/react/24/outline"
 import ConfirmOrder from "./ConfirmDetails"
+
+import { confirmationHandler } from "@app/lib/actions"
+import HiddenInputsFleetPrice from "./HiddenInputsFleetPrice";
+
 const Confirm = (props: any) => {
+    confirmationHandler(props.searchParams)
+
     return (
         <div className="relative isolate overflow-hidden bg-white px-6 py-12 sm:py-12 lg:overflow-visible lg:px-0">
             <div className="py-12 sm:py-8">

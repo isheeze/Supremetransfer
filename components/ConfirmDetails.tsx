@@ -1,8 +1,5 @@
 'use client'
 import { useSearchParams } from "next/navigation"
-import { useEffect } from "react";
-import { fetchRide } from "@app/lib/data"
-import { addRides } from "@app/lib/actions";
 
 export default async function ConfirmOrder(props: any) {
     const searchParams = useSearchParams();
@@ -10,75 +7,9 @@ export default async function ConfirmOrder(props: any) {
     const zoneCharges = searchParams.get("zoneCharges")
     const price = searchParams.get("price")
 
-    useEffect(()=>{
-        (async () => {
-            const id = searchParams.get("_id")
-            const ride = await fetchRide(id)
-
-            if(!ride.id){
-                let formData = new FormData()
-
-                id && formData.set('_id',id)
-
-                let pickup = searchParams.get("pickup")
-                pickup && formData.set('pickup', pickup)
-                let via1 = searchParams.get("via1")
-                via1 && formData.set('via1', via1)
-                let via2 = searchParams.get("via2")
-                via2 && formData.set('via2', via2)
-                let dropoff = searchParams.get("dropoff")
-                dropoff && formData.set('dropoff', dropoff)
-                let direction = searchParams.get("direction")
-                direction && formData.set('direction', direction)
-                let pickupTime = searchParams.get("pickupTime")
-                pickupTime && formData.set('pickupTime', pickupTime)
-                let returnTime = searchParams.get("returnTime")
-                returnTime && formData.set('returnTime', returnTime)
-                let passengers = searchParams.get("passengers")
-                passengers && formData.set('passengers', passengers)
-                let luggage = searchParams.get("luggage")
-                luggage && formData.set('luggage', luggage)
-                let infantSeat = searchParams.get("infantSeat")
-                infantSeat && formData.set('infantSeat', infantSeat)
-                let babySeat = searchParams.get("babySeat")
-                babySeat && formData.set('babySeat', babySeat)
-                let boosterSeat = searchParams.get("boosterSeat")
-                boosterSeat && formData.set('boosterSeat', boosterSeat)
-                let price = searchParams.get("price")
-                price && formData.set('price', price)
-                let vehicle = searchParams.get("vehicle")
-                vehicle && formData.set('vehicle', vehicle)
-                let clientName = searchParams.get("clientName")
-                clientName && formData.set('clientName', clientName)
-                let clientPhone = searchParams.get("clientPhone")
-                clientPhone && formData.set('clientPhone', clientPhone)
-                let clientEmail = searchParams.get("clientEmail")
-                clientEmail && formData.set('clientEmail', clientEmail)
-                let note = searchParams.get("note")
-                note && formData.set('note', note)
-                let airline = searchParams.get("airline")
-                airline && formData.set('airline', airline)
-                let arrivalFlightNumber = searchParams.get("arrivalFlightNumber")
-                arrivalFlightNumber && formData.set('arrivalFlightNumber', arrivalFlightNumber)
-                let flightArrivalTime = searchParams.get("flightArrivalTime")
-                flightArrivalTime && formData.set('flightArrivalTime', flightArrivalTime)
-                let terminal = searchParams.get("terminal")
-                terminal && formData.set('terminal', terminal)
-                let paymentMethod = searchParams.get("paymentMethod")
-                paymentMethod && formData.set('paymentMethod', paymentMethod)
-                let status = searchParams.get("status")
-                status && formData.set('status', status)
-
-                addRides(formData)
-                console.log("Ride Added")
-            }else{
-                console.log("Rided already exists: ", ride)
-            }
-        })()
-    })
     return (
         <div className="mx-auto max-w-xl">
-            <h2 className="text-base font-semibold leading-7 text-center" style={{color: props.themeColor}}>{ searchParams.get("payment") }</h2>
+            <h2 className="text-base font-semibold leading-7 text-center" style={{color: props.themeColor}}>{ searchParams.get("paymentMethod") }</h2>
             <div className="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2">
                 <div className="flex items-center my-2 sm:col-span-2">
                     <div className="block font-semibold leading-6 text-gray-900">

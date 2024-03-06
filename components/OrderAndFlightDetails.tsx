@@ -1,11 +1,24 @@
 'use client'
 import { useSearchParams } from "next/navigation"
-
+function toTwoDigits( value:any, dp:any ){
+    return +parseFloat(value).toFixed( dp );
+}
 export default async function OrderAndFlightDetails(props: any) {
     const searchParams = useSearchParams();
     
     const zoneCharges = searchParams.get("zoneCharges")
     const price = searchParams.get("price")
+
+    var totalPrice = parseFloat(price)
+    if(searchParams.get("zoneCharges")){
+        totalPrice += parseFloat(searchParams.get("zoneCharges"))
+    }
+    if(searchParams.get("pickupParkingCharges")){
+        totalPrice += parseFloat(searchParams.get("pickupParkingCharges"))
+    }
+    if(searchParams.get("dropoffParkingCharges")){
+        totalPrice += parseFloat(searchParams.get("dropoffParkingCharges"))
+    }
     return (
         <div className="flex flex-col md:flex-row">
             <div className="flex-1 shadow-lg ring-1 ring-gray-300 rounded-xl mx-3 my-6 p-6">
@@ -73,12 +86,12 @@ export default async function OrderAndFlightDetails(props: any) {
                         <div className="col-span-full">
                             <fieldset>
                                 <div className="mt-2 grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-2">
-                                    <div className="flex items-center gap-x-3 sm:col-span-3">
+                                    <div className="flex items-center gap-x-3 sm:col-span-2">
                                     <div className="flex h-6 items-center">
                                         <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="Card">
                                         <input type="radio"
                                             id="Card"
-                                            name="payment"
+                                            name="paymentMethod"
                                             value="Debit/Credit Card"
                                             defaultChecked
                                             className="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded-full border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:border-4 checked:before:bg-gray-900 hover:before:opacity-10"
@@ -96,13 +109,13 @@ export default async function OrderAndFlightDetails(props: any) {
                                     Debit/Credit Card
                                     </label>
                                     </div>
-                                    <div className="flex items-center gap-x-3 sm:col-span-3">
+                                    <div className="flex items-center gap-x-3 sm:col-span-2">
                                     
                                     <div className="flex h-6 items-center">
                                         <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="Cash">
                                         <input type="radio"
                                             id="Cash"
-                                            name="payment"
+                                            name="paymentMethod"
                                             value="Cash Payment"
                                             className="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded-full border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:border-4 checked:before:bg-gray-900 hover:before:opacity-10"
                                         />
@@ -117,6 +130,29 @@ export default async function OrderAndFlightDetails(props: any) {
                                     </div>
                                     <label htmlFor="Cash" className="block text-sm font-medium leading-6 text-black">
                                         Cash Payment
+                                    </label>
+                                    </div>
+                                    <div className="flex items-center gap-x-3 sm:col-span-2">
+                                    
+                                    <div className="flex h-6 items-center">
+                                        <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="Call">
+                                        <input type="radio"
+                                            id="Call"
+                                            name="paymentMethod"
+                                            value="Payment on Call"
+                                            className="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded-full border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:border-4 checked:before:bg-gray-900 hover:before:opacity-10"
+                                        />
+                                        <span
+                                            className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
+                                            stroke="currentColor" strokeWidth="1">
+                                            <circle cx="10" cy="10" r="7"  fill="transparent" stroke="transparent"/>
+                                            </svg>
+                                        </span>
+                                        </label>
+                                    </div>
+                                    <label htmlFor="Call" className="block text-sm font-medium leading-6 text-black">
+                                        Payment on Call
                                     </label>
                                     </div>
                                 </div>
@@ -141,7 +177,31 @@ export default async function OrderAndFlightDetails(props: any) {
                                 </div>
                                 <div className="ml-2.5">
                                     <span className="block text-sm font-semibold leading-6 text-gray-900">
-                                        £{ searchParams.get("zoneCharges")?.trim() } /-
+                                        £{ searchParams.get("zoneCharges").trim() } /-
+                                    </span>
+                                </div>
+                            </div>
+                        </div>}
+                        {searchParams.get("pickupParkingCharges") && <div className="sm:col-span-2">
+                            <div className="flex items-center sm:col-span-2">
+                                <div className="block font-semibold leading-6 text-gray-900">
+                                Pickup Parking Charges:
+                                </div>
+                                <div className="ml-2.5">
+                                    <span className="block text-sm font-semibold leading-6 text-gray-900">
+                                        £{ searchParams.get("pickupParkingCharges").trim() } /-
+                                    </span>
+                                </div>
+                            </div>
+                        </div>}
+                        {searchParams.get("dropoffParkingCharges") && <div className="sm:col-span-2">
+                            <div className="flex items-center sm:col-span-2">
+                                <div className="block font-semibold leading-6 text-gray-900">
+                                Dropoff Parking Charges:
+                                </div>
+                                <div className="ml-2.5">
+                                    <span className="block text-sm font-semibold leading-6 text-gray-900">
+                                        £{ searchParams.get("dropoffParkingCharges").trim() } /-
                                     </span>
                                 </div>
                             </div>
@@ -153,8 +213,8 @@ export default async function OrderAndFlightDetails(props: any) {
                                 </div>
                                 <div className="ml-2.5">
                                     <span className="block text-sm font-semibold leading-6 text-gray-900">
-                                        £<span className="text-base font-semibold leading-7 text-center" style={{color: props.themeColor}}>{ searchParams.get("zoneCharges")? parseFloat(zoneCharges || "") + parseFloat(price || "") : price }</span> /-
-                                        <input type="hidden" name="totalPrice" value={ searchParams.get("zoneCharges")? parseFloat(zoneCharges || "") + parseFloat(price || "") : price || 0 } />
+                                        £<span className="text-base font-semibold leading-7 text-center" style={{color: props.themeColor}}>{ toTwoDigits(totalPrice,2) }</span> /-
+                                        <input type="hidden" name="totalPrice" value={ toTwoDigits(totalPrice,2) } />
                                     </span>
                                 </div>
                             </div>

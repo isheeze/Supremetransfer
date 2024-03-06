@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="">
       <Nav menuColor={header.menuColor} phoneBG={header.phoneBG} phoneColor={header.phoneColor} />
-      <Hero themeColor={theme.themeColor} />
+      <Hero themeColor={theme.themeColor} heroButtonColor={theme.heroButtonColor} />
       <ImageBanner />
       <CarsSection />
       <FeaturesWithImage themeColor={theme.themeColor} />

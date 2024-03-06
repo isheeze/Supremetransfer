@@ -41,6 +41,16 @@ const Sidebar = async () => {
             icon: <MdOutlineBubbleChart />,
           },
           {
+            title: "Parking Charges",
+            path: "/dashboard/parkingCharges",
+            icon: <MdOutlineBubbleChart />,
+          },
+          {
+            title: "Extra Prices",
+            path: "/dashboard/extraPrices",
+            icon: <MdOutlineBubbleChart />,
+          },
+          {
             title: "Charges Per Mile",
             path: "/dashboard/ChargesPerMile",
             icon: <MdOutlineBubbleChart />,

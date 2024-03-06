@@ -10,7 +10,8 @@ export const getThemeDataQuery = groq`*[_type == "theme"]{
     logo,
     favicon,
     socialLinks,
-    themeColor
+    themeColor,
+    heroButtonColor
 }`;
 
 const themeData = await sanityFetch<SanityDocument>({

@@ -28,7 +28,7 @@ export async function sanityFetch<QueryResponse>({
     const isDevelopment = process.env.NODE_ENV === "development";
 
     return client
-        .withConfig({ useCdn: !isDraftMode })
+        .withConfig({ useCdn: false })
         .fetch<QueryResponse>(query, params, {
             cache: "no-store",
             // ...(isDraftMode && {

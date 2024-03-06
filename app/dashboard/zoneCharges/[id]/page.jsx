@@ -21,12 +21,8 @@ const SingleZoneChargePage = async ({ params }) => {
       <div className={styles.formContainer}>
         <form action={updateZoneCharges} className={styles.form}>
           <input type="hidden" name="id" value={zoneCharge.id} />
-          <label>Pickup</label>
-          <input type="text" name="pickup" placeholder={zoneCharge.pickup} />
-          <label>Dropoff</label>
-          <input type="text" name="dropoff" placeholder={zoneCharge.dropoff} />
-          <label>Price</label>
-          <input type="number" name="price" placeholder={zoneCharge.price} />
+          <label>Zone</label>
+          <input type="text" name="zone" placeholder={zoneCharge.zone} />
           <button>Update</button>
         </form>
       </div>

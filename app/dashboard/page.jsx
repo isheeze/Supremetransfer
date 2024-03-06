@@ -1,20 +1,15 @@
 import { cards } from "../lib/data";
 import Card from "../ui/dashboard/card/card";
-import Chart from "../ui/dashboard/chart/chart";
+import RidesHistory from "../ui/dashboard/RidesHistory/RidesHistory";
 import styles from "../ui/dashboard/dashboard.module.css";
 import Transactions from "../ui/dashboard/transactions/transactions";
 
-const Dashboard = () => {
+const Dashboard = async({ searchParams }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>
-        <div className={styles.cards}>
-          {cards.map((item) => (
-            <Card item={item} key={item.id} />
-          ))}
-        </div>
-        <Transactions />
-        <Chart />
+        <Transactions searchParams={searchParams}/>
+        <RidesHistory searchParams={searchParams}/>
       </div>
     </div>
   );

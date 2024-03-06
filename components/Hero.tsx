@@ -161,10 +161,10 @@ const Hero = (props: any)=> {
                             <span onClick={handleVia2} className="absolute cursor-pointer -translate-y-1/2 top-1/2 right-2.5 rounded-full px-1 py-0.5 text-xs bg-gradient-to-r from-purple-500 to-pink-500 text-white">
                               - Via
                             </span>
-                            {via2Address && <input type='hidden' name="via2Address" value={via1Address} />}
-                            {via2Zipcode && <input type='hidden' name="via2Zipcode" value={via1Zipcode} />}
-                            {via2Lat && <input type='hidden' name="via2Lat" value={via1Lat} />}
-                            {via2Lng && <input type='hidden' name="via2Lng" value={via1Lng} />}
+                            {via2Address && <input type='hidden' name="via2Address" value={via2Address} />}
+                            {via2Zipcode && <input type='hidden' name="via2Zipcode" value={via2Zipcode} />}
+                            {via2Lat && <input type='hidden' name="via2Lat" value={via2Lat} />}
+                            {via2Lng && <input type='hidden' name="via2Lng" value={via2Lng} />}
                           </div>
                         </div>
                       </div>
@@ -343,8 +343,8 @@ const Hero = (props: any)=> {
                                 <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="infant-seat">
                                   <input type="checkbox"
                                     id="infant-seat"
-                                    name="infant-seats"
-                                    value="infant-seats"
+                                    name="infantSeat"
+                                    value="infantSeat"
                                     className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
                                   />
                                   <span
@@ -369,8 +369,8 @@ const Hero = (props: any)=> {
                                 <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="baby-seat">
                                   <input type="checkbox"
                                     id="baby-seat"
-                                    name="baby-seat"
-                                    value="baby-seat"
+                                    name="babySeat"
+                                    value="babySeat"
                                     className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
                                   />
                                   <span
@@ -395,8 +395,8 @@ const Hero = (props: any)=> {
                                 <label className="relative flex items-center rounded-full cursor-pointer" htmlFor="booster-seat">
                                   <input type="checkbox"
                                     id="booster-seat"
-                                    name="booster-seat"
-                                    value="booster-seat"
+                                    name="boosterSeat"
+                                    value="boosterSeat"
                                     className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
                                   />
                                   <span
@@ -427,7 +427,7 @@ const Hero = (props: any)=> {
                   <button
                     type="submit"
                     className="rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500 hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    style={{ "--tw-shadow-color": props.themeColor, backgroundColor: props.themeColor } as React.CSSProperties}
+                    style={{ "--tw-shadow-color": props.heroButtonColor, backgroundColor: props.heroButtonColor } as React.CSSProperties}
                   >
                     Get Quotes
                   </button>

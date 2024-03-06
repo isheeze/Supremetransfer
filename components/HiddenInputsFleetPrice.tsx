@@ -41,6 +41,8 @@ export default function HiddenInputsFleetPrice() {
 
     const price = searchParams.get("price")
     const zoneCharges = searchParams.get("zoneCharges")
+    const pickupParkingCharges = searchParams.get("pickupParkingCharges")
+    const dropoffParkingCharges = searchParams.get("dropoffParkingCharges")
     const vehicle = searchParams.get("vehicle")
 
     const _id = searchParams.get("_id")
@@ -48,48 +50,50 @@ export default function HiddenInputsFleetPrice() {
     const status = searchParams.get("status")
     return (
         <div>
-            {pickupAddress && <input type="hidden" name="pickupAddress" value={pickupAddress} />}
-            {pickupZipcode && <input type="hidden" name="pickupZipcode" value={pickupZipcode} />}
-            {pickupLat && <input type="hidden" name="pickupLat" value={pickupLat} />}
-            {pickupLng && <input type="hidden" name="pickupLng" value={pickupLng} />}
+            {pickupAddress && <input type="hidden" name="pickupAddress" value={pickupAddress.trim()} />}
+            {pickupZipcode && <input type="hidden" name="pickupZipcode" value={pickupZipcode.trim()} />}
+            {pickupLat && <input type="hidden" name="pickupLat" value={pickupLat.trim()} />}
+            {pickupLng && <input type="hidden" name="pickupLng" value={pickupLng.trim()} />}
 
             
-            {via1Address && <input type="hidden" name="via1Address" value={via1Address} />}
-            {via1Zipcode && <input type="hidden" name="via1Zipcode" value={via1Zipcode} />}
-            {via1Lat && <input type="hidden" name="via1Lat" value={via1Lat} />}
-            {via1Lng && <input type="hidden" name="via1Lng" value={via1Lng} />}
+            {via1Address && <input type="hidden" name="via1Address" value={via1Address.trim()} />}
+            {via1Zipcode && <input type="hidden" name="via1Zipcode" value={via1Zipcode.trim()} />}
+            {via1Lat && <input type="hidden" name="via1Lat" value={via1Lat.trim()} />}
+            {via1Lng && <input type="hidden" name="via1Lng" value={via1Lng.trim()} />}
 
             
-            {via2Address && <input type="hidden" name="via2Address" value={via2Address} />}
-            {via2Zipcode && <input type="hidden" name="via2Zipcode" value={via2Zipcode} />}
-            {via2Lat && <input type="hidden" name="via2Lat" value={via2Lat} />}
-            {via2Lng && <input type="hidden" name="via2Lng" value={via2Lng} />}
+            {via2Address && <input type="hidden" name="via2Address" value={via2Address.trim()} />}
+            {via2Zipcode && <input type="hidden" name="via2Zipcode" value={via2Zipcode.trim()} />}
+            {via2Lat && <input type="hidden" name="via2Lat" value={via2Lat.trim()} />}
+            {via2Lng && <input type="hidden" name="via2Lng" value={via2Lng.trim()} />}
 
             
-            {dropoffAddress && <input type="hidden" name="dropoffAddress" value={dropoffAddress} />}
-            {dropoffZipcode && <input type="hidden" name="dropoffZipcode" value={dropoffZipcode} />}
-            {dropoffLat && <input type="hidden" name="dropoffLat" value={dropoffLat} />}
-            {dropoffLng && <input type="hidden" name="dropoffLng" value={dropoffLng} />}
+            {dropoffAddress && <input type="hidden" name="dropoffAddress" value={dropoffAddress.trim()} />}
+            {dropoffZipcode && <input type="hidden" name="dropoffZipcode" value={dropoffZipcode.trim()} />}
+            {dropoffLat && <input type="hidden" name="dropoffLat" value={dropoffLat.trim()} />}
+            {dropoffLng && <input type="hidden" name="dropoffLng" value={dropoffLng.trim()} />}
 
             
-            {direction && <input type="hidden" name="direction" value={direction} />}
-            {pickupTime && <input type="hidden" name="pickupTime" value={pickupTime} />}
-            {returnTime && <input type="hidden" name="returnTime" value={returnTime} />}
-            {passenger && <input type="hidden" name="Passenger" value={passenger} />}
-            {luggage && <input type="hidden" name="luggage" value={luggage} />}
+            {direction && <input type="hidden" name="direction" value={direction.trim()} />}
+            {pickupTime && <input type="hidden" name="pickupTime" value={pickupTime.trim()} />}
+            {returnTime && <input type="hidden" name="returnTime" value={returnTime.trim()} />}
+            {passenger && <input type="hidden" name="Passenger" value={passenger.trim()} />}
+            {luggage && <input type="hidden" name="luggage" value={luggage.trim()} />}
 
             
-            {infantSeats && <input type="hidden" name="infantSeats" value={infantSeats} />}
-            {babySeat && <input type="hidden" name="babySeat" value={babySeat} />}
-            {boosterSeat && <input type="hidden" name="boosterSeat" value={boosterSeat} />}
+            {infantSeats && <input type="hidden" name="infantSeats" value={infantSeats.trim()} />}
+            {babySeat && <input type="hidden" name="babySeat" value={babySeat.trim()} />}
+            {boosterSeat && <input type="hidden" name="boosterSeat" value={boosterSeat.trim()} />}
 
-            {price && <input type="hidden" name="price" value={price} />}
-            {zoneCharges && <input type="hidden" name="zoneCharges" value={zoneCharges} />}
-            {vehicle && <input type="hidden" name="vehicle" value={vehicle} />}
+            {price && <input type="hidden" name="price" value={price.trim()} />}
+            {zoneCharges && <input type="hidden" name="zoneCharges" value={zoneCharges.trim()} />}
+            {pickupParkingCharges && <input type="hidden" name="pickupParkingCharges" value={pickupParkingCharges.trim()} />}
+            {dropoffParkingCharges && <input type="hidden" name="dropoffParkingCharges" value={dropoffParkingCharges.trim()} />}
+            {vehicle && <input type="hidden" name="vehicle" value={vehicle.trim()} />}
             
-            {_id && <input type="hidden" name="_id" value={_id} />}
-            {paymentMethod && <input type="hidden" name="paymentMethod" value={paymentMethod} />}
-            {status && <input type="hidden" name="status" value={status} />}
+            {_id && <input type="hidden" name="_id" value={_id.trim()} />}
+            {paymentMethod && <input type="hidden" name="paymentMethod" value={paymentMethod.trim()} />}
+            {status && <input type="hidden" name="status" value={status.trim()} />}
         </div>
     )
 }

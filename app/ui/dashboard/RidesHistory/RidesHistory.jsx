@@ -3,19 +3,10 @@ import styles from "@/app/ui/dashboard/products/products.module.css";
 import Search from "@/app/ui/dashboard/search/search";
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
 import { fetchRides } from "@/app/lib/data";
-import { deleteRides } from "@/app/lib/actions";
-import { redirect } from "next/navigation";
-import { auth } from "@/app/auth";
 
-const RidesPage = async ({ searchParams }) => {
-  const {user} = await auth();
-  if(user.role != 'admin'){
-    redirect('/dashboard')
-  }
-
-
-  const q = searchParams?.q || "";
-  const page = searchParams?.page || 1;
+const RidesHistory = async (props) => {
+  const q = props.searchParams?.q || "";
+  const page = props.searchParams?.page || 1;
   const { count, rides } = await fetchRides(q, page);
 
   return (
@@ -40,20 +31,9 @@ const RidesPage = async ({ searchParams }) => {
               <td>{p2p.dropoffAddress}</td>
               <td>{p2p.price}</td>
               <td>{p2p.paymentMethod}</td>
-              <td>{p2p.status}</td>
               <td>
-                <div className={styles.buttons}>
-                  <Link href={`/dashboard/rides/${p2p.id}`}>
-                    <button className={`${styles.button} ${styles.view}`}>
-                      View
-                    </button>
-                  </Link>
-                  <form action={deleteRides}>
-                    <input type="hidden" name="id" value={p2p.id} />
-                    <button className={`${styles.button} ${styles.delete}`}>
-                      Delete
-                    </button>
-                  </form>
+                <div className={p2p.status.trim() == 'draft' && `bg-indigo-700 rounded-lg text-center p-2` || p2p.status.trim() == 'Rejected' && `bg-red-700 rounded-lg text-center p-2` || p2p.status.trim() == 'Accepted' && `bg-green-700 rounded-lg text-center p-2`}>
+                  {p2p.status}
                 </div>
               </td>
             </tr>
@@ -65,4 +45,4 @@ const RidesPage = async ({ searchParams }) => {
   );
 };
 
-export default RidesPage;
+export default RidesHistory;

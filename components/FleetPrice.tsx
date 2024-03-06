@@ -4,6 +4,10 @@ import Image from "next/image"
 import { pricedFleet } from '@app/lib/actions'
 import HiddenInputsFleetPrice from "./HiddenInputsFleetPrice"
 
+function toTwoDigits( value:any, dp:any ){
+    return +parseFloat(value).toFixed( dp );
+}
+
 export default function Fleet(props: any) {
     return (
         <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
@@ -28,7 +32,7 @@ export default function Fleet(props: any) {
                                 <div className="bg-white rounded-3xl p-5 -mt-12 pt-16 shadow-[0px_15px_30px_rgba(0,0,0,0.2)] relative">
                                     <h3 className="mb-2 font-bold flex justify-between gap-x-2">
                                         <span>{fleet.name}</span>
-                                        {props.price && fleet.factor && <span>£{props.price * fleet.factor}</span>}
+                                        {props.price && fleet.factor && <span>£{(props.direction.trim() == 'Two Way') ? toTwoDigits(props.price * fleet.factor * 2,2) : toTwoDigits(props.price * fleet.factor,2)}</span>}
                                     </h3>
                                     <div className="grid max-w-xl grid-cols-2 gap-x-1 gap-y-2 items-center">
                                         {fleet.properties?.map((feature: any) => (
@@ -37,7 +41,7 @@ export default function Fleet(props: any) {
                                     </div>
                                     {props.price && <div>{fleet.factor ?
                                         <form action={pricedFleet}>
-                                            <input type="hidden" value={props.price * fleet.factor} name="price" />
+                                            <input type="hidden" value={(props.direction.trim() == 'Two Way') ? toTwoDigits(props.price * fleet.factor * 2,2) : toTwoDigits(props.price * fleet.factor,2)} name="price" />
                                             <input type="hidden" value={fleet.name} name="vehicle" />
                                             <HiddenInputsFleetPrice />
                                             <button className="rounded-3xl shadow-[0px_15px_30px_rgba(0,0,0,0.3)] flex items-center justify-center z-10 absolute text-white p-2 w-10/12 left-1/2 -translate-x-1/2 mt-2 cursor-pointer" style={{backgroundColor: props.themeColor}}>Book Now</button>

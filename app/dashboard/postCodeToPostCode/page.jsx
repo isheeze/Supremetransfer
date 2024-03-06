@@ -7,6 +7,7 @@ import { fetchPostCodeToPostCodes } from "@/app/lib/data";
 import { deletePostCodeToPostCode } from "@/app/lib/actions";
 import { redirect } from "next/navigation";
 import { auth } from "@/app/auth";
+import ImportCSV from '@components/ImportCSV'
 
 const PtoPPage = async ({ searchParams }) => {
   const {user} = await auth();
@@ -20,6 +21,9 @@ const PtoPPage = async ({ searchParams }) => {
 
   return (
     <div className={styles.container}>
+    <div className={styles.top}>
+      <ImportCSV />
+    </div>
       <div className={styles.top}>
         <Search placeholder="Search for a postCodeToPostCode route..." />
         <Link href="/dashboard/postCodeToPostCode/add">
