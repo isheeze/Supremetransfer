@@ -8,8 +8,9 @@ export default async function OrderAndFlightDetails(props: any) {
     
     const zoneCharges = searchParams.get("zoneCharges")
     const price = searchParams.get("price")
-
-    var totalPrice = parseFloat(price)
+    if(price){
+        var totalPrice = parseFloat(price)
+    }
     if(searchParams.get("zoneCharges")){
         totalPrice += parseFloat(searchParams.get("zoneCharges"))
     }
