@@ -245,8 +245,6 @@ export const fetchDraftRides = async (q, page) => {
     connectToDB();
     
 
-
-    
     var count
     var rides
     if(mongoose.isValidObjectId(q)){
