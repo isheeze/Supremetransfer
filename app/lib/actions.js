@@ -757,8 +757,8 @@ export const payment = async (formData, successUrl) => {
           },
         ],
         mode: "payment",
-        success_url: 'https://supremetransfer.vercel.app'+successUrl,
-        cancel_url: `https://supremetransfer.vercel.app/?canceled=true`,
+        success_url: 'http://localhost:3000'+successUrl,
+        cancel_url: `http://localhost:3000/?canceled=true`,
     });
   } catch (err) {
     console.log({ error: "Error checkout session: ",err });
@@ -2822,7 +2822,8 @@ export async function handleRide(prevState, formData) {
   }
   if(dz){
     aryz.push({'zone': dz.split(" ")[0]})
-  }
+  } 
+  
 
   console.log(formData)
   if(aryz.length){
