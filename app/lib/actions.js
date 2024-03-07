@@ -757,8 +757,8 @@ export const payment = async (formData, successUrl) => {
           },
         ],
         mode: "payment",
-        success_url: 'https://supremetransfer.vercel.app'+successUrl,
-        cancel_url: `https://supremetransfer.vercel.app/?canceled=true`,
+        success_url: 'http://localhost:3000'+successUrl,
+        cancel_url: `http://localhost:3000/?canceled=true`,
     });
   } catch (err) {
     console.log({ error: "Error checkout session: ",err });
@@ -789,10 +789,6 @@ export const orderHandler = async (formData) => {
   }else{
     redirect(query)
   }
-}
-function validateEmail(email) {
-  const re = /^(([^<>()[\\]\\\\.,;:\s@"]+(\.[^<>()[\\]\\\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
 }
 export const sendRejectedEmail = async (formData) => {
   const config = new Configuration({

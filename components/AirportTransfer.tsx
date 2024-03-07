@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function AirportTransfer(props: any) {
   return (
-    <div className="bg-white">
+    <div>
       <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 pt-24 sm:px-6 sm:pt-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div>
           <h2 className="text-2xl font-semibold leading-7" style={{ color: props.themeColor }}>{airportTransfer.subheading}</h2>
@@ -51,7 +51,7 @@ export default function AirportTransfer(props: any) {
         </div>
       </div>
 
-      <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
+      <div className="relative isolate overflow-hidden px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
         {airportTransfer.sections.map((section: any, i: any) => (
           <div  key={i}>
             {!section.leftimage && 

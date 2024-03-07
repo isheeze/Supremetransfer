@@ -2,7 +2,7 @@ import { features } from "@sanity/lib/queries"
 
 export default function Features(props: any) {
   return (
-    <div className="bg-white py-24 sm:py-16">
+    <div className="py-24 sm:py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7" style={{color: props.themeColor}}>{features.subtitle}</h2>

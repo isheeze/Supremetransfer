@@ -41,7 +41,7 @@ export default (props: any) => {
   }
 
   return (
-    <div className="bg-white">
+    <div>
       <div className="dark-bg mx-auto max-w-7xl py-24 sm:px-6 sm:py-16 lg:px-8">
         <Swiper
           spaceBetween={50}

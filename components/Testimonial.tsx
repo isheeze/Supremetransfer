@@ -45,7 +45,7 @@ export default function Testimonial(props: any){
   }
   
     return (
-      <div className="bg-white py-24 sm:py-16">
+      <div className="py-24 sm:py-16">
       <div className="testimonials">
         <div className="mx-auto max-w-2xl lg:text-center">
           <p className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl text-center">

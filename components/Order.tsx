@@ -4,7 +4,7 @@ import OrderAndFlightDetails from "./OrderAndFlightDetails"
 
 const Order = (props: any) => {
     return (
-        <div className="relative isolate overflow-hidden bg-white px-6 py-12 sm:py-12 lg:overflow-visible lg:px-0">
+        <div className="relative isolate overflow-hidden px-6 py-12 sm:py-12 lg:overflow-visible lg:px-0">
             <div className="py-12 sm:py-8">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl lg:text-center mb-8">

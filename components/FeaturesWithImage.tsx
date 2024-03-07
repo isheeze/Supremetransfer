@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function FeatureWithImage(props: any) {
   return (
-    <div className="overflow-hidden bg-white py-16 sm:py-16">
+    <div className="overflow-hidden py-16 sm:py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
       <h2 className="text-2xl font-semibold leading-7 text-center" style={{color: props.themeColor}}>{featureWithImage.subtitle}</h2>
       <h2 className="mt-2 mb-16 text-7xl font-bold tracking-tight text-gray-900 sm:text-7xl text-center">{featureWithImage.title}</h2>
