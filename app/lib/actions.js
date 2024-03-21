@@ -2814,5 +2814,4 @@ export async function handleRide(prevState, formData) {
     redirect(query)
   }
   revalidatePath("/");  
-  
 }
