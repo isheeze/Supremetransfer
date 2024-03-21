@@ -34,7 +34,7 @@ export const addUser = async (formData) => {
 
     await newUser.save();
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/addUser => ',err);
   }
 
   revalidatePath("/dashboard/users");
@@ -65,7 +65,7 @@ export const updateUser = async (formData) => {
 
     await User.findByIdAndUpdate(id, updateFields);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/updateUser => ',err);
   }
 
   revalidatePath("/dashboard/users");
@@ -79,9 +79,9 @@ export const deleteUser = async (formData) => {
     connectToDB();
     await User.findByIdAndDelete(id);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/deleteUser => ',err);
   }
-
+    
   revalidatePath("/dashboard/users");
 };
 // PostCodeToPostCode
@@ -95,6 +95,7 @@ export const addPostCodeToPostCodeFromCSV = async (formData) => {
     formDataCode.set('redirect','1')
 
     await addPostCodeToPostCode(formDataCode)
+    console.log(i+'th added...')
   }
   revalidatePath("/dashboard/postCodeToPostCode");
   redirect("/dashboard/postCodeToPostCode");
@@ -114,7 +115,7 @@ export const addPostCodeToPostCode = async (formData) => {
 
     await newPostCodeToPostCode.save();
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/addPostCodeToPostCode => ',err);
   }
   if(!formData.get('redirect')){
     revalidatePath("/dashboard/postCodeToPostCode");
@@ -142,7 +143,7 @@ export const updatePostCodeToPostCode = async (formData) => {
 
     await PostCodeToPostCode.findByIdAndUpdate(id, updateFields);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/updatePostCodetoPostCode => ',err);
   }
 
   revalidatePath("/dashboard/postCodeToPostCode");
@@ -156,7 +157,7 @@ export const deletePostCodeToPostCode = async (formData) => {
     connectToDB();
     await PostCodeToPostCode.findByIdAndDelete(id);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/deletePostCodeToPostCode => ',err);
   }
 
   revalidatePath("/dashboard/postCodeToPostCode");
@@ -178,7 +179,7 @@ export const addParkingCharges = async (formData) => {
 
     await newParkingCharges.save();
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/addParkingCharges => ',err);
   }
 
   revalidatePath("/dashboard/parkingCharges");
@@ -205,7 +206,7 @@ export const updateParkingCharges = async (formData) => {
 
     await ParkingCharges.findByIdAndUpdate(id, updateFields);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/updateParkingCharges => ',err);
   }
 
   revalidatePath("/dashboard/parkingCharges");
@@ -219,7 +220,7 @@ export const deleteParkingCharges = async (formData) => {
     connectToDB();
     await ParkingCharges.findByIdAndDelete(id);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/deleteParkingCharges => ',err);
   }
 
   revalidatePath("/dashboard/parkingCharges");
@@ -239,7 +240,7 @@ export const addZoneCharges = async (formData) => {
 
     await newZoneCharges.save();
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/addZoneCharges => ',err);
   }
 
   revalidatePath("/dashboard/zoneCharges");
@@ -264,7 +265,7 @@ export const updateZoneCharges = async (formData) => {
 
     await ZoneCharges.findByIdAndUpdate(id, updateFields);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/updateZoneCharges => ',err);
   }
 
   revalidatePath("/dashboard/zoneCharges");
@@ -278,7 +279,7 @@ export const deleteZoneCharges = async (formData) => {
     connectToDB();
     await ZoneCharges.findByIdAndDelete(id);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/deleteZoneCharges => ',err);
   }
 
   revalidatePath("/dashboard/zoneCharges");
@@ -300,7 +301,7 @@ export const addChargesPerMile = async (formData) => {
 
     await newChargesPerMile.save();
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/addChargesPerMile => ',err);
   }
 
   revalidatePath("/dashboard/ChargesPerMile");
@@ -327,7 +328,7 @@ export const updateChargesPerMile = async (formData) => {
 
     await ChargesPerMile.findByIdAndUpdate(id, updateFields);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/updateChargesPerMile => ',err);
   }
 
   revalidatePath("/dashboard/ChargesPerMile");
@@ -341,7 +342,7 @@ export const deleteChargesPerMile = async (formData) => {
     connectToDB();
     await ChargesPerMile.findByIdAndDelete(id);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/deleteChargesPerMile => ',err);
   }
 
   revalidatePath("/dashboard/ChargesPerMile");
@@ -381,7 +382,7 @@ export const addDrivers = async (formData) => {
 
     await newDrivers.save();
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/addDrivers => ',err);
   }
 
   revalidatePath("/dashboard/drivers");
@@ -424,7 +425,7 @@ export const updateDrivers = async (formData) => {
     );
     await Drivers.findByIdAndUpdate(id, updateFields);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/updateDrivers => ',err);
   }
 
   revalidatePath("/dashboard/drivers");
@@ -438,7 +439,7 @@ export const deleteDrivers = async (formData) => {
     connectToDB();
     await Drivers.findByIdAndDelete(id);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/deleteDrivers => ',err);
   }
 
   revalidatePath("/dashboard/drivers");
@@ -480,7 +481,7 @@ export const addRides = async (formData) => {
 
     await newRides.save();
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/addRides => ',err);
   }
 
   revalidatePath("/dashboard/rides");
@@ -522,13 +523,9 @@ export const addRidesWithId = async (formData) => {
     });
 
     await newRides.save();
-    console.log('reached... ')
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/addRidesWithId => ',err);
   }
-
-  //revalidatePath("/dashboard/rides");
-  //redirect("/dashboard/rides");
 };
 
 export const updateRides = async (formData) => {
@@ -570,7 +567,7 @@ export const updateRides = async (formData) => {
     );
     await Rides.findByIdAndUpdate(id, updateFields);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/updateRides => ',err);
   }
 
   revalidatePath("/dashboard/rides");
@@ -591,7 +588,7 @@ export const changeStatusRides = async (id, status) => {
     );
     await Rides.findByIdAndUpdate(id, updateFields);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/changeStatusRides => ',err);
   }
 
   revalidatePath("/dashboard");
@@ -605,7 +602,7 @@ export const deleteRides = async (formData) => {
     connectToDB();
     await Rides.findByIdAndDelete(id);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/deleteRides => ',err);
   }
 
   revalidatePath("/dashboard/rides");
@@ -627,7 +624,7 @@ export const acceptRide = async (formData) => {
     await Rides.findByIdAndUpdate(id, updateFields);
     await sendAcceptedEmail(formData)
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/acceptRide => ',err);
   }
 
   revalidatePath("/dashboard");
@@ -650,7 +647,7 @@ export const rejectRide = async (formData) => {
     await Rides.findByIdAndUpdate(id, updateFields);
     await sendRejectedEmail(formData)
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/rejectRide => ',err);
   }
 
   revalidatePath("/dashboard");
@@ -671,7 +668,7 @@ export const addExtraPrices = async (formData) => {
 
     await newUser.save();
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/addExtraPrices => ',err);
   }
 
   revalidatePath("/dashboard/extraPrices");
@@ -697,7 +694,7 @@ export const updateExtraPrices = async (formData) => {
 
     await ExtraPrices.findByIdAndUpdate(id, updateFields);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/updateExtraPrices => ',err);
   }
 
   revalidatePath("/dashboard/extraPrices");
@@ -711,7 +708,7 @@ export const deleteExtraPrices = async (formData) => {
     connectToDB();
     await ExtraPrices.findByIdAndDelete(id);
   } catch (err) {
-    console.log(err);
+    console.log('app/lib/actions/deleteExtraPrices => ',err);
   }
 
   revalidatePath("/dashboard/extraPrices");
@@ -723,12 +720,13 @@ export const authenticate = async (prevState, formData) => {
   const { username, password } = Object.fromEntries(formData);
 
   try {
+    console.log('---- SIGN IN ----')
     await signIn("credentials", { username, password });
   } catch (err) {
     if (err.message.includes("CredentialsSignin")) {
       return "Wrong Credentials";
     }
-    console.log(err)
+    console.log("app/actions.js/authenticate => ",err)
   }
 };
 
@@ -739,9 +737,6 @@ export const payment = async (formData, successUrl) => {
   try {
     const price = parseFloat(formData.get('totalPrice').trim())
     const date = new Date().toISOString();
-
-    console.log('price: ',price)
-    console.log('date:  ',date)
 
     session = await stripe.checkout.sessions.create({
         line_items: [
@@ -761,7 +756,7 @@ export const payment = async (formData, successUrl) => {
         cancel_url: `http://localhost:3000/?canceled=true`,
     });
   } catch (err) {
-    console.log({ error: "Error checkout session: ",err });
+    console.log('app/lib/actions/payment => ',err);
   }
   if(session.id){
     redirect(`/api/stripe/${session.id}`)
@@ -1365,8 +1360,6 @@ export const sendRejectedEmail = async (formData) => {
   
   const sendBulkEmails = (emailMessageData) => {
     emailsApi.emailsPost(emailMessageData).then((response) => {
-        console.log('API called successfully.');
-        console.log(response.data);
     }).catch((error) => {
         console.error(error);
     });
@@ -1949,10 +1942,8 @@ export const sendAcceptedEmail = async (formData) => {
   
   const sendBulkEmails = (emailMessageData) => {
     emailsApi.emailsPost(emailMessageData).then((response) => {
-        console.log('API called successfully.');
-        console.log(response.data);
     }).catch((error) => {
-        console.error(error);
+        console.error('app/lib/actions/sendAcceptedEmail => ',error);
     });
   };
   
@@ -2533,10 +2524,8 @@ export const sendVerificationEmail = async (formData) => {
   
   const sendBulkEmails = (emailMessageData) => {
     emailsApi.emailsPost(emailMessageData).then((response) => {
-        console.log('API called successfully.');
-        console.log(response.data);
     }).catch((error) => {
-        console.error(error);
+        console.error('app/lib/actions/sendVerificationEmail => ',error);
     });
   };
   
@@ -2653,113 +2642,69 @@ function toTwoDigits( value, dp ){
   return +parseFloat(value).toFixed( dp );
 }
 export async function handleRide(prevState, formData) {
-  console.log('1')
   const schema = z.object({
     pickupAddress: z.string().min(1, {message: "Select pick up address"}),
     dropoffAddress: z.string().min(1, {message: "Select drop off address"}),
     pickupTime: z.string().min(1, {message: "Select pick up time"}),
   });
-  console.log('2')
   try {
     const parsedData = schema.parse({
       pickupAddress: formData.get("pickupAddress"),
       dropoffAddress: formData.get("dropoffAddress"),
       pickupTime: formData.get("pickupTime"),
     });
-    console.log('3')
 
     var price = 0
 
     if(!(formData.get('via1Address') || formData.get('via2Address'))){
-      console.log('4')
       if(formData.get('pickupZipcode') && formData.get('dropoffZipcode')){
-        console.log('5')
         const p = formData.get('pickupZipcode').split(" ")
         const d = formData.get('dropoffZipcode').split(" ")
         connectToDB();
-        console.log("p: ",p)
-        console.log("d: ",d)
         const postCodeToPostCode = await PostCodeToPostCode.find({pickup: p[0].trim(), dropoff: d[0].trim()})
-        console.log('6')
+        
         if(postCodeToPostCode.length){
-          console.log('7')
           price = postCodeToPostCode[0].price
         }else{
-          console.log('8')
           const dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
           if(dis){
-            console.log('9')
             const miles = dis.data[0].distanceMeters*0.000621371192;
             connectToDB();
             const chargesPerMile = await ChargesPerMile.find({min: {$lte: miles}, max: {$gte: miles}})
-            console.log('10')
             if(chargesPerMile.length){
-              console.log('11')
               price = toTwoDigits(chargesPerMile[0].price * miles, 2)
             }
           }
         }
-        console.log('12')
       }else{
-        console.log('13')
         const dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
         if(dis){
-          console.log('14')
           const miles = dis.data[0].distanceMeters*0.000621371192;
           connectToDB();
           const chargesPerMile = await ChargesPerMile.find({min: {$lte: miles}, max: {$gte: miles}})
-          console.log('15')
           if(chargesPerMile.length){
-            console.log('16')
             price = toTwoDigits(chargesPerMile[0].price * miles, 2)
           }
         }
       }
     }else{
-      console.log('17')
       if(formData.get('via1Address') && formData.get('via2Address')){
-        console.log('18')
         var dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('via1Lat'),formData.get('via1Lng'))
         var miles = dis.data[0].distanceMeters*0.000621371192;
         
-        console.log('pickupLat: ',formData.get('pickupLat'))
-        console.log('pickupLng: ',formData.get('pickupLng'))
-        console.log('via1Lat: ',formData.get('via1Lat'))
-        console.log('via1Lng: ',formData.get('via1Lng'))
-        console.log('dis: ',dis.data)
-        console.log('miles: ',miles)
-        console.log('---------------------')
         dis = await distance(formData.get('via1Lat'),formData.get('via1Lng'),formData.get('via2Lat'),formData.get('via2Lng'))
         miles += dis.data[0].distanceMeters*0.000621371192;
 
-        console.log('via1Lat: ',formData.get('via1Lat'))
-        console.log('via1Lng: ',formData.get('via1Lng'))
-        console.log('via2Lat: ',formData.get('via2Lat'))
-        console.log('via2Lng: ',formData.get('via2Lng'))
-        console.log('dis: ',dis.data)
-        console.log('miles: ',miles)
-        console.log('---------------------')
         dis = await distance(formData.get('via2Lat'),formData.get('via2Lng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
         miles += dis.data[0].distanceMeters*0.000621371192;
         
-        console.log('via2Lat: ',formData.get('via2Lat'))
-        console.log('via2Lng: ',formData.get('via2Lng'))
-        console.log('dropoffLat: ',formData.get('dropoffLat'))
-        console.log('dropoffLng: ',formData.get('dropoffLng'))
-        console.log('dis: ',dis.data)
-        console.log('miles: ',miles)
-
         connectToDB();
         const chargesPerMile = await ChargesPerMile.find({min: {$lte: miles}, max: {$gte: miles}})
-        console.log('19')
         if(chargesPerMile.length){
-          console.log('20')
           price = toTwoDigits(chargesPerMile[0].price * miles, 2)
         }
       }else{
-        console.log('21')
         if(formData.get('via1Address')){
-          console.log('22')
           var dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('via1Lat'),formData.get('via1Lng'))
           var miles = dis.data[0].distanceMeters*0.000621371192;
           dis = await distance(formData.get('via1Lat'),formData.get('via1Lng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
@@ -2769,11 +2714,9 @@ export async function handleRide(prevState, formData) {
           const chargesPerMile = await ChargesPerMile.find({min: {$lte: miles}, max: {$gte: miles}})
 
           if(chargesPerMile.length){
-            console.log('23')
             price = toTwoDigits(chargesPerMile[0].price * miles, 2)
           }
         }else{
-          console.log('24')
           var dis = await distance(formData.get('pickupLat'),formData.get('pickupLng'),formData.get('via2Lat'),formData.get('via2Lng'))
           var miles = dis.data[0].distanceMeters*0.000621371192;
           dis = await distance(formData.get('via2Lat'),formData.get('via2Lng'),formData.get('dropoffLat'),formData.get('dropoffLng'))
@@ -2783,7 +2726,6 @@ export async function handleRide(prevState, formData) {
           const chargesPerMile = await ChargesPerMile.find({min: {$lte: miles}, max: {$gte: miles}})
 
           if(chargesPerMile.length){
-            console.log('25')
             price = toTwoDigits(chargesPerMile[0].price * miles, 2)
           }
         }
@@ -2791,7 +2733,7 @@ export async function handleRide(prevState, formData) {
     }
 
   } catch (error) {
-    console.log('errors: ', error)
+    console.log('app/lib/actions/handleRide => ', error)
     if(error.errors){
       return { errors: error.errors };
     }else{
@@ -2821,7 +2763,6 @@ export async function handleRide(prevState, formData) {
   } 
   
 
-  console.log(formData)
   if(aryz.length){
     connectToDB()
     zoneCharges = await ZoneCharges.find({ $or: aryz }).count()
@@ -2835,7 +2776,6 @@ export async function handleRide(prevState, formData) {
   if(pz){
     connectToDB()
     let parkingCharges = await ParkingCharges.find({ pickup: pz.split(" ")[0] })
-    console.log("pparkingCharges",parkingCharges)
     if(parkingCharges.length){
       formData.set('pickupParkingCharges',parkingCharges[0].price)
     }
@@ -2843,7 +2783,6 @@ export async function handleRide(prevState, formData) {
   if(pz){
     connectToDB()
     let parkingCharges = await ParkingCharges.find({ dropoff: dz.split(" ")[0] })
-    console.log("dparkingCharges",parkingCharges)
     if(parkingCharges.length){
       formData.set('dropoffParkingCharges',parkingCharges[0].price)
     }
@@ -2867,7 +2806,6 @@ export async function handleRide(prevState, formData) {
     }
   }
 
-  console.log(formData)
   if(price){
     var query = `/fleet/${price}?`
     for(var pair of formData.entries()){
@@ -2877,4 +2815,3 @@ export async function handleRide(prevState, formData) {
   }
   revalidatePath("/");
 }
-

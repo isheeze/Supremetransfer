@@ -17,11 +17,13 @@ const login = async (credentials) => {
       user.password
     );
 
-    if (!isPasswordCorrect) throw new Error("Wrong credentials!");
-
+    if (!isPasswordCorrect){
+      console.log('app/auth.js => wrong credentials')
+      //throw new Error("Wrong credentials!");
+    }
     return user;
   } catch (err) {
-    console.log(err);
+    console.log('app/auth/login => ',err);
     throw new Error("Failed to login!");
   }
 };
@@ -38,7 +40,6 @@ export const { signIn, signOut, auth } = NextAuth({
             role: user.role,
             id: user._id,
           };
-      
           return userData;
         } catch (err) {
           return null;
