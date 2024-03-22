@@ -61,7 +61,7 @@ export default function PortsChauffeur(props: any) {
                   <div className="lg:max-w-lg">
                     <p className="text-base font-semibold leading-7" style={{ color: props.themeColor }}>{section.subheading}</p>
                     <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{section.heading}</h1>
-                    {section.descriptions && section.descriptions.map((desc: any, i: any) => ( <p key={i} className="mt-6 text-xl leading-8 text-gray-700">
+                    {section.descriptions && section.descriptions.map((desc: any, i: any) => ( <p key={i} className="mt-6 text-xl leading-8 text-gray-700 text-justify">
                       {desc.description}
                     </p>))}
                   </div>
@@ -82,7 +82,7 @@ export default function PortsChauffeur(props: any) {
                   {section.blocks.map((textBlock: any, i: any) => (
                     <div key={i}>
                       <h2 className="mt-8 text-2xl font-bold tracking-tight text-gray-900">{textBlock.heading}</h2>
-                      {textBlock.descriptions && textBlock.descriptions.map((desc: any, i: any) => ( <p key={i} className='mt-8'>
+                      {textBlock.descriptions && textBlock.descriptions.map((desc: any, i: any) => ( <p key={i} className='mt-8 text-justify'>
                         {desc.description}
                       </p>))}
                     </div>
@@ -94,7 +94,7 @@ export default function PortsChauffeur(props: any) {
                         <span>
                           <strong className="font-semibold text-gray-900">{point.heading} </strong>
                           {point.descriptions && point.descriptions.map((desc: any, i: any) => (
-                          <p key={i} className={(i != 0 ? 'mt-2' : '')}>
+                          <p key={i} className={(i != 0 ? 'mt-2 text-justify' : ' text-justify')}>
                             {desc.description}
                           </p>))}
                         </span>
@@ -112,7 +112,7 @@ export default function PortsChauffeur(props: any) {
                   <div className="lg:max-w-lg">
                     <p className="text-base font-semibold leading-7" style={{ color: props.themeColor }}>{section.subheading}</p>
                     <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{section.heading}</h1>
-                    {section.descriptions && section.descriptions.map((desc: any, i: any) => ( <p key={i} className="mt-6 text-xl leading-8 text-gray-700">
+                    {section.descriptions && section.descriptions.map((desc: any, i: any) => ( <p key={i} className="mt-6 text-xl leading-8 text-gray-700 text-justify">
                       {desc.description}
                     </p>))}
                   </div>
@@ -133,7 +133,7 @@ export default function PortsChauffeur(props: any) {
                   {section.blocks.map((textBlock: any, i: any) => (
                     <div key={i}>
                       <h2 className="mt-8 text-2xl font-bold tracking-tight text-gray-900">{textBlock.heading}</h2>
-                      {textBlock.descriptions && textBlock.descriptions.map((desc: any, i: any) => ( <p key={i} className='mt-8'>
+                      {textBlock.descriptions && textBlock.descriptions.map((desc: any, i: any) => ( <p key={i} className='mt-8 text-justify'>
                         {desc.description}
                       </p>))}
                     </div>
@@ -145,7 +145,7 @@ export default function PortsChauffeur(props: any) {
                         <span>
                           <strong className="font-semibold text-gray-900">{point.heading} </strong>
                           {point.descriptions && point.descriptions.map((desc: any, i: any) => (
-                          <p key={i} className='mt-4'>
+                          <p key={i} className='mt-4 text-justify'>
                             {desc.description}
                           </p>))}
                         </span>

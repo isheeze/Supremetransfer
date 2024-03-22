@@ -17,7 +17,7 @@ export default function About(props: any) {
                 <div className="lg:max-w-lg">
                   <p className="text-base font-semibold leading-7" style={{ color: props.themeColor }}>{section.subheading}</p>
                   <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{section.heading}</h1>
-                  <p className="mt-6 text-xl leading-8 text-gray-700">
+                  <p className="mt-6 text-xl leading-8 text-gray-700 text-justify">
                     {section.description}
                   </p>
                 </div>
@@ -38,7 +38,7 @@ export default function About(props: any) {
                 {section.blocks.map((textBlock: any, i: any) => (
                   <div key={i}>
                     <h2 className="text-2xl font-bold tracking-tight text-gray-900">{textBlock.heading}</h2>
-                    <p className='mt-8'>
+                    <p className='mt-8 text-justify'>
                       {textBlock.description}
                     </p>
                   </div>
@@ -64,7 +64,7 @@ export default function About(props: any) {
                 <div className="lg:max-w-lg">
                   <p className="text-base font-semibold leading-7" style={{ color: props.themeColor }}>{section.subheading}</p>
                   <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{section.heading}</h1>
-                  <p className="mt-6 text-xl leading-8 text-gray-700">
+                  <p className="mt-6 text-xl leading-8 text-gray-700 text-justify">
                     {section.description}
                   </p>
                 </div>
@@ -85,7 +85,7 @@ export default function About(props: any) {
                 {section.blocks.map((textBlock: any, i: any) => (
                   <div key={i}>
                     <h2 className="text-2xl font-bold tracking-tight text-gray-900">{textBlock.heading}</h2>
-                    <p className='mt-8'>
+                    <p className='mt-8 text-justify'>
                       {textBlock.description}
                     </p>
                   </div>
