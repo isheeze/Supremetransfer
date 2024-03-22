@@ -89,7 +89,7 @@ export default function AirportTransfer(props: any) {
                   ))}
                     {section.points && <ul role="list" className="mt-8 text-gray-600">
                     {section.points.map((point: any, i: any) => (
-                      <li className="flex" key={i}  style={{marginTop: `${section.gap}px`}}>
+                      <li className="flex text-justify" key={i}  style={{marginTop: `${section.gap}px`}}>
                         <div dangerouslySetInnerHTML={{ __html: point.icon.svg }} className="mt-1 h-5 w-5 mr-1 flex-none icons-container" aria-hidden="true" style={{ color: props.themeColor }}/>
                         <span>
                           <strong className="font-semibold text-gray-900">{point.heading} </strong>
@@ -140,7 +140,7 @@ export default function AirportTransfer(props: any) {
                   ))}
                   {section.points && <ul role="list" className="mt-8 text-gray-600">
                     {section.points.map((point: any, i: any) => (
-                      <li className="flex" key={i}  style={{marginTop: `${section.gap}px`}}>
+                      <li className="flex text-justify" key={i}  style={{marginTop: `${section.gap}px`}}>
                         <div dangerouslySetInnerHTML={{ __html: point.icon.svg }} className="mt-1 h-5 w-5 mr-1 flex-none icons-container" aria-hidden="true" style={{ color: props.themeColor }}/>
                         <span>
                           <strong className="font-semibold text-gray-900">{point.heading} </strong>
