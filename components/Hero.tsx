@@ -34,6 +34,8 @@ const Hero = (props: any)=> {
   const [via, setVia] = useState(false);
   const [via2, setVia2] = useState(false);
   const [twoWay, setTwoWay] = useState(false);
+  
+  const [slide, setSlide] = useState(0);
 
   const [promoCode, setPromoCode] = useState<any>()
 
@@ -72,14 +74,10 @@ const Hero = (props: any)=> {
     const [theme, setTheme] = useState<SanityDocument>()
 
     function slider(){
-      let slides = document.querySelectorAll('.txtSlider > div')
-      if(slides.length){
-        let i = 0;
+      if(theme.textSlider.length){
         setInterval(()=>{
-          console.log('=> ',slides[i])
-            slides[i].classList.add("hide")
-            i = (i + 1) % slides.length
-            slides[i].classList.remove("hide")
+          console.log('=> ',slide)
+          setSlide((slide+1)%theme.textSlider.length)
         }, 1000)
       }
     }
@@ -476,8 +474,8 @@ const Hero = (props: any)=> {
                 </svg>
 
                 <div className='txtSlider w-fit text-white text-center'>
-                {theme.textSlider.map((txt: any) => (
-                  <div>{txt.text}</div>
+                {theme.textSlider.map((txt: any, i: any) => (
+                  <div key={i} className={(slide == i) ? 'hide' : ''}>{txt.text}</div>
                 ))}
                 </div>
               </div>
