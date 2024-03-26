@@ -83,7 +83,6 @@ const Hero = (props: any)=> {
         }
       }
     }
-    
     useEffect(() => {
       const fetchThemeData = async () => {
         try {
