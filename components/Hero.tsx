@@ -74,11 +74,13 @@ const Hero = (props: any)=> {
     const [theme, setTheme] = useState<SanityDocument>()
 
     function slider(){
-      if(theme.textSlider.length){
-        setInterval(()=>{
-          console.log('=> ',slide)
-          setSlide((slide+1)%theme.textSlider.length)
-        }, 1000)
+      if(theme){
+        if(theme.textSlider.length){
+          setInterval(()=>{
+            console.log('=> ',slide)
+            setSlide((slide+1)%theme.textSlider.length)
+          }, 1000)
+        }
       }
     }
     
