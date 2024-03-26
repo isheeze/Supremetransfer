@@ -71,17 +71,18 @@ const Hero = (props: any)=> {
 
     const [theme, setTheme] = useState<SanityDocument>()
 
-    
-    
-    useEffect(() => {
+    function slider(){
       let slides = document.querySelectorAll('.txtSlider > div > div')
       let i = 0;
       setInterval(()=>{
+          console.log("hey", slides[i])
           slides[i].classList.add("hide")
           i = (i + 1) % slides.length
           slides[i].classList.remove("hide")
       }, 1000)
-
+    }
+    
+    useEffect(() => {
       const fetchThemeData = async () => {
         try {
           const getThemeDataQuery = groq`*[_type == "home"]{
@@ -101,6 +102,7 @@ const Hero = (props: any)=> {
       };
 
       fetchThemeData();
+      slider()
     }, []);
 
     if (!theme) {
