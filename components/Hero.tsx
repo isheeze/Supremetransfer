@@ -31,9 +31,11 @@ const Hero = (props: any)=> {
   const [dropoffLat, setDropoffLat] = useState<any>()
   const [dropoffLng, setDropoffLng] = useState<any>()
 
-    const [via, setVia] = useState(false);
-    const [via2, setVia2] = useState(false);
-    const [twoWay, setTwoWay] = useState(false);
+  const [via, setVia] = useState(false);
+  const [via2, setVia2] = useState(false);
+  const [twoWay, setTwoWay] = useState(false);
+
+  const [promoCode, setPromoCode] = useState<any>()
 
     const DepDateRef = useRef<any>(null);
     const handleDepDateFocus = () => {
@@ -420,6 +422,19 @@ const Hero = (props: any)=> {
                             </div>
                           </div>
                         </fieldset>
+                      </div>
+
+                      <div className="col-span-full">
+                        <div className="mt-2">
+                          <div className="relative flex rounded-full shadow ring-1 ring-inset ring-slate-900/20 focus-within:ring-2 focus-within:ring-inset customFocusWithinRing">
+                            <input 
+                              type='text'
+                              defaultValue={""}
+                              placeholder='Promo Code'
+                              name="promoCode"
+                              onChange={(event) => {setPromoCode(event.target.value);}}/>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
