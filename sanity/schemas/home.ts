@@ -14,6 +14,29 @@ const home = {
       options: { hotspot: true },
     },
     {
+      name: "txtbg",
+      title: "Background of Text Slider",
+      type: "image",
+      options: { hotspot: true },
+    },
+    defineField({
+      name: "textSlider",
+      title: "Text Slider",
+      type: "array",
+      of: [
+        {
+          type: "object", // This specifies the type of values in the array
+          fields: [
+            {
+              name: "text",
+              type: "text",
+              title: "Text"
+            }
+          ],
+        },
+      ],
+    }),
+    {
       name: "imageBanner",
       title: "Image Banner",
       type: "image",

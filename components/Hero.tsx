@@ -72,7 +72,9 @@ const Hero = (props: any)=> {
       const fetchThemeData = async () => {
         try {
           const getThemeDataQuery = groq`*[_type == "home"]{
-            heroImage
+            heroImage,
+            txtbg,
+            textSlider
           }`;
 
           const themeData = await sanityFetch<SanityDocument>({
@@ -435,6 +437,11 @@ const Hero = (props: any)=> {
               </form>
             </div>
             <div className="flex-1">
+              <div style={{backgroundImage: `url(${urlForImage(theme.txtbg)})`}} >
+              {theme.textSlider.map((txt: any) => (
+                <div>{txt.text}</div>
+              ))}
+              </div>
             </div>
           </div>
         </div>
