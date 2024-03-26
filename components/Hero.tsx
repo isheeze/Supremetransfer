@@ -70,19 +70,6 @@ const Hero = (props: any)=> {
 
 
     const [theme, setTheme] = useState<SanityDocument>()
-
-    function slider(){
-      let slides = document.querySelectorAll('.txtSlider > div')
-      if(slides.length){
-        let i = 0;
-        setInterval(()=>{
-          console.log('=> ',slides[i])
-            slides[i].classList.add("hide")
-            i = (i + 1) % slides.length
-            slides[i].classList.remove("hide")
-        }, 1000)
-      }
-    }
     
     useEffect(() => {
       const fetchThemeData = async () => {
@@ -104,7 +91,7 @@ const Hero = (props: any)=> {
       };
 
       fetchThemeData()
-      slider()
+      
     }, []);
 
     if (!theme) {
@@ -447,6 +434,7 @@ const Hero = (props: any)=> {
                               defaultValue={""}
                               placeholder='Promo Code'
                               name="promoCode"
+                              className='block w-full flex-1 border-0 bg-transparent py-1.5 px-4 text-black placeholder:text-black focus:ring-0 sm:text-sm sm:leading-6'
                               onChange={(event) => {setPromoCode(event.target.value);}}/>
                           </div>
                         </div>
@@ -480,6 +468,7 @@ const Hero = (props: any)=> {
                 ))}
                 </div>
               </div>
+              <script src='/slider.js'></script>
             </div>
           </div>
         </div>
