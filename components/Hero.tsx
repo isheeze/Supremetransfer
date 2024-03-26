@@ -37,7 +37,8 @@ const Hero = (props: any)=> {
 
   const [promoCode, setPromoCode] = useState<any>()
 
-    const DepDateRef = useRef<any>(null);
+  const DepDateRef = useRef<any>(null);
+
     const handleDepDateFocus = () => {
       if (DepDateRef.current) {
         DepDateRef?.current?.showPicker(); // Open the picker programmatically
@@ -69,8 +70,18 @@ const Hero = (props: any)=> {
 
 
     const [theme, setTheme] = useState<SanityDocument>()
+
+    
     
     useEffect(() => {
+      let slides = document.querySelectorAll('.txtSlider > div')
+      let i = 0;
+      setInterval(()=>{
+          slides[i].classList.add("hide")
+          i = (i + 1) % slides.length
+          slides[i].classList.remove("hide")
+      }, 1000)
+
       const fetchThemeData = async () => {
         try {
           const getThemeDataQuery = groq`*[_type == "home"]{
@@ -458,7 +469,7 @@ const Hero = (props: any)=> {
                 </g>
               </svg>
 
-              <div>
+              <div className='txtSlider'>
               {theme.textSlider.map((txt: any) => (
                 <div>{txt.text}</div>
               ))}
