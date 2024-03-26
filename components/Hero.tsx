@@ -74,7 +74,7 @@ const Hero = (props: any)=> {
     
     
     useEffect(() => {
-      let slides = document.querySelectorAll('.txtSlider > div')
+      let slides = document.querySelectorAll('.txtSlider > div > div')
       let i = 0;
       setInterval(()=>{
           slides[i].classList.add("hide")
