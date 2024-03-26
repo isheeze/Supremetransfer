@@ -76,6 +76,7 @@ const Hero = (props: any)=> {
       if(slides.length){
         let i = 0;
         setInterval(()=>{
+          console.log('=> ',slides[i])
             slides[i].classList.add("hide")
             i = (i + 1) % slides.length
             slides[i].classList.remove("hide")
@@ -102,7 +103,7 @@ const Hero = (props: any)=> {
         }
       };
 
-      fetchThemeData();
+      fetchThemeData()
       slider()
     }, []);
 
